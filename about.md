@@ -1,0 +1,11 @@
+---
+layout: page
+title: About
+permalink: /about/
+---
+
+<div class="sister-project" markdown="1">
+SparkTutorials has moved to the official Spark webpage at [http://sparkjava.com/tutorials/](http://sparkjava.com/tutorials/)
+<br>
+I have stopped writing tutorials for Spark though, focusing on my new Java/Kotlin web framework [Javalin](https://javalin.io)
+</div>

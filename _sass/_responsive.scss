@@ -1,0 +1,64 @@
+@media screen and (max-width: 1200px) {
+  #tut-nav {
+    display: none
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #fork-me,
+  #some-buttons,
+  footer {
+    display: none
+  }
+}
+
+@media screen and (max-height: 700px) {
+  #tut-nav li {
+    margin-bottom: 0;
+    font-size: 12px
+  }
+}
+
+@media screen and (max-height: 550px) {
+  #tut-nav {
+    position: absolute;
+    z-index: 1
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #download-li {
+    display: none
+  }
+}
+
+@media screen and (max-width: 480px) {
+  pre {
+    font-size: 10px
+  }
+  nav a {
+    font-size: 12px
+  }
+  #logo img {
+    height: 40px;
+    padding: 12px 0 8px 0
+  }
+  nav {
+    height: 60px
+  }
+  nav ul {
+    height: 60px
+  }
+  nav li {
+    padding: 30px 10px 0 10px
+  }
+  .padding-hack {
+    height: 60px
+  }
+}
+
+@media screen and (max-width: 350px) {
+  nav a {
+    font-size: 10px
+  }
+}

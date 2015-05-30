@@ -1,0 +1,13 @@
+# Site settings
+title: Spark Framework tutorials - Spark Java tutorials
+description: > # this means to ignore newlines until "baseurl:"
+  A collection of Spark Framework tutorials. Get started with learning Spark Framework today.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://sparktutorials.github.io" # the base hostname & protocol for your site
+twitter_username: sparkjava
+
+# Build settings
+markdown: kramdown
+sass:
+  sass_dir: _sass
+  style: compressed
