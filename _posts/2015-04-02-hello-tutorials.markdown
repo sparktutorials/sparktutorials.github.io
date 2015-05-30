@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Hello Tutorials!"
+author: David Åse
 date:   2015-04-02 10:34:52
 categories: jekyll update
 summary: This website will be used to collect tutorials about Spark.
