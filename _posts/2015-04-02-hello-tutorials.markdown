@@ -18,17 +18,19 @@ If you have suggestions for tutorials, or if you want your tutorial posted on th
 ##Getting started with Spark
 
 Add the maven dependency:
-{% prism markup %}
-<dependency>
-    <groupId>com.sparkjava</groupId>
-    <artifactId>spark-core</artifactId>
-    <version>2.1</version>
-</dependency>
-{% endprism %}
+
+<pre><code class="language-markup">
+&lt;dependency&gt;
+    &lt;groupId&gt;com.sparkjava&lt;/groupId&gt;
+    &lt;artifactId&gt;spark-core&lt;/artifactId&gt;
+    &lt;version&gt;2.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
 
 Set up your first route:
 
-{% prism java %}
+<pre><code class="language-java">
 import static spark.Spark.*;
 
 public class HelloWorld {
@@ -36,9 +38,10 @@ public class HelloWorld {
         get("/hello", (req, res) -> "Hello World");
     }
 }
-{% endprism %}
+</code></pre>
+
 
 Run and view:
-{% prism bash %}
+<pre><code class="language-bash">
 http://localhost:4567/hello
-{% endprism %}
+</code></pre>
