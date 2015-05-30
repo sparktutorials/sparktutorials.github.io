@@ -18,30 +18,29 @@
 <body>
     {% include header.html %}
     <header>
-        <a class="site-title" href="{{ site.baseurl }}/">
-            <img src="/img/logo.png">
-        </a>
-        <nav class="site-nav">
-            {% for page in site.pages %} 
-                {% if page.title %} <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a> {% endif %} 
-            {% endfor %}
+        <nav>
+            <ul>
+                <li id="logo"><a class="site-title" href="{{ site.baseurl }}/"><img src="/img/logo.svg"></a></li>
+                <li><a href="http://sparkjava.com" target="_blank">Go to sparkjava.com</a></li>
+                {% for page in site.pages %} 
+                    <li>{% if page.title %} <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a> {% endif %}</li>
+                {% endfor %}
+            </ul>
         </nav>
     </header>
-
-    <ul>
-        {% for post in site.posts %}
-        <li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
-        {% endfor %}
-    </ul>
-    
-    {{ content }}
-
+    <div class="padding-hack"></div>
+    <main>
+        <ul id="tut-nav">
+            {% for post in site.posts %}
+            <li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {{ content }}
+    </main>
     <footer>
-    
+        The source code for this webpage is available on <a href="https://github.com/sparktutorials/sparktutorials.github.io" target="_blank">GitHub</a>.
+        If you find any errors, please create a pull request, it will be merged swifly.
     </footer>
-    
     <script src="/js/prism.js"></script>
-
 </body>
-
 </html>

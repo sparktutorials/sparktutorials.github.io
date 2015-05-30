@@ -1,7 +1,283 @@
 ---
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
-
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
 body {
-    background: #eee;
+    margin: 0
+}
+img {
+    border: 0
+}
+ul {
+    list-style: circle;
+}
+ul li {
+    margin: 5px 0;
+}
+#logo {
+    float: left
+}
+#logo img {
+    height: 60px;
+    padding: 12px 0 8px 0
+}
+nav {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    height: 80px
+}
+nav ul {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+    height: 80px;
+    list-style: none
+}
+nav li {
+    display: inline-block;
+    float: right;
+    padding: 50px 10px 0 10px;
+    margin: 0;
+}
+nav li.active {
+    text-decoration: underline
+}
+nav li a {
+    text-decoration: none;
+    color: #333
+}
+nav li a:hover {
+    color: #000
+}
+nav li:first-child {
+    padding: 0
+}
+nav li:nth-child(2) {
+    padding-right: 0
+}
+.padding-hack {
+    height: 80px
+}
+#tut-nav {
+    width: 200px;
+    position: fixed;
+    left: 50%;
+    padding: 0;
+    margin-left: 430px;
+    list-style: none;
+    top: 100px;
+    z-index: 999999
+}
+#tut-nav li {
+    font-size: 14px;
+    margin-bottom: 10px
+}
+#tut-nav a {
+    text-decoration: none
+}
+#tut-nav a:hover {
+    color: #c07d10;
+    text-decoration: underline
+}
+@media screen and (max-height: 700px) {
+    #tut-nav li {
+        margin-bottom: 0;
+        font-size: 12px
+    }
+    #tut-nav li ul li {
+        font-size: 11px
+    }
+}
+@media screen and (max-height: 550px) {
+    #docs-nav,
+    #tut-nav {
+        position: absolute;
+        z-index: 1
+    }
+}
+* {
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #666;
+}
+h1, h2, h3 {
+    color: #333;
+    margin: 10px 0 5px 0
+}
+
+h1 { font-size: 25px }
+h2 { font-size: 20px }
+h3 { font-size: 18px }
+p  { line-height: 24px; }
+footer {
+    text-align: center;
+    max-width: 800px;
+    border-top: 1px solid #ec9b17;
+    margin: 0 auto;
+    padding: 10px;
+    font-size: 12px
+}
+a {
+    text-decoration: none;
+    color: #ec9b17
+}
+a:hover {
+    color: #c07d10
+}
+html {
+    overflow-y: scroll
+}
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 15px 15px 15px
+}
+#some-buttons {
+    position: fixed;
+    left: 50%;
+    margin-left: 309px;
+    top: 15px;
+    z-index: 9999
+}
+#some-buttons img {
+    height: 22px;
+    width: 22px
+}
+#some-twitter {
+    float: right;
+    margin-left: 8px;
+    opacity: .6
+}
+#some-twitter:hover {
+    opacity: 1
+}
+#some-gplus {
+    float: right;
+    margin-left: 8px;
+    opacity: .6
+}
+#some-gplus:hover {
+    opacity: 1
+}
+#some-facebook {
+    float: right;
+    margin-left: 8px;
+    opacity: .6
+}
+#some-facebook:hover {
+    opacity: 1
+}
+.some-button:hover {
+    opacity: 1
+}
+.some-button img {
+    height: 22px;
+    width: 22px
+}
+.decreased-opacity {
+    opacity: .6
+}
+.decreased-opacity:hover {
+    opacity: 1
+}
+@media screen and (max-width: 1200px) {
+    #tut-nav {
+        display: none
+    }
+}
+@media screen and (max-width: 1000px) {
+    #fork-me,
+    #some-buttons {
+        display: none
+    }
+}
+@media screen and (max-width: 500px) {
+    #download-li {
+        display: none
+    }
+}
+@media screen and (max-width: 480px) {
+    pre {
+        font-size: 10px
+    }
+    .code-list {
+        font-size: 10px
+    }
+    nav a {
+        font-size: 12px
+    }
+    .spark-banner-background {
+        height: 250px
+    }
+    #spark-banner .intro-text {
+        position: absolute;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        top: 60px;
+        width: 80%;
+        font-size: 26px
+    }
+    #spark-banner img {
+        max-height: 200px
+    }
+    #logo img {
+        height: 40px;
+        padding: 12px 0 8px 0
+    }
+    nav {
+        height: 60px
+    }
+    nav ul {
+        height: 60px
+    }
+    nav li {
+        padding: 30px 10px 0 10px
+    }
+    .padding-hack {
+        height: 60px
+    }
+    #news h1 {
+        font-size: 20px
+    }
+    #news h2 {
+        font-size: 16px
+    }
+    #news h3 {
+        font-size: 14px
+    }
+}
+@media screen and (max-width: 320px) {
+    nav a {
+        font-size: 10px
+    }
+    #spark-banner .intro-text {
+        font-size: 20px;
+        top: 60px
+    }
+    #spark-banner img {
+        max-height: 170px
+    }
+    .spark-banner-background {
+        height: 220px
+    }
+}
+@media screen and (max-width: 300px) {
+    nav a {
+        font-size: 9px
+    }
+    #logo {
+        display: none
+    }
+    #spark-banner .intro-text {
+        top: 40px
+    }
 }
