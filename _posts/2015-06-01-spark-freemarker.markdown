@@ -172,3 +172,5 @@ The example using FreeMarker is present in the <a href="https://github.com/ftoma
 As we have seen in this post Spark can be easily integrated with template engines and FreeMarker is a decent choice. I personally think that Spark is great for RESTful services but it does a pretty good job also for common user-facing web applications and it can be easily used for mixed applications (RESTful service + HTML interface, as we have seen in this post).
 
 There are improvements to be done to use templates in a large application. For example you may want to define a common structure (header, navigation column, footer) to be used in all the different templates, without having to maintain copies. To understand how to do this and more advanced topics I suggest to take a look at the FreeMarker documentation.
+
+{% include authorTomassetti.html %}

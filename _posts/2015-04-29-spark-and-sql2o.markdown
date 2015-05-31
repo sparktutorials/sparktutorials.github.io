@@ -146,3 +146,5 @@ There are things we are missing: We do not properly catch exceptions which are t
 
 At this point we just need proper tests: We should have unit tests to verify that the controllers behave properly. To write them we could mock our Model. 
 Testing the SQL code is more complex: I normally use functional tests. Cucumber is a nice tool and we could launch a docker container from inside our functional tests. I think that testing is the next big thing we need to focus on and probably you could soon read a specific tutorial on this website.
+
+{% include authorTomassetti.html %}
