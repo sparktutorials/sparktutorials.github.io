@@ -22,21 +22,7 @@ We are not going to see how to insert this data in a DB. We will just keep the l
 ##A few dependencies
 First of all, we need to set up a few dependencies. Java:
 <pre><code class="language-java">
-package me.tomassetti;
- 
-import static spark.Spark.get;
-import static spark.Spark.post;
-import spark.Request;
-import spark.Response;
-import spark.Route;
- 
-public class BlogService {
-    public static void main( String[] args) {
-        get("/posts", (req, res) -> {
-            return "Hello Sparkingly World!";
-        });
-    }
-}
+{% capture code %}{% include codeExamples/sparkLombok/javaDeps.html %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
 We will be using Maven so I will start by creating a new pom.xml throwing in a few things. Basically:
@@ -51,86 +37,7 @@ We will be using Maven so I will start by creating a new pom.xml throwing in a f
 Let's take a lot at the POM:
 
 <pre><code class="language-markup">
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;junit&lt;/groupId&gt;
-      &lt;artifactId&gt;junit&lt;/artifactId&gt;
-      &lt;version&gt;4.12&lt;/version&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.sparkjava&lt;/groupId&gt;
-      &lt;artifactId&gt;spark-core&lt;/artifactId&gt;
-      &lt;version&gt;2.1&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-      &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;
-      &lt;version&gt;2.5.1&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-      &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
-      &lt;version&gt;2.5.1&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
-      &lt;artifactId&gt;lombok&lt;/artifactId&gt;
-      &lt;version&gt;1.16.2&lt;/version&gt;
-      &lt;scope&gt;provided&lt;/scope&gt;
-    &lt;/dependency&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;org.sql2o&lt;/groupId&gt;
-        &lt;artifactId&gt;sql2o&lt;/artifactId&gt;
-        &lt;version&gt;1.5.4&lt;/version&gt;
-      &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.postgresql&lt;/groupId&gt;
-      &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
-      &lt;version&gt;9.4-1201-jdbc41&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.google.guava&lt;/groupId&gt;
-      &lt;artifactId&gt;guava&lt;/artifactId&gt;
-      &lt;version&gt;18.0&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.easymock&lt;/groupId&gt;
-      &lt;artifactId&gt;easymock&lt;/artifactId&gt;
-      &lt;version&gt;3.3.1&lt;/version&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;
-      &lt;artifactId&gt;gson&lt;/artifactId&gt;
-      &lt;version&gt;2.3.1&lt;/version&gt;
-      &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-  
-  &lt;build&gt;
-    &lt;plugins&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-        &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-        &lt;version&gt;3.2&lt;/version&gt;
-        &lt;configuration&gt;
-          &lt;source&gt;1.8&lt;/source&gt;
-          &lt;target&gt;1.8&lt;/target&gt;
-        &lt;/configuration&gt;
-      &lt;/plugin&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
-        &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;
-        &lt;version&gt;1.2.1&lt;/version&gt;
-        &lt;configuration&gt;
-          &lt;mainClass&gt;me.tomassetti.BlogService&lt;/mainClass&gt;
-          &lt;arguments&gt;
-          &lt;/arguments&gt;
-        &lt;/configuration&gt;
-      &lt;/plugin&gt;
-    &lt;/plugins&gt;
-  &lt;/build&gt;
+{% capture code %}{% include codeExamples/sparkLombok/mavenDep.html %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
 ##Spark "Hello world!"
@@ -282,118 +189,7 @@ get("/posts", (request, response) -> {
 And the final code is:
 
 <pre><code class="language-java">
-package me.tomassetti;
- 
-import static spark.Spark.get;
-import static spark.Spark.post;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import lombok.Data;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
-public class BlogService {
-
-    private static final int HTTP_BAD_REQUEST = 400;
-    
-    interface Validable {
-        boolean isValid();
-    }
-
-    @Data
-    static class NewPostPayload {
-        private String title;
-        private List categories = new LinkedList<>();
-        private String content;
-
-        public boolean isValid() {
-            return title != null && !title.isEmpty() && !categories.isEmpty();
-        }
-    }
-    
-    // In a real application you may want to use a DB, for this example we just store the posts in memory
-    public static class Model {
-        private int nextId = 1;
-        private Map posts = new HashMap<>();
-        
-        @Data
-        class Post {
-            private int id;
-            private String title;
-            private List categories;
-            private String content;
-        }
-        
-        public int createPost(String title, String content, List categories){
-            int id = nextId++;
-            Post post = new Post();
-            post.setId(id);
-            post.setTitle(title);
-            post.setContent(content);
-            post.setCategories(categories);
-            posts.put(id, post);
-            return id;
-        }
-        
-        public List getAllPosts(){
-            return posts.keySet().stream().sorted().map((id) -> posts.get(id)).collect(Collectors.toList());
-        }
-    }
-
-    public static String dataToJson(Object data) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            StringWriter sw = new StringWriter();
-            mapper.writeValue(sw, data);
-            return sw.toString();
-        } catch (IOException e){
-            throw new RuntimeException("IOException from a StringWriter?");
-        }
-    }
-    
-    public static void main( String[] args) {
-        Model model = new Model();
-        
-        // insert a post (using HTTP post method)
-        post("/posts", (request, response) -> {
-            try {
-                ObjectMapper mapper = new ObjectMapper();
-                NewPostPayload creation = mapper.readValue(request.body(), NewPostPayload.class);
-                if (!creation.isValid()) {
-                    response.status(HTTP_BAD_REQUEST);
-                    return "";
-                }
-                int id = model.createPost(creation.getTitle(), creation.getContent(), creation.getCategories());
-                response.status(200);
-                response.type("application/json");
-                return id;
-            } catch (JsonParseException jpe) {
-                response.status(HTTP_BAD_REQUEST);
-                return "";
-            }
-        });
-        
-        // get all post (using HTTP get method)
-        get("/posts", (request, response) -> {
-            response.status(200);
-            response.type("application/json");
-            return dataToJson(model.getAllPosts());
-        });
-    }
-}
+{% capture code %}{% include codeExamples/sparkLombok/finalCode.html %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
 ##Using PostMan to test the application
@@ -410,4 +206,3 @@ Then we can get the list of the posts. In this case we use a GET (no body in the
 
 ##Conclusion
 I have to say that I was positively surprised by this project. I was ready for the worse: this is the kind of application that requires a basic logic and a lot of plumbing. I found out that Python, Clojure and Ruby do all a great jobs for this kinds of problems, while the times I wrote simple web applications in Java the logic was drown in boilerplate code. Well, things can be different. The combination of Spark, Lombok, Jackson and Java 8 is really tempting. I am very grateful to the authors of these pieces of software, they are really improving the life of Java developers. I consider it also a lesson: great frameworks can frequently improves things much more than we think.
-

@@ -38,74 +38,7 @@ The TL;DR readers who can’t wait, can just clone this repo: <a href="https://g
 The pom.xml contains a very basic Maven configuration. It configures the Spark dependencies using a Java 1.8 compiler and creates a fat jar with all the dependencies. I'm in no way a Maven expert so pull requests to make this example simpler and more streamlined are more than welcome.
 
 <pre><code class="language-markup">
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-
-  &lt;groupId&gt;hellodocker&lt;/groupId&gt;
-  &lt;artifactId&gt;hellodocker&lt;/artifactId&gt;
-  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.sparkjava&lt;/groupId&gt;
-      &lt;artifactId&gt;spark-core&lt;/artifactId&gt;
-      &lt;version&gt;2.0.0&lt;/version&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-  &lt;build&gt;
-    &lt;plugins&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-        &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
-        &lt;version&gt;2.4&lt;/version&gt;
-        &lt;configuration&gt;
-          &lt;finalName&gt;sparkexample&lt;/finalName&gt;
-          &lt;archive&gt;
-            &lt;manifest&gt;
-              &lt;addClasspath&gt;true&lt;/addClasspath&gt;
-              &lt;mainClass&gt;sparkexample.Hello&lt;/mainClass&gt;
-              &lt;classpathPrefix&gt;dependency-jars/&lt;/classpathPrefix&gt;
-            &lt;/manifest&gt;
-          &lt;/archive&gt;
-        &lt;/configuration&gt;
-      &lt;/plugin&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-        &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
-        &lt;version&gt;3.1&lt;/version&gt;
-        &lt;configuration&gt;
-          &lt;source&gt;1.8&lt;/source&gt;
-          &lt;target&gt;1.8&lt;/target&gt;
-        &lt;/configuration&gt;
-      &lt;/plugin&gt;
-      &lt;plugin&gt;
-        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-        &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
-        &lt;executions&gt;
-          &lt;execution&gt;
-            &lt;goals&gt;
-              &lt;goal&gt;attached&lt;/goal&gt;
-            &lt;/goals&gt;
-            &lt;phase&gt;package&lt;/phase&gt;
-            &lt;configuration&gt;
-              &lt;finalName&gt;sparkexample&lt;/finalName&gt;
-              &lt;descriptorRefs&gt;
-                &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;
-              &lt;/descriptorRefs&gt;
-              &lt;archive&gt;
-                &lt;manifest&gt;
-                  &lt;mainClass&gt;sparkexample.Hello&lt;/mainClass&gt;
-                &lt;/manifest&gt;
-              &lt;/archive&gt;
-            &lt;/configuration&gt;
-          &lt;/execution&gt;
-        &lt;/executions&gt;
-      &lt;/plugin&gt;
-    &lt;/plugins&gt;
-  &lt;/build&gt;
-&lt;/project&gt;
+{% capture code %}{% include codeExamples/sparkDocker/mavenDep.html %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
 ##Hello.java
@@ -132,25 +65,7 @@ As you can see this is modern Java code: it uses static imports and lambda expre
 ##Dockerfile
 Setting up your dockerfile is pretty straightforward:
 <pre><code class="language-bash">
-FROM java:8 
-
-# Install maven
-RUN apt-get update
-RUN apt-get install -y maven
-
-WORKDIR /code
-
-# Prepare by downloading dependencies
-ADD pom.xml /code/pom.xml
-RUN ["mvn", "dependency:resolve"]
-RUN ["mvn", "verify"]
-
-# Adding source, compile and package into a fat jar
-ADD src /code/src
-RUN ["mvn", "package"]
-
-EXPOSE 4567
-CMD ["/usr/lib/jvm/java-8-openjdk-amd64/bin/java", "-jar", "target/sparkexample-jar-with-dependencies.jar"]
+{% capture code %}{% include codeExamples/sparkDocker/dockerFile.html %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
 The Dockerfile uses a plain Java image (<a href="https://registry.hub.docker.com/_/java/" target="_blank">java:8</a>) and starts with installing Maven. In the next step it only installs the project dependencies. We do this by adding the pom.xml and resolving the dependencies. As you will see, this allows Docker to cache the dependencies. In the next step we actually compile and package our app, and start it. 
