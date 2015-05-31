@@ -35,7 +35,10 @@ h1, h2, h3 {
 h1 { font-size: 23px }
 h2 { font-size: 20px }
 h3 { font-size: 17px }
-p  { line-height: 24px; }
+p  { 
+  line-height: 24px; 
+  text-align: justify;
+}
 footer {
   text-align: center;
   border-top: 1px solid #ec9b17;
@@ -157,12 +160,17 @@ article.post h2 {
   margin-top: 30px;
   margin-bottom: -15px;
 }
+.post ul li {
+  margin: 10px;
+}
 .post {
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
   margin-bottom: 35px;
 }
 .post img {
+  display: block;
+  margin: 0 auto;
   max-width: 100%;
 }
 .img-bordered {

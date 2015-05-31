@@ -2,7 +2,6 @@
 layout: post
 title:  "Getting started with Spark and Docker"
 date:   2015-04-14 10:34:52
-categories: jekyll update
 author: Matthias Lübken from <a href="https://giantswarm.io/" target="_blank">GiantSwarm</a> 
 summary: > 
   This tutorial provides a short and simple example on how to get started with Java development on Docker. 

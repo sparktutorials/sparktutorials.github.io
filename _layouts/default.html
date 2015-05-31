@@ -23,7 +23,7 @@
                 <li id="logo"><a class="site-title" href="{{ site.baseurl }}/"><img src="/img/logo.svg"></a></li>
                 <li><a href="http://sparkjava.com" target="_blank">Go to sparkjava.com</a></li>
                 {% for page in site.pages %} 
-                    <li>{% if page.title %} <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a> {% endif %}</li>
+                    <li>{% if page.title %} <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a> {% endif %}</li>
                 {% endfor %}
             </ul>
         </nav>
