@@ -162,6 +162,9 @@ article.post h2 {
 .post img {
   max-width: 100%;
 }
+.img-bordered {
+  border: 1px solid #ddd;
+}
 .post:last-of-type {
   border-bottom: 0;
   margin: 0;
