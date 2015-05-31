@@ -7,7 +7,7 @@ html {
     -webkit-text-size-adjust: 100%
 }
 body {
-    margin: 0
+    margin: 0 0 30px;
 }
 img {
     border: 0
@@ -36,11 +36,14 @@ h3 { font-size: 17px }
 p  { line-height: 24px; }
 footer {
     text-align: center;
-    max-width: 800px;
     border-top: 1px solid #ec9b17;
-    margin: 0 auto;
-    padding: 10px;
-    font-size: 12px
+    line-height: 30px;
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
 }
 a {
     text-decoration: none;
@@ -50,7 +53,9 @@ a:hover {
     color: #c07d10
 }
 html {
-    overflow-y: scroll
+    overflow-y: scroll;    
+    position: relative;
+    min-height: 100%;
 }
 main {
     max-width: 800px;
@@ -151,6 +156,12 @@ nav li:nth-child(2) {
     margin-bottom: 35px;
 }
 
+.post:last-of-type {
+    border-bottom: 0;
+    margin: 0;
+    padding: 0;
+}
+    
 .post-meta {
     background-color: #f0f0f0;
     display: inline-block;
