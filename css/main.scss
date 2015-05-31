@@ -2,229 +2,234 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 html {
-    font-family: sans-serif;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%
 }
 body {
-    margin: 0 0 30px;
+  margin: 0 0 30px;
 }
 img {
-    border: 0
+  border: 0
 }
 ul {
-    list-style: circle;
+  list-style: circle;
 }
 ul li {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 * {
-    font-weight: 300;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #666;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #666;
 }
 h1, h2, h3 {
-    font-family: 'Roboto Condensed', sans-serif;
-    color: #333;
-    margin: 10px 0 5px 0
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #333;
+  margin: 10px 0 5px 0
 }
-
 h1 { font-size: 23px }
 h2 { font-size: 20px }
 h3 { font-size: 17px }
 p  { line-height: 24px; }
 footer {
-    text-align: center;
-    border-top: 1px solid #ec9b17;
-    line-height: 30px;
-    font-size: 12px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 30px;
-    width: 100%;
+  text-align: center;
+  border-top: 1px solid #ec9b17;
+  line-height: 30px;
+  font-size: 12px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 30px;
+  width: 100%;
 }
 a {
-    text-decoration: none;
-    color: #ec9b17
+  text-decoration: none;
+  color: #ec9b17
 }
 a:hover {
-    color: #c07d10
+  color: #c07d10
 }
 html {
-    overflow-y: scroll;    
-    position: relative;
-    min-height: 100%;
+  overflow-y: scroll;
+  position: relative;
+  min-height: 100%;
 }
 main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px 15px 15px 15px
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 15px 15px 15px;
+  overflow: hidden;
+}
+pre {
+  font-size: 15px;
 }
 #logo {
-    float: left
+  float: left
 }
 #logo img {
-    height: 60px;
-    padding: 12px 0 8px 0
+  height: 60px;
+  padding: 12px 0 8px 0
 }
 nav {
-    position: fixed;
-    z-index: 999;
-    width: 100%;
-    background: #fff;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-    height: 80px
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  height: 80px
 }
 nav ul {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 15px;
-    height: 80px;
-    list-style: none
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 15px;
+  height: 80px;
+  list-style: none
 }
 nav li {
-    float: right;
-    padding: 50px 10px 0 10px;
-    margin: 0;
+  float: right;
+  padding: 50px 10px 0 10px;
+  margin: 0;
 }
 nav li a {
-    color: #333
+  color: #333
 }
 nav li:first-child {
-    padding: 0
+  padding: 0
 }
 nav li:nth-child(2) {
-    padding-right: 0
+  padding-right: 0
 }
 .padding-hack {
-    height: 80px
+  height: 80px
 }
 #tut-nav {
-    width: 200px;
-    position: fixed;
-    left: 50%;
-    padding: 0;
-    margin-left: 430px;
-    list-style: none;
-    top: 100px;
-    z-index: 999999
+  width: 200px;
+  position: fixed;
+  left: 50%;
+  padding: 0;
+  margin-left: 430px;
+  list-style: none;
+  top: 100px;
+  z-index: 999999
 }
 #tut-nav li {
-    font-size: 14px;
-    margin-bottom: 10px
+  font-size: 14px;
+  margin-bottom: 10px
 }
 #tut-nav a {
-    text-decoration: none
+  text-decoration: none
 }
 #tut-nav a:hover {
-    color: #c07d10;
-    text-decoration: underline
+  color: #c07d10;
+  text-decoration: underline
 }
 #some-buttons {
-    position: fixed;
-    left: 50%;
-    margin-left: 309px;
-    top: 15px;
-    z-index: 9999
+  position: fixed;
+  left: 50%;
+  margin-left: 309px;
+  top: 15px;
+  z-index: 9999
 }
 #some-buttons img {
-    height: 22px;
-    width: 22px
+  height: 22px;
+  width: 22px
 }
 #some-buttons a {
-    float: right;
-    margin-left: 8px;
-    opacity: .6;
+  float: right;
+  margin-left: 8px;
+  opacity: .6;
 }
 #some-buttons a:hover {
-    opacity: 1;
+  opacity: 1;
 }
-
 .posts .post p:first-of-type {
-    margin-top: 0px;
+  margin-top: 0px;
 }
-
 .post h2 {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
-
+article.post h2 {
+  margin-top: 30px;
+  margin-bottom: -15px;
+}
 .post {
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 35px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 35px;
 }
-
+.post img {
+  max-width: 100%;
+}
 .post:last-of-type {
-    border-bottom: 0;
-    margin: 0;
-    padding: 0;
+  border-bottom: 0;
+  margin: 0;
+  padding: 0;
 }
-    
 .post-meta {
-    background-color: #f0f0f0;
-    display: inline-block;
-    padding: 3px 6px;
-    margin: 3px 0 4px;
-    border-radius: 3px;
-    font-size: 13px;
-    color: #888;
+  background-color: #f0f0f0;
+  display: inline-block;
+  padding: 3px 6px;
+  margin: 3px 0 4px;
+  border-radius: 3px;
+  font-size: 13px;
+  color: #888;
 }
-
 @media screen and (max-width: 1200px) {
-    #tut-nav {
-        display: none
-    }
+  #tut-nav {
+    display: none
+  }
 }
 @media screen and (max-width: 1000px) {
-    #fork-me, #some-buttons {
-        display: none
-    }
+  #fork-me,
+  #some-buttons {
+    display: none
+  }
 }
 @media screen and (max-height: 700px) {
-    #tut-nav li {
-        margin-bottom: 0;
-        font-size: 12px
-    }
+  #tut-nav li {
+    margin-bottom: 0;
+    font-size: 12px
+  }
 }
 @media screen and (max-height: 550px) {
-    #tut-nav {
-        position: absolute;
-        z-index: 1
-    }
+  #tut-nav {
+    position: absolute;
+    z-index: 1
+  }
 }
 @media screen and (max-width: 500px) {
-    #download-li {
-        display: none
-    }
+  #download-li {
+    display: none
+  }
 }
 @media screen and (max-width: 480px) {
-    pre {
-        font-size: 10px
-    }
-    nav a {
-        font-size: 12px
-    }
-    #logo img {
-        height: 40px;
-        padding: 12px 0 8px 0
-    }
-    nav {
-        height: 60px
-    }
-    nav ul {
-        height: 60px
-    }
-    nav li {
-        padding: 30px 10px 0 10px
-    }
-    .padding-hack {
-        height: 60px
-    }
+  pre {
+    font-size: 10px
+  }
+  nav a {
+    font-size: 12px
+  }
+  #logo img {
+    height: 40px;
+    padding: 12px 0 8px 0
+  }
+  nav {
+    height: 60px
+  }
+  nav ul {
+    height: 60px
+  }
+  nav li {
+    padding: 30px 10px 0 10px
+  }
+  .padding-hack {
+    height: 60px
+  }
 }
 @media screen and (max-width: 350px) {
-    nav a {
-        font-size: 10px
-    }
+  nav a {
+    font-size: 10px
+  }
 }
