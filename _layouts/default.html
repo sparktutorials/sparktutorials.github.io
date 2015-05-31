@@ -8,11 +8,10 @@
 
     <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-    <link rel="stylesheet" href="{{ " /css/main.css " | prepend: site.baseurl }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ " /feed.xml " | prepend: site.baseurl | prepend: site.url }}">
-    <link href="/css/prism.css" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+    <style>#some-buttons img{height:22px;width:22px}#logo img{max-height:60px;}main{max-width:800px;margin:0 auto;padding:30px 15px 15px 15px}nav ul{max-width:800px;margin:0 auto;padding:0 15px;height:80px;list-style:none}footer{text-align:center;max-width:800px;margin:0 auto}</style>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 </head>
 
@@ -43,5 +42,10 @@
         If you find any errors, please create a pull request. It will be merged swifly.
     </footer>
     <script src="/js/prism.js"></script>
+    <script>
+        loadCss("/css/main.css");
+        loadCss("/css/prism.css");
+        function loadCss(b){var c=document.createElement("link");c.rel="stylesheet";c.href=b;b=document.getElementsByTagName("head")[0];b.parentNode.insertBefore(c,b)}var d=requestAnimationFrame||mozRequestAnimationFrame||webkitRequestAnimationFrame||msRequestAnimationFrame;d?d(a):window.addEventListener("load",a);
+    </script>
 </body>
 </html>
