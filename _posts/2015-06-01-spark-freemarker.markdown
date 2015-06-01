@@ -9,6 +9,7 @@ summary: >
   (for consumption by other applications) and HTML (for the sake of our fellow human beings).
 ---
 
+<em>The code discussed in this post is available on <a href="https://github.com/sparktutorials/BlogService_SparkExample" target="_blank">GitHub</a></em>
 
 ##Offering the same data as both JSON and HTML
 To offer the same data as JSON or HTML we could use different strategies. The two simplest ones are:
