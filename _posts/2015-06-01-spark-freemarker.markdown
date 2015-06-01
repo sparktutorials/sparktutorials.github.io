@@ -16,11 +16,11 @@ To offer the same data as JSON or HTML we could use different strategies. The tw
 * using different endpoints for JSON and HTML
 * use the Accept header to determine what format of data to return
 
-The first strategy is very simple to implement: You just have to create different routes. For example, we could offer the JSON data in response to the endpoints <em>/service/posts</em> and <em>/service/posts/:id</em>, while offering HTML data in response to the endpoints <em>/posts</em> and <em>/posts/:id</em>. This is because we typically want shorter URLs for the content intended for human beings. In this post we will focus on the Accept-header strategy though, which requires a bit of work.
+The first strategy is very simple to implement: you just have to create different routes. For example, we could offer the JSON data in response to the endpoints <em>/service/posts</em> and <em>/service/posts/:id</em>, while offering HTML data in response to the endpoints <em>/posts</em> and <em>/posts/:id</em>. This is because we typically want shorter URLs for the content intended for human beings. In this post we will focus on the Accept-header strategy though, which requires a bit of work.
 
 ##Using the Accept header to decide to return JSON or HTML
 An HTTP request reaching our service brings a lot of information, including the URL (of which we can parse specific parts to derive parameters), query parameters, a body and <a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields" target="_blank">headers</a>.<br>
-An interesting header is Accept. It can be used to specify the format that the caller is able to process or the formats it prefers. A web browser typically set this header to contains <em>text/html</em>. Other applications prefer to work with format like JSON or XML (for the young kids out there: XML is a weird markup language we had to work with before we got JSON).
+An interesting header is Accept. It can be used to specify the format that the caller is able to process or the formats it prefers. A web browser typically set this header to contains <em>text/html</em>. Other applications prefer to work with formats like JSON or XML (for the young kids out there: XML is a weird markup language we had to work with before we got JSON).
 
 The actual content of the header can be quite complex, for example, my browser sends:
 
@@ -106,7 +106,7 @@ Let's start by creating a file named <em>posts.ftl</em> under the directory <em>
 {% capture code %}{% include codeExamples/sparkFreemaker/simpleHtml.html %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
-Now we have to configure FreeMarker to look for templates among the resource files. It is as simple as writing a few lines of code before you start define your routes:
+Now we have to configure FreeMarker to look for templates among the resource files. It is as simple as writing a few lines of code before you start defining your routes:
 
 <pre><code class="language-java">
 FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine();
