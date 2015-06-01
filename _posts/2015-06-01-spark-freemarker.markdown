@@ -8,7 +8,8 @@ summary: >
   In this post we are going to create an HTML view of the blog, showing how the same data can be exposed through JSON 
   (for consumption by other applications) and HTML (for the sake of our fellow human beings).
 ---
-
+_The code discussed in this post is available on [GitHub]
+(https://github.com/sparktutorials/BlogService_SparkExample)_
 ##Offering the same data as both JSON and HTML
 To offer the same data as JSON or HTML we could use different strategies. The two simplest ones are:
 
@@ -84,7 +85,7 @@ Let's take a look at what is happening here:
 
 I think j2html is great when prototyping HTML pages because you don't have to deal with the hassle of setting up a template engine. In addition to that is very useful when you need to generate small pieces of HTML to be used to compose larger pages. However if you want to build complex layouts you may want to use templates to achieve a stronger separation between logic and presentation. In the next paragraph we take a look such a template engine.
 
-The example using j2html can be found in the <a href="https://github.com/ftomassetti/BlogService_SparkExample" target="_blank">GitHub repository</a> under the tag j2html.
+The example using j2html can be found in the <a href="https://github.com/sparktutorials/BlogService_SparkExample" target="_blank">GitHub repository</a> under the tag j2html.
 
 ##Producing HTML using the FreeMarker template engine
 For large HTML content you may want to use templates. The basic idea is the you can let a designer create a sample page and then replace the sample content with placeholders that are going to be dynamically replaced by the actual content at each request. 
@@ -166,7 +167,7 @@ And this should be the result, displaying a couple of posts:
 
 <img class="img-bordered" src="/img/posts/marvellousBlog2.png" alt="Screenshot of blog">
 
-The example using FreeMarker is present in the <a href="https://github.com/ftomassetti/BlogService_SparkExample" target="_blank">GitHub repository</a> under the tag freemarker.
+The example using FreeMarker is present in the <a href="https://github.com/sparktutorials/BlogService_SparkExample" target="_blank">GitHub repository</a> under the tag freemarker.
 
 ##Conclusions
 As we have seen in this post Spark can be easily integrated with template engines and FreeMarker is a decent choice. I personally think that Spark is great for RESTful services but it does a pretty good job also for common user-facing web applications and it can be easily used for mixed applications (RESTful service + HTML interface, as we have seen in this post).
