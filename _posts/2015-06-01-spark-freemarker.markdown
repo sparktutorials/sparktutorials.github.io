@@ -36,7 +36,9 @@ private static boolean shouldReturnHtml(Request request) {
     return accept != null && accept.contains("text/html");
 }
 
-...where we define routes
+
+// ...jumping down in the code, where we define routes
+
 // get all post (using HTTP get method)
 get("/posts", (request, response) -> {
     if (shouldReturnHtml(request)) {
