@@ -8,8 +8,8 @@ summary: >
   In this post we are going to create an HTML view of the blog, showing how the same data can be exposed through JSON 
   (for consumption by other applications) and HTML (for the sake of our fellow human beings).
 ---
-_The code discussed in this post is available on [GitHub]
-(https://github.com/sparktutorials/BlogService_SparkExample)_
+
+
 ##Offering the same data as both JSON and HTML
 To offer the same data as JSON or HTML we could use different strategies. The two simplest ones are:
 
