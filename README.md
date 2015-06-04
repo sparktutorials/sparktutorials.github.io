@@ -1,5 +1,5 @@
 # sparktutorials.github.io
-Spark Tutorial Collection
+This repo contains the source code for the Spark Tutorial webpage, located at [https://sparktutorials.github.io](https://sparktutorials.github.io)
 
 ##Anyone is free to submit a tutorial!
 If you have something to share, small or big, please creat a pull request.
