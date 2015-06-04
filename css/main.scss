@@ -40,14 +40,16 @@ p  {
   text-align: justify;
 }
 footer {
+  background: #333;
+  color: white;
   text-align: center;
-  border-top: 1px solid #ec9b17;
+  box-shadow: 0px -1px 1px rgba(0, 0, 0, 0.2);
+  height: 30px;
   line-height: 30px;
   font-size: 12px;
   position: absolute;
   left: 0;
   bottom: 0;
-  height: 30px;
   width: 100%;
 }
 a {
