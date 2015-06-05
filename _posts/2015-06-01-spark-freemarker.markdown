@@ -3,6 +3,7 @@ layout: post
 title:  "Spark and Freemarker: Exposing HTML and JSON from the same service"
 author: <a href="http://tomassetti.me" target="_blank">Federico Tomassetti</a>
 date:   2015-06-01 10:34:52
+comments: true
 summary: >
   In previous posts we have seen how to develop a RESTful service using Spark and we have implemented a service to manage a blog.  
   In this post we are going to create an HTML view of the blog, showing how the same data can be exposed through JSON 
