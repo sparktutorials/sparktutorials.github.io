@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <script>if(location.protocol!=="https:"&&document.location.hostname!=="localhost")location.protocol="https:"</script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +12,9 @@
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ " /feed.xml " | prepend: site.baseurl | prepend: site.url }}">
     <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/prism.css">
     <meta name="google-site-verification" content="HX9v0k1uPAE8oRVglGZMdID4ighR4gbqYe30e_4LBBU" />
 </head>
 
@@ -43,9 +45,5 @@
         If you find any errors, please create a pull request. It will be merged swifly.
     </footer>
     <script src="/js/prism.js"></script>
-    <script>
-        loadCss("/css/prism.css");
-        function loadCss(b){var c=document.createElement("link");c.rel="stylesheet";c.href=b;b=document.getElementsByTagName("head")[0];b.parentNode.insertBefore(c,b)}var d=requestAnimationFrame||mozRequestAnimationFrame||webkitRequestAnimationFrame||msRequestAnimationFrame;d?d(a):window.addEventListener("load",a);
-    </script>
 </body>
 </html>
