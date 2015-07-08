@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script>if(location.protocol!=="https:"&&document.location.hostname!=="localhost")location.protocol="https:"</script>
+    <script>"http:"===location.protocol&&"localhost"!==document.location.hostname&&(location.href=location.href.replace(/^http:/,"https:"));</script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
