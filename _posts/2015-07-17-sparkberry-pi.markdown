@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "A groovy Sparkberry Pi: Running Spark on Raspberry Pi in minutes (with groovy)"
-date:   2015-07-20 10:34:52
+date:   2015-07-17 19:02:00
 author: <a href="https://sites.google.com/a/athaydes.com/renato-athaydes/" target="_blank">Renato Athaydes</a>
 comments: true
 summary: > 
