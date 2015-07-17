@@ -5,7 +5,7 @@ date:   2015-07-20 10:34:52
 author: <a href="https://sites.google.com/a/athaydes.com/renato-athaydes/" target="_blank">Renato Athaydes</a>
 comments: true
 summary: > 
-  This tutorial will show you how to turn your Rasberry Pi into a webserver in a matter of minutes, 
+  This tutorial will show you how to turn your Raspberry Pi into a webserver in a matter of minutes, 
   using Spark and Groovy. Spark was chosen for the tutorial because "Spark is as easy as it gets".
   <br>
   </em> The tutorial is written by Renato Athaydes and originally appeared on his 
@@ -13,16 +13,15 @@ summary: >
 ---
 
 ##Background
-I have just bought a Raspberry Pi to have some fun with code first and, hopefully, hardware later.
+I just bought a Raspberry Pi to have some fun. First with code, and hopefully with hardware later.
 
-After setting it up (with the Raspian OS, a Linux distro for the Pi), making sure it could connect to the internet and that I could ssh into it from my laptop, the first thing I wanted to do was to get it to run a  webserver.
+After setting it up (with the Raspian OS, a Linux distro for the Pi), making sure it could connect to the internet and that I could ssh into it from my laptop, the first thing I wanted to do was to get it to run a webserver.
 
-I recently attended a <a href="http://www.meetup.com/Stockholm-Java-User-Group/events/218888072/" target="_blank">Java meetup</a> (in fact, the very first one in Stockholm) where one of the speakers demoed the Spark-Java micro-framework, and it really caught my attention. Starting up a webserver and providing a simple REST API, or just plain HTML, with Spark is as easy as it gets, so I wanted to use that.
-
-But is it that easy on the Pi? Well, if you're using Java, you would need to first, somehow, get the required jars, then compile all sources before you can run anything. It's not fun to manually download jars, place the files in the right places so that you can give Java and javac the right classpath and so on, specially in an environment where an IDE is not a viable option... There should be a better way. And of course, there is!
+I recently attended a <a href="http://www.meetup.com/Stockholm-Java-User-Group/events/218888072/" target="_blank">Java meetup</a> (in fact, the very first one in Stockholm) where one of the speakers demoed the Spark micro-framework, and it really caught my attention. Starting up a webserver and providing a simple REST API (or just plain HTML) with Spark is as easy as it gets, but is it also that easy on the Pi? <br>
+Well, if you want to use Java, you would need to first get the required jars, then compile all sources before you can run anything. It's not fun to manually download jars, place the files in the right places so that you can give Java and javac the right classpath and so on, specially in an environment where an IDE is not a viable option... There should be a better way. And of course, there is!
 
 ##Getting groovy with it
-I have previously written about how easy it is to set up a webserver using Groovy, so I was already inclined to use Groovy for this... you see, using @Grab, all your dependencies will be downloaded automatically. No need to install Maven or Gradle! All you need, besides the JDK (which already comes installed in the Raspian image), is to have Groovy installed.
+I have previously written about how easy it is to set up a webserver using Groovy, so I was already inclined to use Groovy for this project... you see, using @Grab, all your dependencies will be downloaded automatically. No need to install Maven or Gradle! All you need, besides the JDK (which already comes installed in the Raspian image), is to have Groovy installed.
 
 Now, you may ask, just how easy is it to install Groovy in the Raspberry Pi?
 
@@ -36,12 +35,15 @@ gvm install groovy
 
 <em>Note: here, we use GVM to get Groovy. See <a href="http://gvmtool.net" target="_blank">http://gvmtool.net</a></em>
 
-This should take less than a minute (the download of version 2.3.9 is about 32MB). <br> 
+This should take less than a minute (the download of version 2.3.9 is about 32MB).
+
 You can check that you have groovy installed by running:
+
 <pre><code class="language-bash">
 groovy -version
 </code></pre>
-Which should print something like this:
+
+Which should print something like:
 
 <samp>Groovy Version: 2.3.9 JVM: 1.8.0 Vendor: Oracle Corporation OS: Linux</samp>
 
@@ -52,7 +54,7 @@ The environment is set up now, and all you have to do is write some code. And th
 @Grab(group = 'com.sparkjava', module = 'spark-core', version = '2.2')
 import static spark.Spark.*
 
-get '/hello', { req, res -> 'Hello from Groovy/Raspberry Pi!' }
+get '/hello', { req, res -> 'Hello from your groovy Sparkberry Pi!' }
 </code></pre>
 
 Save this code in a file called <samp>Server.groovy</samp>, then run it:
@@ -67,7 +69,7 @@ Once you see some output from the application (which does take a little while in
 
 Notice that, even though Spark was written with Java 8 closures in mind, with the latest versions of Groovy, Groovy closures will also work just fine. 
 
-If you want to serve static files from a sub-directory (here "public"), you just have to add this line:
+If you want to serve static files from a sub-directory (here "/public"), you just have to add this line:
 
 <samp>staticFileLocation "public"</samp>
 
@@ -97,7 +99,7 @@ static String createPage(Map queryParams) {
 }
 </code></pre>
 
-Now, your complete <samp>Server.groovy</samp> file should looks like this:
+Now, your complete <samp>Server.groovy</samp> file should look like this:
 
 <pre><code class="language-java">
 @Grab(group = 'com.sparkjava', module = 'spark-core', version = '2.2')
