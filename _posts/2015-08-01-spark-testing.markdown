@@ -30,7 +30,50 @@ In my opinion code can be roughly divided in two parts: the logic and the plumbi
 
 We first start with the unit tests, which are probably familiar to more user. Then we will take courage and jump in the land on Cucumber & Ruby to write our functional tests.
 
-##The Handler interface
+##The RequestHandler interface
+
+As we have seen before a key objective to simplify testing is to separate logic and plumbing code. To do so I want to insulate the logic from the _spark specific_ bits. The logic should be as insulated as possible, so that we could one day replace Spark with something else and leave the logic untouched (of course no one of sound mind would do something so reckless as stop using Spark, it was just a reckless example).
+
+To do instead of using Routes in my code I create typically an interface:
+
+```java
+interface RequestHandler<V extends Validable> {
+  
+  Answer process(V value, Map<String, String> queryParams) {
+  }
+
+}
+```
+
+```java
+class AbstractRequestHandler<V extends Validable> implements RequestHandler<V> {
+  
+}
+```
+
+The code before the change:
+
+```java
+        // insert a post (using HTTP post method)
+        post("/posts", (request, response) -> {
+            ObjectMapper mapper = new ObjectMapper();
+            NewPostPayload creation = mapper.readValue(request.body(), NewPostPayload.class);
+            if (!creation.isValid()) {
+                response.status(HTTP_BAD_REQUEST);
+                return "";
+            }
+            UUID id = model.createPost(creation.getTitle(), creation.getContent(), creation.getCategories());
+            response.status(200);
+            response.type("application/json");
+            return id;
+        });
+```
+
+The code after the change:
+
+```java
+post("/posts", new PostsCreateHandler(model));
+```
 
 
 ##Unit tests
