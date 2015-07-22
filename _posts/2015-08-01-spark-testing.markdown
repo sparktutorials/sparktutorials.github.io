@@ -9,6 +9,18 @@ summary: >
 
 ##The plan
 
+There are many different forms of tests which can be used to assure different properties of your applications are maintained over time. In this tutorial we focus exclusively on the functional aspects (i.e., we verify that the application does what is supposed to do), while we do not consider the non-functional aspects (i.e., how the application does it, so performance, load handling, etc.).
+
+In particular we are going to write two kinds of tests:
+* unit tests, to verify that single classes or methods implement a piece of logic correctly
+* functional tests, to ensure that the whole application implements correctly features
+
+We are going to use two different approaches for implementig these tests:
+* unit tests will be written in Java using JUnit. We will describe a pattern to make the logic more testable
+* functional tests are going to be written using Cucumber. You will have to write some Ruby for that
+
+We first start with the unit tests, which are probably familiar to more user. Then we will take courage and jump in the land on Cucumber & Ruby to write our functional tests.
+
 ##The Handler interface
 
 ##Unit tests
