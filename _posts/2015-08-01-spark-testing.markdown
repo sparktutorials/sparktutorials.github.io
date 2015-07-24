@@ -12,10 +12,12 @@ summary: >
 There are many different forms of tests which can be used to assure different properties of your applications are maintained over time. In this tutorial we focus exclusively on the functional aspects (i.e., we verify that the application does what is supposed to do), while we do not consider the non-functional aspects (i.e., how the application does it, so performance, load handling, etc.).
 
 In particular we are going to write two kinds of tests:
+
 * unit tests, to verify that single classes or methods implement a piece of logic correctly
 * functional tests, to ensure that the whole application implements correctly features
 
 We are going to use two different approaches for implementig these tests:
+
 * unit tests will be written in Java using JUnit. We will describe a pattern to make the logic more testable
 * functional tests are going to be written using Cucumber. You will have to write some Ruby for that
 
@@ -32,30 +34,96 @@ We first start with the unit tests, which are probably familiar to more user. Th
 
 ##The RequestHandler interface
 
-As we have seen before a key objective to simplify testing is to separate logic and plumbing code. To do so I want to insulate the logic from the _spark specific_ bits. The logic should be as insulated as possible, so that we could one day replace Spark with something else and leave the logic untouched (of course no one of sound mind would do something so reckless as stop using Spark, it was just a reckless example).
+As we have seen before a key objective to simplify testing is to separate logic and plumbing code. To do so I want to insulate the logic from the _spark specific_ bits. The logic should be as insulated as possible, so that we could one day replace Spark with something else and leave the logic untouched (of course no one of sound mind would do something as reckless as stop using Spark, it was just an hyphotetical example).
 
-To do instead of using Routes in my code I create typically an interface:
+To do instead of using Routes in my code I create typically an interface which is project specific. I start by looking at what information I need to use to serve the different requests. Considering the application we have built in the previous tutorials you will see that for each request we:
 
-```java
-interface RequestHandler<V extends Validable> {
-  
-  Answer process(V value, Map<String, String> queryParams) {
-  }
+* could read JSON code from the body of the request
+* consider parameters encoded in the URL (e.g., the ID of the post)
+* consider the header _Accept_ to establish if we need to return HTML or JSON objects
 
-}
-```
+So for this project I could write this common interface for all my requests handlers.
 
-```java
-class AbstractRequestHandler<V extends Validable> implements RequestHandler<V> {
-  
-}
-```
+<pre><code class="language-java">public interface RequestHandler&lt;V extends Validable&gt; {
+
+    Answer process(V value, Map&lt;String, String&gt; urlParams, boolean shouldReturnHtml);
+
+}</code></pre>
+
+As you can see we expect the body of the request to be parsed and returned as a value of the generic type V. The type of the value object can be different depending on the requests. For example, when we receive the request to create a new post we will expect a _NewPostPayload_ object to be serialized in the body of the request. We will use a special value named _EmptyPayload_ for the cases in which we do not need to parse the body of the request.
+
+Finally our handler will simply return an instance of _Answer_ which is a class with two simple fields:
+
+* the HTTP code to return (200 = success, 404 = not found, etc., see the list [here](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html))
+* the body of the response: typically JSON or HTML code
+
+Note that nothing present in the interface is Spark specific or related to any particular frameworks. It will help us making all our handlers easily testable.
+
+Now we need just to bridge our request handlers to Spark's routes. We could do that in a few different ways. I will go for creating a base class from which our request handlers should inherit.
+
+<pre><code class="language-java">public abstract class AbstractRequestHandler<V extends Validable&gt; implements RequestHandler<V&gt;, Route {
+
+    private Class<V&gt; valueClass;
+    protected Model model;
+
+    private static final int HTTP_BAD_REQUEST = 400;
+
+    public AbstractRequestHandler(Class<V&gt; valueClass, Model model){
+        this.valueClass = valueClass;
+        this.model = model;
+    }
+
+    private static boolean shouldReturnHtml(Request request) {
+        String accept = request.headers("Accept");
+        return accept != null && accept.contains("text/html");
+    }
+
+    public static String dataToJson(Object data) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.enable(SerializationFeature.INDENT_OUTPUT);
+            StringWriter sw = new StringWriter();
+            mapper.writeValue(sw, data);
+            return sw.toString();
+        } catch (IOException e){
+            throw new RuntimeException("IOException from a StringWriter?");
+        }
+    }
+
+    public final Answer process(V value, Map<String, String&gt; queryParams, boolean shouldReturnHtml) {
+        if (!value.isValid()) {
+            return new Answer(HTTP_BAD_REQUEST);
+        } else {
+            return processImpl(value, queryParams, shouldReturnHtml);
+        }
+    }
+
+    protected abstract Answer processImpl(V value, Map<String, String&gt; queryParams, boolean shouldReturnHtml);
+
+
+    @Override
+    public Object handle(Request request, Response response) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        V value = objectMapper.readValue(request.body(), valueClass);
+        Map<String, String&gt; queryParams = new HashMap<&gt;();
+        Answer answer = process(value, queryParams, shouldReturnHtml(request));
+        response.status(answer.getCode());
+        if (shouldReturnHtml(request)) {
+            response.type("text/html");
+        } else {
+            response.type("application/json");
+        }
+        response.body(answer.getBody());
+        return answer.getBody();
+    }
+
+}</code></pre>
 
 The code before the change:
 
-```java
+<pre><code class="language-java">
         // insert a post (using HTTP post method)
-        post("/posts", (request, response) -> {
+        post("/posts", (request, response) -&gt; {
             ObjectMapper mapper = new ObjectMapper();
             NewPostPayload creation = mapper.readValue(request.body(), NewPostPayload.class);
             if (!creation.isValid()) {
@@ -67,13 +135,13 @@ The code before the change:
             response.type("application/json");
             return id;
         });
-```
+</code></pre>
 
 The code after the change:
 
-```java
+<pre><code class="language-java">
 post("/posts", new PostsCreateHandler(model));
-```
+</code></pre>
 
 
 ##Unit tests
