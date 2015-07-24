@@ -32,7 +32,7 @@ We first start with the unit tests, which are probably familiar to more user. Th
 
 ##The RequestHandler interface
 
-As we have seen before a key objective to simplify testing is to separate logic and plumbing code. To do so I want to insulate the logic from the _spark specific_ bits. The logic should be as insulated as possible, so that we could one day replace Spark with something else and leave the logic untouched (of course no one of sound mind would do something so reckless as stop using Spark, it was just a reckless example).
+As we have seen before a key objective to simplify testing is to separate logic and plumbing code. To do so I want to insulate the logic from the _spark specific_ bits. The logic should be as insulated as possible, so that we could one day replace Spark with something else and leave the logic untouched (of course no one of sound mind would do something as reckless as stop using Spark, it was just an hyphotetical example).
 
 To do instead of using Routes in my code I create typically an interface:
 
