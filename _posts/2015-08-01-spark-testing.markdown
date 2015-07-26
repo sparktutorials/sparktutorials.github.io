@@ -11,7 +11,7 @@ summary: >
 
 There are many different forms of tests which can be used to assure different properties of your applications are maintained over time. In this tutorial we focus exclusively on the functional aspects (i.e., we verify that the application does what is supposed to do), while we do not consider the non-functional aspects (i.e., how the application does it, so performance, load handling, etc.).
 
-In particular we are going to write two kinds of tests:
+Our plan is to write two kinds of tests:
 
 * unit tests, to verify that single classes or methods implement a piece of logic correctly
 * functional tests, to ensure that the whole application implements correctly features
@@ -21,28 +21,34 @@ We are going to use two different approaches for implementig these tests:
 * unit tests will be written in Java using JUnit. We will describe a pattern to make the logic more testable
 * functional tests are going to be written using Cucumber. You will have to write some Ruby for that
 
-Ok, now we have to understand when to use one each testing approach. We are going to see that in the next paragraph.
+We will start by understanding when to use one each testing approach and then we will see how to write unit tests. Functional tests instead will be discussed in a future post.
+
+As for previous posts examples are presented based on our [Blog service application](https://github.com/sparktutorials/BlogService_SparkExample), with all the code available on GitHub.
 
 ##Logic and plumbing code
 
-In my opinion code can be roughly divided in two parts: the logic and the plumbing. The logic is normally something specific to your application and dealing with the domain. For example calculating since how many days a post was published or if a user has the permission to post a blog in a given section. The plumbing has instead to deal with the technological aspects: verify that a certain header has a valid value, deal with an IO exception and so on. The logic is what you want absolutely to test and it is tipically fairly easy to write unit tests for that part. The plumbing instead is tipically hard to test because it is strongly connected with low level libraries and it tipically require some complex state to be re-created in your test. In addition to the difficulty the benefits are often very low: you are basically testing the library you are using (for example an HTTP library) instead of testing your logic. So I suggest to do two things:
+In my opinion code can be roughly divided in two parts: the **logic** and the **plumbing**. The **logic** is normally something specific to your application and dealing with the domain. For example calculating since how many days a post was published or if a user has the permission to publish a post. The **plumbing** has instead to deal with the technological aspects: verify that a certain header has a valid value, deal with an IO exception and so on. 
+
+The logic is what you want absolutely to test and it is typically fairly easy to write unit tests for that part. The plumbing instead tend to be hard to test because it is strongly connected with low level libraries and it could require some complex state to be re-created in your test. In addition to the difficulty the benefits are often very low: you are basically testing the library you are using (for example an HTTP library) instead of testing your logic. 
+
+Because of this my test strategy is based on two elements:
 
 * separate logic and plumbing code
 * test logic through unit tests while testing plumbing code through functional tests
 
-We first start with the unit tests, which are probably familiar to more user. Then we will take courage and jump in the land on Cucumber & Ruby to write our functional tests.
+We first start with the unit tests, which are probably familiar to more user. Then we will take courage and jump in the land on Cucumber & Ruby to write our functional tests. Don't be alarmed: functional tests are not going to be treated in this post, so you will have some time to learn Ruby first.
 
 ##The RequestHandler interface
 
 As we have seen before a key objective to simplify testing is to separate logic and plumbing code. To do so I want to insulate the logic from the _spark specific_ bits. The logic should be as insulated as possible, so that we could one day replace Spark with something else and leave the logic untouched (of course no one of sound mind would do something as reckless as stop using Spark, it was just an hyphotetical example).
 
-To do instead of using Routes in my code I create typically an interface which is project specific. I start by looking at what information I need to use to serve the different requests. Considering the application we have built in the previous tutorials you will see that for each request we:
+To do this instead of just implementing *Routes* in my code I create an interface which is project specific. I start by looking at what information I need to use to serve the different requests. Considering the application we have built in the previous tutorials you will see that for each request we:
 
 * could read JSON code from the body of the request
 * consider parameters encoded in the URL (e.g., the ID of the post)
 * consider the header _Accept_ to establish if we need to return HTML or JSON objects
 
-So for this project I could write this common interface for all my requests handlers.
+So for this project I could write this common interface for all my requests handlers and named it [RequestHandler](https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/main/java/me/tomassetti/RequestHandler.java):
 
 <pre><code class="language-java">public interface RequestHandler&lt;V extends Validable&gt; {
 
@@ -50,16 +56,16 @@ So for this project I could write this common interface for all my requests hand
 
 }</code></pre>
 
-As you can see we expect the body of the request to be parsed and returned as a value of the generic type V. The type of the value object can be different depending on the requests. For example, when we receive the request to create a new post we will expect a _NewPostPayload_ object to be serialized in the body of the request. We will use a special value named _EmptyPayload_ for the cases in which we do not need to parse the body of the request.
+As you can see we expect the body of the request to be parsed and returned as a value of the generic type _V_. The type of the value object can be different depending on the requests. For example, when we receive the request to create a new post we will expect a [NewPostPayload](https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/main/java/me/tomassetti/handlers/NewPostPayload.java) object to be serialized in the body of the request. We will use a special value named [EmptyPayload](https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/main/java/me/tomassetti/handlers/EmptyPayload.java) for the cases in which we do not need to parse the body of the request.
 
-Finally our handler will simply return an instance of _Answer_ which is a class with two simple fields:
+Finally our handler will simply return an instance of [Answer](https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/main/java/me/tomassetti/Answer.java) which is a class with two simple fields:
 
 * the HTTP code to return (200 = success, 404 = not found, etc., see the list [here](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html))
 * the body of the response: typically JSON or HTML code
 
-Note that nothing present in the interface is Spark specific or related to any particular frameworks. It will help us making all our handlers easily testable.
+Note that nothing present in the interface is Spark-specific or related to any particular frameworks. It will help us making all our handlers easily testable.
 
-Now we need just to bridge our request handlers to Spark's routes. We could do that in a few different ways. I will go for creating a base class from which our request handlers should inherit.
+Now we need just to bridge our request handlers to Spark's routes. We could do that in a few different ways. I will go for creating a base class from which our request handlers should inherit. This class is [AbstractRequestHandler](https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/main/java/me/tomassetti/AbstractRequestHandler.java). 
 
 <pre><code class="language-java">public abstract class AbstractRequestHandler<V extends Validable&gt; implements RequestHandler<V&gt;, Route {
 
@@ -119,7 +125,9 @@ Now we need just to bridge our request handlers to Spark's routes. We could do t
 
 }</code></pre>
 
-The code before the change:
+##How to write and use RequestHandlers
+
+Now let's see how to use this class. Before we had our logic defined in anonymous classes implementing the _Route_ interface. For example:
 
 <pre><code class="language-java">
         // insert a post (using HTTP post method)
@@ -137,16 +145,32 @@ The code before the change:
         });
 </code></pre>
 
-The code after the change:
+After the change we will move the logic to a separate class, like [PostsCreateHandler](https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/main/java/me/tomassetti/handlers/PostsCreateHandler.java):
+
+<pre><code class="language-java">public class PostsCreateHandler extends AbstractRequestHandler&lt;NewPostPayload&gt; {
+
+    private Model model;
+
+    public PostsCreateHandler(Model model) {
+        super(NewPostPayload.class, model);
+        this.model = model;
+    }
+
+    @Override
+    protected Answer processImpl(NewPostPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
+        UUID id = model.createPost(value.getTitle(), value.getContent(), value.getCategories());
+        return new Answer(200, id.toString());
+    }
+}</code></pre>
+
+
+And we will use this class as our _Route_ (remember that _AbstractRequestHandler, which is extended by _PostsCreateHandler_, implements _Route_).
 
 <pre><code class="language-java">
 post("/posts", new PostsCreateHandler(model));
 </code></pre>
 
-
 ##Unit tests
-
-##Functional tests
 
 ##Conclusions
 
