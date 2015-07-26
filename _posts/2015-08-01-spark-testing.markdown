@@ -172,6 +172,149 @@ post("/posts", new PostsCreateHandler(model));
 
 ##Unit tests
 
+At this point we can simply test our logic by writing tests for our _RequestHandlers_. It is simple because we do not need to mock anything related to Spark. We just need to mock our _Model_, which represents the way we access the database. However it has a simple interface and mocking it is straightforward. Let's look at some examples.
+
+Class (PostsCreateHandlerTest)[https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/test/java/me/tomassetti/handlers/PostsCreateHandlerTest.java]:
+
+<pre><code class="language-java">ppublic class PostsCreateHandlerTest {
+
+    @Test
+    public void anInvalidNewPostReturnsBadRequest() {
+        NewPostPayload newPost = new NewPostPayload();
+        newPost.setTitle(""); // this makes the post invalid
+        newPost.setContent("Bla bla bla");
+        assertFalse(newPost.isValid());
+
+        Model model = EasyMock.createMock(Model.class);
+        replay(model);
+
+        PostsCreateHandler handler = new PostsCreateHandler(model);
+        assertEquals(new Answer(400), handler.process(newPost, Collections.emptyMap(), false));
+        assertEquals(new Answer(400), handler.process(newPost, Collections.emptyMap(), true));
+
+        verify(model);
+    }
+
+    @Test
+    public void aPostIsCorrectlyCreated() {
+        NewPostPayload newPost = new NewPostPayload();
+        newPost.setTitle("My new post");
+        newPost.setContent("Bla bla bla");
+        assertTrue(newPost.isValid());
+
+        Model model = EasyMock.createMock(Model.class);
+        expect(model.createPost("My new post", "Bla bla bla", Collections.emptyList())).andReturn(UUID.fromString("728084e8-7c9a-4133-a9a7-f2bb491ef436"));
+        replay(model);
+
+        PostsCreateHandler handler = new PostsCreateHandler(model);
+        assertEquals(new Answer(200, "728084e8-7c9a-4133-a9a7-f2bb491ef436"), handler.process(newPost, Collections.emptyMap(), false));
+
+        verify(model);
+    }
+
+}</code></pre>
+
+Class (PostsIndexHandlerTest)[https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/test/java/me/tomassetti/handlers/PostsIndexHandlerTest.java]:
+
+<pre><code class="language-java">public class PostsIndexHandlerTest {
+
+    @Test
+    public void emptyListIsHandledCorrectlyInHtmlOutput() {
+        Model model = EasyMock.createMock(Model.class);
+        expect(model.getAllPosts()).andReturn(Collections.EMPTY_LIST);
+        replay(model);
+
+        PostsIndexHandler handler = new PostsIndexHandler(model);
+        String expectedHtml = "<body><h1>My wonderful blog</h1><div></div></body>";
+        assertEquals(new Answer(200, expectedHtml), handler.process(new EmptyPayload(), Collections.emptyMap(), true));
+
+        verify(model);
+    }
+
+    @Test
+    public void aNonEmptyListIsHandledCorrectlyInHtmlOutput() {
+        Model model = EasyMock.createMock(Model.class);
+
+        Post post1 = new Post();
+        post1.setTitle("First post");
+        post1.setContent("First post content");
+        post1.setCategories(ImmutableList.of("Howto", "BoringPosts"));
+
+        Post post2 = new Post();
+        post2.setTitle("Second post");
+        post2.setContent("Second post content");
+        post2.setCategories(ImmutableList.of());
+
+        expect(model.getAllPosts()).andReturn(ImmutableList.of(post1, post2));
+        replay(model);
+
+        PostsIndexHandler handler = new PostsIndexHandler(model);
+        String expectedHtml = "<body><h1>My wonderful blog</h1><div><div><h2>First post</h2><p>First post content</p><ul><li>Howto</li><li>BoringPosts</li></ul></div><div><h2>Second post</h2><p>Second post content</p><ul></ul></div></div></body>";
+        assertEquals(new Answer(200, expectedHtml), handler.process(new EmptyPayload(), Collections.emptyMap(), true));
+
+        verify(model);
+    }
+
+    @Test
+    public void emptyListIsHandledCorrectlyInJsonOutput() {
+        Model model = EasyMock.createMock(Model.class);
+        expect(model.getAllPosts()).andReturn(Collections.EMPTY_LIST);
+        replay(model);
+
+        PostsIndexHandler handler = new PostsIndexHandler(model);
+        String expectedHtml = "[ ]";
+        assertEquals(new Answer(200, expectedHtml), handler.process(new EmptyPayload(), Collections.emptyMap(), false));
+
+        verify(model);
+    }
+
+    @Test
+    public void aNonEmptyListIsHandledCorrectlyInJsonOutput() {
+        Model model = EasyMock.createMock(Model.class);
+
+        Post post1 = new Post();
+        post1.setTitle("First post");
+        post1.setContent("First post content");
+        post1.setCategories(ImmutableList.of("Howto", "BoringPosts"));
+
+        Post post2 = new Post();
+        post2.setTitle("Second post");
+        post2.setContent("Second post content");
+        post2.setCategories(ImmutableList.of());
+
+        expect(model.getAllPosts()).andReturn(ImmutableList.of(post1, post2));
+        replay(model);
+
+        PostsIndexHandler handler = new PostsIndexHandler(model);
+        String expectedHtml = "[ {\n" +
+                "  \"post_uuid\" : null,\n" +
+                "  \"title\" : \"First post\",\n" +
+                "  \"content\" : \"First post content\",\n" +
+                "  \"publishing_date\" : null,\n" +
+                "  \"categories\" : [ \"Howto\", \"BoringPosts\" ]\n" +
+                "}, {\n" +
+                "  \"post_uuid\" : null,\n" +
+                "  \"title\" : \"Second post\",\n" +
+                "  \"content\" : \"Second post content\",\n" +
+                "  \"publishing_date\" : null,\n" +
+                "  \"categories\" : [ ]\n" +
+                "} ]";
+        assertEquals(new Answer(200, expectedHtml), handler.process(new EmptyPayload(), Collections.emptyMap(), false));
+
+        verify(model);
+    }
+
+}</code></pre>
+
 ##Conclusions
+
+I hope this post helped you to see one possible way to approach testing Spark applications. This approach tries to be simple and effective, in the spirit of Spark. I can see two possible disadvantages with this approach:
+
+* we add a bit of extra complexity by introducing _AbstractRequestHandler_
+* we do not have unit tests for the "plumbing bits" of the application. For that part we rely only on functional tests
+
+While I have used this approach in practice, with decent results it is not always applicable: sometimes you want to write very simple applications, just a few hundreds lines of code and you do not want to go through the hassle of introducing separate handler classes. In another cases you want to have an high unit tests coverage. Needs can be different and testing approaches could need to be tailored because of that, anyway I hope this can serve as a starting point. 
+
+Have fun with Spark!
 
 {% include authorTomassetti.html %}
