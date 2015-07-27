@@ -214,7 +214,11 @@ Class (PostsCreateHandlerTest)[https://github.com/sparktutorials/BlogService_Spa
 
 }</code></pre>
 
-Class (PostsIndexHandlerTest)[https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/test/java/me/tomassetti/handlers/PostsIndexHandlerTest.java]:
+As you can see in _anInvalidNewPostReturnsBadRequest_ we simply prepare an invalid _NewPostPayload_ and we pass it to an instance of _PostsCreateHandler_. We then pass an empty map (no url params needed here), and we invoke the method both with the parameter _shouldReturnHtml_ false and true, to verify that we get the same behavior in both cases. To test the answer is very easy: we just check that we get the expected _Answer_. In this case we expect the HTTP code 400 to be returned, because the request is not valid: this is beucuase the _newPost_ value was not valid.
+
+In the second test (_aPostIsCorrectlyCreated_) we verify that _model.createPost_ is invoked passing the values we specified in our _NewPostPayload_ instance. Easy, eh?
+
+We have other tests in (PostsIndexHandlerTest)[https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/test/java/me/tomassetti/handlers/PostsIndexHandlerTest.java]:
 
 <pre><code class="language-java">public class PostsIndexHandlerTest {
 
@@ -306,6 +310,8 @@ Class (PostsIndexHandlerTest)[https://github.com/sparktutorials/BlogService_Spar
 
 }</code></pre>
 
+Here we just test that the JSON and HTML returned in the body of the Answer are the one expected. Really straightforward.
+
 ##Conclusions
 
 I hope this post helped you to see one possible way to approach testing Spark applications. This approach tries to be simple and effective, in the spirit of Spark. I can see two possible disadvantages with this approach:
@@ -313,7 +319,9 @@ I hope this post helped you to see one possible way to approach testing Spark ap
 * we add a bit of extra complexity by introducing _AbstractRequestHandler_
 * we do not have unit tests for the "plumbing bits" of the application. For that part we rely only on functional tests
 
-While I have used this approach in practice, with decent results it is not always applicable: sometimes you want to write very simple applications, just a few hundreds lines of code and you do not want to go through the hassle of introducing separate handler classes. In another cases you want to have an high unit tests coverage. Needs can be different and testing approaches could need to be tailored because of that, anyway I hope this can serve as a starting point. 
+I have used this approach in practice, obtaining decent results. However this approach is not always applicable: sometimes you want to write very simple applications, just a few hundreds lines of code and you do not want to go through the hassle of introducing separate handler classes. In another cases you want to have an high unit tests coverage. Needs can be different and testing approaches could need to be tailored because of that, anyway I hope this can serve as a starting point.
+
+We think testing is a very interesting and important topics so we will try to write again about testing.
 
 Have fun with Spark!
 
