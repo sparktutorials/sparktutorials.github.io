@@ -2,7 +2,7 @@
 layout: post
 title:  "Testing and Spark - Part 1: Background and Unit Tests"
 author: <a href="http://tomassetti.me" target="_blank">Federico Tomassetti</a>
-date:   2015-08-01 10:34:52
+date:   2015-07-30 10:34:52
 summary: >
   Writing tests should simplify development and give you the confidence to perform refactoring. However, it often becomes a chore, as it's not always easy to understand what to test and how to test it. <br> In this tutorial we describe one possible approach: By using a mix of unit tests and functional tests we can keep development simple and agile, while still enjoying the security and peace of mind that tests bring us.
 ---
