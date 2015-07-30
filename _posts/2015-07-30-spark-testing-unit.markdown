@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Testing and Spark - Part 1: Background and Unit Tests"
+title:  "Spark and Testing - Part 1: Background and Unit Tests"
 author: <a href="http://tomassetti.me" target="_blank">Federico Tomassetti</a>
 date:   2015-07-30 10:34:52
 summary: >
