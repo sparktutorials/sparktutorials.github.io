@@ -15,7 +15,7 @@ img {
 ul {
   list-style: circle;
 }
-ul li {
+ol li, ul li {
   margin: 5px 0;
 }
 * {
@@ -160,7 +160,7 @@ article.post h2 {
   margin-top: 30px;
   margin-bottom: -15px;
 }
-.post ul li {
+.post ul li, .post ol li {
   margin: 10px;
 }
 .post {
@@ -189,6 +189,9 @@ article.post h2 {
   border-radius: 3px;
   font-size: 13px;
   color: #888;
+}
+.notification {
+    margin-top: 30px;
 }
 @media screen and (max-width: 1200px) {
   #tut-nav {

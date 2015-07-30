@@ -1,27 +1,28 @@
 ---
 layout: post
-title:  "Testing your Spark application: Background and Unit Tests"
+title:  "Testing and Spark - Part 1: Background and Unit Tests"
 author: <a href="http://tomassetti.me" target="_blank">Federico Tomassetti</a>
 date:   2015-08-01 10:34:52
 summary: >
   Writing tests should simplify development and give you the confidence to perform refactoring. However, it often becomes a chore, as it's not always easy to understand what to test and how to test it. <br> In this tutorial we describe one possible approach: By using a mix of unit tests and functional tests we can keep development simple and agile, while still enjoying the security and peace of mind that tests bring us.
 ---
 
+<div class="notification"><em>This is part one of a two-part tutorial series on testing</em></div>
+
 ##The plan
+There are many different forms of tests that can be used to assure that the different properties of your applications are maintained over time. In these tutorials we will focus exclusively on application logic (we verify that the application does what is supposed to do). We willl not consider non-functional aspects (like response time, load handling, etc.).
 
-There are many different forms of tests that can be used to assure that the different properties of your applications are maintained over time. In this tutorial we will focus exclusively on application logic (we verify that the application does what is supposed to do). We willl not consider the non-functional aspects (like response time, load handling, etc.).
+Our plan is to write two kinds of tests. In the first tutorial we are going to focus on *unit tests*, while in the second tutorial we are going to focus on *functional tests*:
 
-Our plan is to write two kinds of tests:
-
-* unit tests, to verify that classes or methods are logically correct
-* functional tests, to ensure that the whole application correctly implements our features
+* *unit tests*, to verify that classes or methods are logically correct
+* *functional tests*, to ensure that the whole application correctly implements our features
 
 We are going to use two different approaches for implementig these tests:
 
-* unit tests will be written in Java using JUnit. We will describe a pattern to make the logic easy to test
-* functional tests are going to be written using Cucumber. You will have to write some Ruby for that
+* *unit tests* will be written in *Java using JUnit*. We will describe a pattern to make logic easy to test
+* *functional tests* are going to be written using *Cucumber and Ruby*
 
-We will start by examining when to use one each testing approach. Then we will see how to write unit tests. Functional tests instead will be discussed in a future post.
+We will start by examining when to use each testing approach, then we will see how to write unit tests.
 
 The examples are based on our Blog service application, and all the code is available on <a href="https://github.com/sparktutorials/BlogService_SparkExample" target="_blank">GitHub.</a>
 
@@ -29,18 +30,18 @@ The examples are based on our Blog service application, and all the code is avai
 
 In my opinion, code can be divided roughly into two parts: the **logic** and the **plumbing**: 
 
-The **logic** is normally something specific to your application and domain. For example calculating how many days ago a post was published, or, if a user has the permission to publish a post. 
+The **logic** is normally something specific to your application and domain. For example calculating how many days ago a post was published, or, if a user has the permission to publish a post.
 
-The **plumbing** has instead to deal with the technological aspects: verify that a certain header has a valid value, deal with an IO exception, etc. 
+The **plumbing** is more about the technological aspects. For example verifying that a certain header has a valid value, dealing with an IO exception, etc.
 
-The logic is what you absolutely need to test, and it's usually fairly easy to write unit tests for it. Testing the plumbing tends to be harder. It's often strongly connected with low level libraries and usually requires complex states to be re-created in your test. In addition to the difficulty, the benefits are few: you are basically testing the library you are using (for example an HTTP library) instead of testing your logic. 
+The logic is what you absolutely need to test, and it's usually fairly easy to write unit tests for it. Testing the plumbing tends to be harder. It's often strongly connected with low level libraries and usually requires complex states to be re-created in your test. In addition to the difficulty, the benefits are few: you are basically testing the library you are using (for example an HTTP library) instead of testing your own code and logic. 
 
-Because of this, my test strategy can be divided in two:
+Because of this, my test strategy can be divided in two steps:
 
-* separate logic and plumbing code
-* test logic through unit tests while testing plumbing code through functional tests
+1. separate logic and plumbing code
+2. test logic through unit tests while testing plumbing code through functional tests
 
-We will start with the unit tests, which are probably familiar to more users. In the next tutorial we will take courage and jump into the land of Cucumber & Ruby to write our functional tests.
+It's time to get started! As mentioned before, we will begin with unit tests. Functional tests (using Cucumber and Ruby) will have to wait for Part 2 of this tutorial series.
 
 ##The RequestHandler interface
 
