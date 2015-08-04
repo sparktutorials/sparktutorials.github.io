@@ -4,7 +4,7 @@ title:  "Spark for REST APIs: Using Spark, Lombok and Jackson to reduce Java boi
 author: <a href="http://tomassetti.me" target="_blank">Federico Tomassetti</a>
 date:   2015-04-03 10:34:52
 comments: true
-summary: This tutorial will teach you how to create a minimal RESTful application for a blog, using JSON to transfer data. You will learn about setting up a complete Spark project, using Jackson and Lombok for awesome descriptive exchange objects. The tutorial is written by Federico Tomassetti and originally appear on his <a href="http://tomassetti.me/">blog</a>.
+summary: This tutorial will teach you how to create a minimal RESTful application for a blog, using JSON to transfer data. You will learn about setting up a complete Spark project, using Jackson and Lombok for awesome descriptive exchange objects.
 ---
 
 ##Getting started with Spark:  Create a lightweight RESTful application in Java

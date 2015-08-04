@@ -4,15 +4,15 @@ title:  "Spark and Testing - Part 1: Background and Unit Tests"
 author: <a href="http://tomassetti.me" target="_blank">Federico Tomassetti</a>
 date:   2015-07-30 10:34:52
 summary: >
-  Writing tests should simplify development and give you the confidence to perform refactoring. However, it often becomes a chore, as it's not always easy to understand what to test and how to test it. <br> In this tutorial we describe one possible approach: By using a mix of unit tests and functional tests we can keep development simple and agile, while still enjoying the security and peace of mind that tests bring us.
+  In this tutorial you will learn an approach for writing testable Spark applications from the ground up, using unit tests. We will also discuss what and when to test. We will cover functional tests in a later tutorial.
 ---
 
-<div class="notification"><em>This is part one of a two-part tutorial series on testing</em></div>
+<div class="notification"><em>This is part one of a two-part tutorial series on testing in which we will outline how to write a testable Spark application from the ground up. If you already have a finished application that you want to start testing using the approach described here, some refactoring will be required. </em></div>
 
 ##The plan
-There are many different forms of tests that can be used to assure that the different properties of your applications are maintained over time. In these tutorials we will focus exclusively on application logic (we verify that the application does what is supposed to do). We willl not consider non-functional aspects (like response time, load handling, etc.).
+There are many different forms of tests that can be used to assure that the different properties of your applications are maintained over time. In these tutorials we will focus exclusively on application logic (we verify that the application does what is supposed to do). We will not consider non-functional aspects (like response time, load handling, etc.).
 
-Our plan is to write two kinds of tests. In the first tutorial we are going to focus on *unit tests*, while in the second tutorial we are going to focus on *functional tests*:
+In the first tutorial we are going to focus on *unit tests*, while in the second tutorial we are going to focus on *functional tests*:
 
 * *unit tests*, to verify that classes or methods are logically correct
 * *functional tests*, to ensure that the whole application correctly implements our features
