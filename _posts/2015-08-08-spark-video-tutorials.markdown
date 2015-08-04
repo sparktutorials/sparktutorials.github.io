@@ -4,10 +4,10 @@ title:  "Spark Video Tutorials"
 author: <a href="https://www.linkedin.com/in/davidaase" target="_blank">David Åse</a>
 date:   2015-08-08 15:43:21
 summary: >
- Our friends over at <a href="https://learnhowtoprogram.com" target="_blank">learnhowtoprogram.com</a> have been working on a series of Java courses, all of which feature Spark. This post contains an overview of these courses with direct links to their videos.
+ Our friends over at <a href="https://learnhowtoprogram.com" target="_blank">learnhowtoprogram.com</a> have been working on a series of Java courses for beginners, all of which feature Spark. This post contains an overview of these courses with direct links to their videos.
 ---
 
-Our friends over at <a href="https://learnhowtoprogram.com" target="_blank">learnhowtoprogram.com</a> have been working on a series of Java courses, all of which feature Spark. This post contains an overview of these courses with direct links to their videos.
+Our friends over at <a href="https://learnhowtoprogram.com" target="_blank">learnhowtoprogram.com</a> have been working on a series of Java courses for beginners, all of which feature Spark. This post contains an overview of these courses with direct links to their videos.
  
 <section id="video-tuts">
   
@@ -100,7 +100,7 @@ Our friends over at <a href="https://learnhowtoprogram.com" target="_blank">lear
     
     <p>
         To follow the full course, go to 
-        <a href="    https://www.learnhowtoprogram.com/sections/java-database-basics" target="_blank">
+        <a href="https://www.learnhowtoprogram.com/sections/java-database-basics" target="_blank">
             https://www.learnhowtoprogram.com/sections/java-database-basics
         </a>
     </p>
