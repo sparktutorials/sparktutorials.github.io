@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Hello Tutorials!"
+title: "Hello Tutorials!"
 author: <a href="https://www.linkedin.com/in/davidaase" target="_blank">David Åse</a>
-date:   2015-04-02 10:34:52
+date: 2015-04-02 10:34:52
 summary: >
  This website will be used to collect tutorials about Spark. We aim to provide one tutorial every month until summer:
  <ul>
