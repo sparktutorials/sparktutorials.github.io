@@ -16,8 +16,7 @@ Maven is a build automation tool used primarily for Java projects. It addresses 
 
 Maven projects are configured using a 
 <a href="https://en.wikipedia.org/wiki/Apache_Maven#Project_Object_Model">
-    Project Object Model
-</a>, which is stored in a pom.<a href="https://en.wikipedia.org/wiki/XML" target="_blank">xml</a>-file. <br>Here's a minimal example:
+    Project Object Model</a>, which is stored in a pom.<a href="https://en.wikipedia.org/wiki/XML" target="_blank">xml</a>-file. <br>Here's a minimal example:
 
 <pre><code class="language-markup">
 {% capture code %}{% include codeExamples/sparkMaven/pom.xml %}{% endcapture %}{{ code | xml_escape }}
@@ -37,23 +36,19 @@ Maven projects are configured using a
 <br>Give your project a name and click "Finish":
 <img src="/img/posts/mavenTut/idea4.png" alt="">
 
-
-
 <br>Paste the Spark dependency into the generated pom.xml. If prompted, tell IntelliJ to enable auto-import.
 <img src="/img/posts/mavenTut/idea5.png" alt="">
 <pre><code class="language-markup">
 {% capture code %}{% include codeExamples/sparkMaven/sparkMaven.xml %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
-
-
-
-
-<br>Finally, paste the Spark Hello World snippet into a new Class, "Main.java":
-<img src="/img/posts/mavenTut/idea6.png" alt="">
+<br>Finally, paste the Spark "Hello World" snippet:
 <pre><code class="language-java">
 {% capture code %}{% include codeExamples/sparkMaven/sparkStart.java %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
+
+<br>Into a new Class, "Main.java":
+<img src="/img/posts/mavenTut/idea6.png" alt="">
 
 <br>Now everything is ready for you to run your main Class. Enjoy!
 
@@ -81,7 +76,7 @@ Maven projects are configured using a
 <strong>Save the pom.xml file!</strong>
 
 
-<br>Finally, paste the following Java snippet:
+<br>Finally, paste the Spark "Hello World" snippet:
 
 <pre><code class="language-java">
 {% capture code %}{% include codeExamples/sparkMaven/sparkStart.java %}{% endcapture %}{{ code | xml_escape }}
