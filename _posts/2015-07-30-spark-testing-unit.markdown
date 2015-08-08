@@ -3,6 +3,7 @@ layout: post
 title:  "Spark and Testing - Part 1: Background and Unit Tests"
 author: <a href="http://tomassetti.me" target="_blank">Federico Tomassetti</a>
 date:   2015-07-30 10:34:52
+comments: true
 summary: >
   In this tutorial series you will learn an approach for writing testable Spark applications from the ground up. In part one we will discuss what and when to test, and write some unit tests. In part two we will cover functional tests.
 ---
