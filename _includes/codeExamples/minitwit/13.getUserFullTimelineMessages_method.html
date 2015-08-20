@@ -1,0 +1,30 @@
+@Override
+public List<Message> getUserFullTimelineMessages(User user) {
+	Map<String, Object> params = new HashMap<String, Object>();
+        params.put("id", user.getId());
+        
+	String sql = "select message.*, user.* from message, user " +
+		"where message.author_id = user.user_id and ( " +
+		"user.user_id = :id or " +
+		"user.user_id in (select followee_id from follower " +
+                                    "where follower_id = :id))" +
+		"order by message.pub_date desc";
+	List<Message> result = template.query(sql, params, messageMapper);
+		
+	return result;
+}
+
+// Other methods...
+
+private RowMapper<Message> messageMapper = (rs, rowNum) -> {
+	Message m = new Message();
+		
+	m.setId(rs.getInt("message_id"));
+	m.setUserId(rs.getInt("author_id"));
+	m.setUsername(rs.getString("username"));
+	m.setText(rs.getString("text"));
+	m.setPubDate(rs.getTimestamp("pub_date"));
+	m.setGravatar(GravatarUtil.gravatarURL(rs.getString("email"), GRAVATAR_DEFAULT_IMAGE_TYPE, GRAVATAR_SIZE));
+		
+	return m;
+};

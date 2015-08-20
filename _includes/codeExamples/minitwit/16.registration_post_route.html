@@ -1,0 +1,27 @@
+post("/register", (req, res) -> {
+	Map<String, Object> map = new HashMap<>();
+	User user = new User();
+	try {
+		MultiMap<String> params = new MultiMap<String>();
+		UrlEncoded.decodeTo(req.body(), params, "UTF-8", -1);
+		BeanUtils.populate(user, params);
+	} catch (Exception e) {
+		halt(501);
+		return null;
+	}
+	String error = user.validate();
+	if(StringUtils.isEmpty(error)) {
+		User existingUser = service.getUserbyUsername(user.getUsername());
+		if(existingUser == null) {
+			service.registerUser(user);
+			res.redirect("/login?r=1");
+			halt();
+		} else {
+			error = "The username is already taken";
+		}
+	}
+	map.put("error", error);
+	map.put("username", user.getUsername());
+	map.put("email", user.getEmail());
+	return new ModelAndView(map, "register.ftl");
+}, new FreeMarkerEngine());
