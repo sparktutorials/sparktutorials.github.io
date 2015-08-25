@@ -34,16 +34,19 @@ This is actually where most of the work is done. In order to easily deploy a Jav
 </code></pre>
 
 ##Configuring Heroku
-First of all we have to create a Heroku application. This can be done by running <samp>heroku create appname</samp>:
+First of all we have to create a Heroku application. This can be done by running <samp>heroku create appname</samp>.<br>
+Open a terminal and navigate to your project root, then enter:
 
 <pre><code class="language-bash">
 heroku create spark-heroku-example
 </code></pre>
+Now that you have a Heroku application, we have to configure how to deploy it using Maven. This is pretty straightfoward using the Heroku Maven plugin. 
 
-Configuring Heroku deployment is pretty straightfoward using the Heroku Maven plugin. We specify the JDK version and the app-name, along with the launch config:
+We specify the JDK version and the app-name, along with the launch config:
 <pre><code class="language-markup">
 {% capture code %}{% include codeExamples/herokuDeploy/heroku.xml %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
+When you've added the Heroku config to your pom, it should look like <a href="https://github.com/tipsy/spark-heroku-example/blob/master/pom.xml" target="_blank">this</a>.
 
 ##Making Spark Listen on the Correct Port
 The only thing left is making sure Spark can handle your requests. Heroku assigns your application a new port every time you deploy it, so we have to get this port and tell Spark to use it:
@@ -75,6 +78,6 @@ Now we can deploy our application using <samp>mvn heroku:deploy</samp>:
 mvn heroku:deploy
 </code></pre>
 
-That's it. Our application is now avilable at: <a href="https://spark-heroku-example.herokuapp.com/hello" target="_blank">https://spark-heroku-example.herokuapp.com/hello</a>
+That's it. Our application is now avilable at <a href="https://spark-heroku-example.herokuapp.com/hello" target="_blank">https://spark-heroku-example.herokuapp.com/hello</a>
 
-The full source code for this example can be found at <a href="https://github.com/tipsy/spark-heroku-example" target="_blank">GitHub</a>
+The source code for this example can be found on <a href="https://github.com/tipsy/spark-heroku-example" target="_blank">GitHub</a>.
