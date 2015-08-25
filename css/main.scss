@@ -229,7 +229,8 @@ blockquote p {
 }
 @media screen and (max-width: 1000px) {
   #fork-me,
-  #some-buttons {
+  #some-buttons,
+  footer {
     display: none
   }
 }
