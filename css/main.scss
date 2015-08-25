@@ -203,6 +203,25 @@ article.post h2 {
 .notification {
     margin-top: 30px;
 }
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 5px;
+  vertical-align: -0.5em;
+}
+blockquote p {
+  line-height: 200%;
+  display: inline;
+}
 @media screen and (max-width: 1200px) {
   #tut-nav {
     display: none

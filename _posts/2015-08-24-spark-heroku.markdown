@@ -8,7 +8,17 @@ summary: >
  In this tutorial you will learn how to deploy a Hello World application on Heroku!
 ---
 
-##Setup
+##What is Heroku?
+<blockquote>
+    <p>
+        Heroku is a cloud application platform – a new way of building and deploying web apps.
+        Our service lets app developers spend their time on their application code, not managing servers, deployment, ongoing operations, or scaling.
+        <a href="https://www.heroku.com/about">heroku.com</a>
+    </p>
+</blockquote>
+Heroku takes care of everything related to deployment, and gives you easy access to key commands via their tool Heroku Toolbelt. It's very easy to get started with (as you'll soon learn), and it provides a very nice free-tier that you can use to test your webapps.
+
+##Initial Setup
 Before we get started, there are a few things we need to do:
 
 * Create a free Heroku account <a href="https://signup.heroku.com/dc" target="_blank">(sign up)</a>
@@ -35,8 +45,8 @@ Configuring Heroku deployment is pretty straightfoward using the Heroku Maven pl
 {% capture code %}{% include codeExamples/herokuDeploy/heroku.xml %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
-##Making Spark listen to the correct port
-The only thing left is making sure Spark can handle your requests. Heroku assigns your application a new port every time you deploy it, so we have to get this port and tell Spark to use it.
+##Making Spark Listen on the Correct Port
+The only thing left is making sure Spark can handle your requests. Heroku assigns your application a new port every time you deploy it, so we have to get this port and tell Spark to use it:
 
 <pre><code class="language-java">
 import static spark.Spark.*;
