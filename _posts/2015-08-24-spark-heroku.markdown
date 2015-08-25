@@ -13,10 +13,10 @@ summary: >
     <p>
         Heroku is a cloud application platform – a new way of building and deploying web apps.
         Our service lets app developers spend their time on their application code, not managing servers, deployment, ongoing operations, or scaling.
-        <a href="https://www.heroku.com/about">heroku.com</a>
+        &mdash; <a href="https://www.heroku.com/about">heroku.com</a>
     </p>
 </blockquote>
-Heroku takes care of everything related to deployment, and gives you easy access to key commands via their tool Heroku Toolbelt. It's very easy to get started with (as you'll soon learn), and it provides a very nice free-tier that you can use to test your webapps.
+Heroku takes care of everything related to deployment, and gives you easy access to key commands via their tool Heroku Toolbelt. It's very easy to get started with (as you'll soon learn), and it provides a nice free-tier that you can use to deploy your webapps.
 
 ##Initial Setup
 Before we get started, there are a few things we need to do:
@@ -27,18 +27,18 @@ Before we get started, there are a few things we need to do:
 * Set up the Spark Hello World example with Maven <a href="/2015/04/02/setting-up-a-spark-project-with-maven.html" target="_blank">(→ Tutorial)</a>
 
 ##Configuring Maven
-This is actually where most of the work is done. In order to easily deploy a Java application anywhere, you have to create a jar file containing your application and all of its dependencies. Open the pom.xml of your Spark Maven project and add the following configuration under your dependencies:
+This is actually where most of the work is done. In order to easily deploy a Java application anywhere, you have to create a jar file containing your application and all of its dependencies. Open the pom.xml of your Spark Maven project and add the following configuration (below your dependencies tag):
 
 <pre><code class="language-markup">
 {% capture code %}{% include codeExamples/herokuDeploy/maven.xml %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
 ##Configuring Heroku
-First of all we have to create a Heroku application. This can be done by running <samp>heroku create appname</samp>.<br>
+Before we can configure anything, we actually have to create a Heroku application. This can be done by using the <samp>heroku create</samp> command.<br>
 Open a terminal and navigate to your project root, then enter:
 
 <pre><code class="language-bash">
-heroku create spark-heroku-example
+heroku create spark-heroku-example #choose your own application name 
 </code></pre>
 Now that you have a Heroku application, we have to configure how to deploy it using Maven. This is pretty straightfoward using the Heroku Maven plugin. 
 
@@ -66,14 +66,15 @@ public class Main {
         if (processBuilder.environment().get("PORT") != null) {
             return Integer.parseInt(processBuilder.environment().get("PORT"));
         }
-        return 4567;
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 
 }
 </code></pre>
 
-Now we can deploy our application using <samp>mvn heroku:deploy</samp>:
+Now we can deploy our application using <samp>mvn heroku:deploy</samp>.
 
+Again, make sure you are in your project root, then enter:
 <pre><code class="language-bash">
 mvn heroku:deploy
 </code></pre>

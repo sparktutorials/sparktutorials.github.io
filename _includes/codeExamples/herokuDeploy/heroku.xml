@@ -4,7 +4,8 @@
     <version>0.4.4</version>
     <configuration>
         <jdkVersion>1.8</jdkVersion>
-        <appName>spark-heroku-example</appName>
+        <!-- Use your own application name -->
+        <appName>spark-heroku-example</appName> 
         <processTypes>
             <!-- Tell Heroku how to launch your application -->
             <web>java -jar ./target/my-app-1.0-jar-with-dependencies.jar</web>
