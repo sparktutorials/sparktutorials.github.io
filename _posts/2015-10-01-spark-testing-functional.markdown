@@ -12,7 +12,20 @@ summary: >
 
 ##Goal of the functional tests
 
-Also PMs can be involved
+The terminology for tests is rather confused: different people use the same term to indicate different things and the same kind of tests is indicated by different names, depending on who you are talking to. In this post we call functional tests tests which verify that same high level functionality needed by the user is working correctly.
+
+These tests should not be check technical implementation details but only the behavior of the application as perceived by the user.
+
+Our functional tests should be readable for Project Managers and other stakeholders. In some way they capture functional requirements and verify those requirements are met.
+
+In this tutorial we will realize functional tests which:
+ 
+ * start the application
+ * perform some operation (like creating a post)
+ * verify the results
+ * shutdown the application
+
+To write these tests we will use Cucumber.
 
 ##Cucumber
 
