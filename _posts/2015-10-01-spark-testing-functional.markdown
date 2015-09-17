@@ -29,7 +29,38 @@ To write these tests we will use Cucumber.
 
 ##Cucumber
 
-##Infrastructure needed
+Our functional tests should be declarative and easy to read. For this reason we are going to use Cucumber.
+
+### Install it
+
+You could install cucumber in your system libraries running gem install cucumber.
+
+I suggest however to use bundle:
+gem install bundler
+create a Gemfile
+bundle install --path vendor/bundle
+
+## Plan
+
+Now, writing the functional tests per se will be simple but first we have to create all the infrastructure. This is were normally I reach a fairly high level of desperation. What we need to do is theoretically very simple:
+
+ * create a clean database
+ * run the application with that database
+ * perform our steps
+ * stop the application
+ * destroy the database
+
+In practice you need all sort of synchronization, because you do not want to start using your application before it is finished the initialization process, right? 
+
+## Infrastructure needed
+
+We are going to run the database in a container. Run:
+
+build_docker_container_for_functests.sh
+
+This should create a docker image named blog_functests_db_container
+
+[image docker_images]
 
 ##Examples of tests
 
