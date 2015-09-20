@@ -87,7 +87,7 @@ I find that in general spawn and manage processes seem to be much simpler and ni
 
 ### Infrastructure needed
 
-We are going to run the database in a Docker container because it is a nice way to create a reproducible environement. Ok, we are doing that also to show off a bit. 
+We are going to run the database in a Docker container because it is a nice way to create a reproducible environement. Ok, we are doing that also to show off a bit. Using a container to run our database we akways sure to start from a given state: given we do not persist changes to our container previous tests run will not pollute the DB: we will always have a fresh copy at disposal for our tests.
 
 Of course if you are not using Linux it means that you have to install Boot2docker. That would mean having to run a comple of extra commands here and there to start Boot2docker.
 
@@ -101,8 +101,168 @@ This should create a docker image named `blog_functests_db_container`. Let's dou
 
 <img src="/img/posts/docker_images.png" alt="List of docker images">
 
-##Examples of tests
+### What we need to do before and after each test
+
+In our tests we will have to start and stop both the database and the application and we are going to do that for each single test. To do so we are going to write Cucumber hooks. We create `functional_tests/features/support/hooks.rb` and write this inside:
+
+<pre><code class="language-ruby">
+#encoding: utf-8
+
+require 'rest-client'
+
+def create_clean_db
+    started = system 'sh start_db.sh &'
+    raise Exception.new('Unable to start DB') unless started
+    attempts_left = 30
+    while attempts_left > 0
+        up_and_running = system 'sh db_is_up.sh'
+        return if up_and_running
+        puts "Waiting for db... (attemps left #{attempts_left})"
+        sleep(1)
+        attempts_left = attempts_left - 1
+    end
+    stop_db
+    raise Exception.new('DB does not respond, giving up')
+end
+
+def stop_db
+    system 'sh kill_all_functests_db_containers.sh'
+end
+
+def application_up_and_running?
+    begin
+        RestClient.get 'http://localhost:4567/alive'
+        return true
+    rescue Exception => e
+        $stdout.puts "Error #{e}"
+        return false
+    end
+end
+
+def start_application
+    res = system 'sh start_application.sh'    
+    attempts_left = 30
+    while attempts_left > 0
+        up_and_running = application_up_and_running?
+        return if up_and_running
+        $stdout.puts "Waiting for the application... (attemps left #{attempts_left})"
+        sleep(2)
+        attempts_left = attempts_left - 1
+    end
+    stop_application
+    raise Exception.new('The application does not respond, giving up')
+end
+
+def stop_application
+    res = system 'sh stop_application.sh'
+end
+
+Before do |scenario|
+    # in case there are leftovers
+    stop_application
+    stop_db
+
+    create_clean_db
+    start_application
+end
+
+After do |scenario|
+    stop_application
+    stop_db
+end    
+</code></pre>
+
+So before each test start we ensure that the application is killed, if it was still running, and the database is shutdown. Note that this should not be necessary but it is better to exceed on the safe side. Then we start the db (`create_clean_db`) and the application (`start_application`).
+
+Let's see in more details how we manage the db and the application.
+
+### Managing the database
+
+These are the functions we used to manage the DB:
+
+<pre><code class="language-ruby">
+def create_clean_db
+    started = system 'sh start_db.sh &'
+    raise Exception.new('Unable to start DB') unless started
+    attempts_left = 30
+    while attempts_left > 0
+        up_and_running = system 'sh db_is_up.sh'
+        return if up_and_running
+        puts "Waiting for db... (attemps left #{attempts_left})"
+        sleep(1)
+        attempts_left = attempts_left - 1
+    end
+    stop_db
+    raise Exception.new('DB does not respond, giving up')
+end
+
+def stop_db
+    system 'sh kill_all_functests_db_containers.sh'
+end
+</code></pre>
+
+We start the database using the `start_db.sh` script. It starts docker in daemon mode and return control to our Ruby function. At that point we have to wait until the database is up and running because otherwise our application would complain and fail.
+We do that by calling `db_is_up.sh` every second for up to 30 seconds, after which we give up.
+
+To check if the database is up we just try to connect to it. This is the content of `db_is_up.sh`:
+
+<pre><code class="language-bash">
+psql -h 127.0.0.1 -p 7500 -U blog_owner -d blog -c "select 1;"
+</code></pre>
+
+### Managing the application
+
+This is the code we use to start and stop the application:
+
+<pre><code class="language-ruby">
+def application_up_and_running?
+    begin
+        RestClient.get 'http://localhost:4567/alive'
+        return true
+    rescue Exception => e
+        $stdout.puts "Error #{e}"
+        return false
+    end
+end
+
+def start_application
+    res = system 'sh start_application.sh'    
+    attempts_left = 30
+    while attempts_left > 0
+        up_and_running = application_up_and_running?
+        return if up_and_running
+        $stdout.puts "Waiting for the application... (attemps left #{attempts_left})"
+        sleep(2)
+        attempts_left = attempts_left - 1
+    end
+    stop_application
+    raise Exception.new('The application does not respond, giving up')
+end
+
+def stop_application
+    res = system 'sh stop_application.sh'
+end
+</code></pre>
+
+We start it by using Maven. `start_application_sh` looks like this:
+
+<pre><code class="language-bash">
+mvn -f ../pom.xml exec:java -Dexec.args="--db-port 7500" > log_app_out.txt 2> log_app_err.txt &
+echo $! > .saved_pid
+</code></pre>
+
+We store the content of the output and error streams on file. However each run of the application override the same files so you may want to improve that. We start the application in background (so that the script can terminate) and save the PID identifying ther process. Later we use that PID to kill the application.
+
+To verify that the application is up and running we try to contact it on a specific route that we defined for this purpose. That route returns just "ok", but we use the fact we are getting an answer to recognize when the application is ready to be used (and tested).
+
+## Examples of tests
 
 ##Conclusions
+
+I think that functional tests are important because they provide us the guarantee that the application is doing what is supposed to do.
+
+There is a lot of space for improvements: it is very important to add proper logging functionalities so that when sometimes go wrong we know what's happened and we can fix it rapidly. If our tests fail we want to understand if it indicastes an issue with our application or our testing infrastructure: perhaps someone else is using a certain port or the database was not restarted properly. In such cases we want to find that out without having to tear apart every single piece of our testing infrastructure.
+
+Writing the infrastructure of these tests could take some time (especially to get all the bits right) but the nice thing is that it can be reused across projects.
 
 {% include authorTomassetti.html %}
