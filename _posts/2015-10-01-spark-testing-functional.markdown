@@ -8,20 +8,62 @@ summary: >
   In this tutorial series you will learn an approach for writing functional tests for Spark applications from the ground up. In part one we discussed what and when to test, and wrote some unit tests. In this post we complete the discussion covering functional tests.
 ---
 
-<div class="notification"><em>This is part two of a two-part tutorial series on testing in which we outline how to write a testable Spark application from the ground up. If you already have a finished application that you want to start testing using the approach described here, some refactoring will be required. 
-<br/>
+<div class="notification"><em>This is part two of a two-part tutorial series on testing in which we outline how to write a testable Spark application from the ground up.
+<br/><br/>
 As always <del>batteries</del> <a href="https://github.com/sparktutorials/BlogService_SparkExample">code is included</a>.
+<br/><br/>
+This tutorial reuses an application we have built over the different tutorials presented in this website. If you did not read previous installments do not worry: just check out code, read the tutorial and have fun.
 </em></div>
 
-##Goal of the functional tests
+In this post we are going to see how to write very readable, high level tests. How readable? 
+<br/>
+Like this:
 
-The terminology for test types is rather confused: different people use the same term to indicate different things and the same kind of tests can be indicated by different names, depending on who you are talking to. In this post we call functional tests tests which verify, at an high level, that functionalities needed by the user are implemented correctly.
+<pre><code class="language-ruby">
+Feature: Post managament
+    I can create posts
+    I can edit posts
+    I can delete posts
+  
+    Scenario: Add a post
+        When I insert a post with title "Foo" and content "bar"
+        Then I have 1 posts
+        Then the post has title "Foo"
+        Then the post has content "bar"
 
-These tests should not be check technical implementation details but only the behavior of the application as perceived by the user.
+    Scenario: Edit the title
+        Given that on the DB there is a post with UUID=91ff2946-187e-4114-a185-712600ef1622 title="Bad title" content="foo bar zum!"
+        When I edit post 91ff2946-187e-4114-a185-712600ef1622 setting title="Good post"
+        Then the post 91ff2946-187e-4114-a185-712600ef1622 has title "Good post"
+        Then the post 91ff2946-187e-4114-a185-712600ef1622 has content "foo bar zum!"
 
-We do not consider neither non-functional featurs like response times, or the load that the application can handle.
+    Scenario: Edit the content
+        Given that on the DB there is a post with UUID=91ff2946-187e-4114-a185-712600ef1622 title="Good title" content="foo bar zum!"
+        When I edit post 91ff2946-187e-4114-a185-712600ef1622 setting content="Foo bar zum! Zum zum!"
+        Then the post 91ff2946-187e-4114-a185-712600ef1622 has title "Good title"
+        Then the post 91ff2946-187e-4114-a185-712600ef1622 has content "Foo bar zum! Zum zum!"        
 
-Our functional tests should be readable for Project Managers and other stakeholders. In some way they capture functional requirements and help us to verify those requirements are met.
+    Scenario: Delete a post
+        Given that on the DB there is a post with UUID=91ff2946-187e-4114-a185-712600ef1622 title="Bad title" content="foo bar zum!"
+        When I delete post 91ff2946-187e-4114-a185-712600ef1622
+        Then post 91ff2946-187e-4114-a185-712600ef1622 is not found
+</code></pre>
+
+This is the actual code of our functional tests for posts management: nice, clean and clear enough to support discussions with non-technical people. Now, how do we make this thing work?
+
+We have to take a step back, talk about the definition of functional tests, write some infrastructure code (boring, but we can reuse it across projects) and then see finally how we can define such readable tests.
+
+So, take a breath and let's get started.
+
+## Goal of the functional tests
+
+The terminology for test types is rather confused: different people use the same term to indicate different things and the same kind of tests can be indicated by different names, depending on who you are talking to. In this post we call functional tests those tests which verify, at an high level, that functionalities needed by the user are implemented correctly.
+
+These tests should not check technical implementation details but only the behavior of the application as perceived by the user.
+
+Functional tests obviously do not consider non-functional featurs like response times, or the load that the application can handle.
+
+Our functional tests should be readable for Project Managers and other stakeholders. In some way they capture functional requirements and help us to verify that those requirements are met.
 
 In this tutorial we will realize functional tests which:
  
@@ -34,25 +76,25 @@ To write these tests we will use Cucumber.
 
 ##Cucumber
 
-Our functional tests should be declarative and easy to read. For this reason we are going to use Cucumber. Cucumber is a well known and mature solution oriented to support Behaviour-Driven Development (BDD). It is available for several languages including Ruby and Java.
+Our functional tests should be declarative and easy to read. For this reason we are going to use [Cucumber](https://cucumber.io/). Cucumber is a well known and mature solution oriented to support Behaviour-Driven Development (BDD). It is available for several languages including Ruby and Java.
 
 ### Ruby? Why?
 
-We are going to write are tests using Ruby for two reasons: on one hand Ruby is amazing for writing declareative and concise code and those are very good qualities for our tests. On the other end this enforces very effectively a strong separation between our tests and our application: we are going to interface with the code under tests by runnin the whole application, not by accessing single classes or methods. Given we are using a different language for tests there is not temptation to sneak in a call to a Java method (no, you are not allowed to doing so by using JRuby!).
+We are going to write are tests using Ruby for two reasons: on one hand Ruby is amazing for writing declarative and concise code and those are very good qualities for our tests. On the other hand this enforces very effectively a strong separation between our tests and our application: we are going to interface with the code under tests by running the whole application, not by accessing single classes or methods. Given we are using a different language for tests there is not temptation to sneak in a call to a Java method (no, you are not allowed to doing so by using JRuby!).
 
-Anyway do not worry I am going to hold your hand as we jump in the Ruby world. In the end you could even like it.
+Anyway do not worry I am going to hold your hand as we jump in the Ruby world. Who knows, in the end you could even like it.
 
 ### Install it
 
 First of all you need to install Ruby. You are a grown-up, you can do that without direction.
 
-Once you have done that you could install cucumner by using gem, the dependencies management tool which comes with Ruby. You can install cucumber among your system libraries sinply by running:
+Once you have done that you could install Cucumber by using gem, the dependencies management tool which comes with Ruby. You can install Cucumber among your system libraries sinply by running:
 
 <pre><code class="language-bash">
-gem install cucumber.
+gem install cucumber
 </code></pre>
 
-I suggest however to use bundler, a tool which permit to install dependencies locally. Let's start by creating a directory named `functional_tests` under the root of the project and then create a file named `Gemfile` (no extension):
+I suggest however to use [Bundler](http://bundler.io/), a tool which permit to install dependencies locally. Let's start by creating a directory named `functional_tests` under the root of the project and then create a file named `Gemfile` (no extension):
 
 <pre><code class="language-ruby">
 source 'https://rubygems.org'
@@ -62,7 +104,7 @@ gem 'rspec'
 gem 'rspec-expectations'
 </code></pre>
 
-And let's make bundler find the libraries and installing them for us:
+And let's make Bundler find the libraries and installing them for us:
 
 <pre><code class="language-bash">
 # to install bundler itself
@@ -77,19 +119,19 @@ Now, writing the functional tests per se will be simple but first we have to cre
 
  * create a clean database
  * run the application with that database
- * perform our steps
+ * perform our test steps
  * stop the application
  * destroy the database
 
-In practice you need all sort of synchronization, because you do not want to start using your application before it is finished the initialization process, right? 
+In practice you need all sort of synchronization, because you do not want to start calling your application before it has finished the initialization process or the database is up, right? 
 
 I find that in general spawn and manage processes seem to be much simpler and nicer in Ruby, so I am sorry for the ones that did not listen and went on writing their functional tests in Java :)
 
 ### Infrastructure needed
 
-We are going to run the database in a Docker container because it is a nice way to create a reproducible environement. Ok, we are doing that also to show off a bit. Using a container to run our database we akways sure to start from a given state: given we do not persist changes to our container previous tests run will not pollute the DB: we will always have a fresh copy at disposal for our tests.
+We are going to run the database in a Docker container because it is a nice way to create a reproducible environement. Ok, we are doing that also to show off a bit. Using a container to run our database we are always sure to start from a given state. We do not persist changes to our container so previous tests run will not pollute the DB. It means that we will always have a fresh copy at disposal for our tests.
 
-Of course if you are not using Linux it means that you have to install Boot2docker. That would mean having to run a comple of extra commands here and there to start Boot2docker.
+Of course if you are not using Linux it means that you have to install [Boot2docker](http://boot2docker.io/). That would mean having to run a comple of extra commands here and there to start Boot2docker.
 
 You should have all the code in the repository, you just need to run this to create the docker container (think about it as the image of an OS with just your DB installed:
 
@@ -172,7 +214,9 @@ After do |scenario|
 end    
 </code></pre>
 
-So before each test start we ensure that the application is killed, if it was still running, and the database is shutdown. Note that this should not be necessary but it is better to exceed on the safe side. Then we start the db (`create_clean_db`) and the application (`start_application`).
+So before each test start we ensure that the application is killed, if it was still running (`stop_application`), and the database is shutdown (`stop_db`). Note that this should not be necessary but it is better to exceed on the safe side. Then we start the db (`create_clean_db`) and the application (`start_application`).
+
+At the end of each test we kill the application and shutdown the database. 
 
 Let's see in more details how we manage the db and the application.
 
@@ -255,14 +299,231 @@ We store the content of the output and error streams on file. However each run o
 
 To verify that the application is up and running we try to contact it on a specific route that we defined for this purpose. That route returns just "ok", but we use the fact we are getting an answer to recognize when the application is ready to be used (and tested).
 
-## Examples of tests
+## Describing the features
+
+After this long and tedious preparation we are ready to write our tests.
+Do you remember the nice tests we have seen at the beginning of the post? Cool, let's take a look again at this code (which you should save in `functional_tests/features/post_mngt.feature`):
+
+<pre><code class="language-ruby">
+#encoding: utf-8
+
+Feature: Post managament
+    I can create posts
+    I can edit posts
+    I can delete posts
+  
+    Scenario: Add a post
+        When I insert a post with title "Foo" and content "bar"
+        Then I have 1 posts
+        Then the post has title "Foo"
+        Then the post has content "bar"
+
+    Scenario: Edit the title
+        Given that on the DB there is a post with UUID=91ff2946-187e-4114-a185-712600ef1622 title="Bad title" content="foo bar zum!"
+        When I edit post 91ff2946-187e-4114-a185-712600ef1622 setting title="Good post"
+        Then the post 91ff2946-187e-4114-a185-712600ef1622 has title "Good post"
+        Then the post 91ff2946-187e-4114-a185-712600ef1622 has content "foo bar zum!"
+
+    Scenario: Edit the content
+        Given that on the DB there is a post with UUID=91ff2946-187e-4114-a185-712600ef1622 title="Good title" content="foo bar zum!"
+        When I edit post 91ff2946-187e-4114-a185-712600ef1622 setting content="Foo bar zum! Zum zum!"
+        Then the post 91ff2946-187e-4114-a185-712600ef1622 has title "Good title"
+        Then the post 91ff2946-187e-4114-a185-712600ef1622 has content "Foo bar zum! Zum zum!"        
+
+    Scenario: Delete a post
+        Given that on the DB there is a post with UUID=91ff2946-187e-4114-a185-712600ef1622 title="Bad title" content="foo bar zum!"
+        When I delete post 91ff2946-187e-4114-a185-712600ef1622
+        Then post 91ff2946-187e-4114-a185-712600ef1622 is not found
+</code></pre>
+
+The points immediately under `Feature` are not executed: they are a simple description of what the feature should do. The varios elements composing a scenario are instead called `steps` and they are where the magic happen.
+
+There are three kind of steps:
+
+* `given` they represent some preconditions, some initial settings that is expected to prepare the scenario
+* `when` they represent the operation to be performed and tested
+* `then` steps represent conditions to be verified after the operation is performed
+
+Each step is mapped to a Ruby method described in `functional_tests/features/step_definitions/post_steps.rb`:
+
+<pre><code class="language-ruby">
+#encoding: utf-8
+
+require 'rest-client'
+require 'json'
+require "rspec"
+include RSpec::Matchers
+
+# psql -h 127.0.0.1 -p 7500 -U blog_owner -d blog
+
+def execute_sql(sql_code)
+    done = system "sh db_execute.sh \"#{sql_code}\""
+    raise Exception.new("Issue executing sql code: #{sql_code}") unless done
+end
+
+#
+# Given
+#
+
+Given(/^that on the DB there is a post with UUID=([a-f0-9-]+) title="([^"]*)" content="([^"]*)"$/) do |uuid, title, content|
+  execute_sql("insert into posts(post_uuid, title, content) values ('#{uuid}', '#{title}', '#{content}');")
+end
+
+#
+# When
+#
+
+When(/^I insert a post with title "([^"]*)" and content "([^"]*)"$/) do |title, content|
+  payload = """
+  {
+    \"title\" : \"#{title}\",
+    \"content\" : \"#{content}\",
+    \"categories\" : []
+  }
+  """
+  response = RestClient.post 'http://localhost:4567/posts', payload, :content_type => :json, :accept => :json
+  expect(response.code).to eq(201)
+end
+
+When(/^I edit post ([a-f0-9-]+) setting title="([^"]*)"$/) do |uuid, title|
+  payload = """
+  {
+    \"title\" : \"#{title}\"
+  }
+  """
+  response = RestClient.put "http://localhost:4567/posts/#{uuid}", payload, :content_type => :json, :accept => :json
+  expect(response.code).to eq(200)
+end
+
+When(/^I edit post ([a-f0-9-]+) setting content="([^"]*)"$/) do |uuid, content|
+  payload = """
+  {
+    \"content\" : \"#{content}\"
+  }
+  """
+  response = RestClient.put "http://localhost:4567/posts/#{uuid}", payload, :content_type => :json, :accept => :json
+  expect(response.code).to eq(200)
+end
+
+When(/^I delete post ([a-f0-9-]+)$/) do |uuid|
+    begin
+      response = RestClient.delete "http://localhost:4567/posts/#{uuid}"
+      expect(response.code).to eq(200)
+    rescue RestClient::InternalServerError => e
+        STDERR.puts (e.methods)
+        throw e
+    end
+end
+
+#
+# Then
+#
+
+Then(/^I have (\d+) posts?$/) do |n_posts|
+    begin
+      response = RestClient.get 'http://localhost:4567/posts'      
+      expect(response.code).to eq(200)
+      data = JSON.parse(response.body)
+      expect(data.count).to eq(n_posts.to_i)
+    rescue RestClient::InternalServerError => e
+        STDERR.puts (e.methods)
+        throw e
+    end
+end
+
+Then(/^the post has title "([^"]*)"$/) do |title|
+    begin
+      response = RestClient.get 'http://localhost:4567/posts'      
+      expect(response.code).to eq(200)
+      data = JSON.parse(response.body)
+      expect(data[0]["title"]).to eq(title)
+    rescue RestClient::InternalServerError => e
+        STDERR.puts (e.methods)
+        throw e
+    end
+end
+
+Then(/^the post has content "([^"]*)"$/) do |content|
+    begin
+      response = RestClient.get 'http://localhost:4567/posts'      
+      expect(response.code).to eq(200)
+      data = JSON.parse(response.body)
+      expect(data[0]["content"]).to eq(content)
+    rescue RestClient::InternalServerError => e
+        STDERR.puts (e.methods)
+        throw e
+    end
+end
+
+Then(/^the post ([a-f0-9-]+) has title "([^"]*)"$/) do |uuid, title|
+    begin
+      response = RestClient.get "http://localhost:4567/posts/#{uuid}"      
+      expect(response.code).to eq(200)
+      data = JSON.parse(response.body)
+      expect(data["title"]).to eq(title)
+    rescue RestClient::InternalServerError => e
+        STDERR.puts (e.methods)
+        throw e
+    end
+end
+
+Then(/^the post ([a-f0-9-]+) has content "([^"]*)"$/) do |uuid, content|
+    begin
+      response = RestClient.get "http://localhost:4567/posts/#{uuid}"      
+      expect(response.code).to eq(200)
+      data = JSON.parse(response.body)
+      expect(data["content"]).to eq(content)
+    rescue RestClient::InternalServerError => e
+        STDERR.puts (e.methods)
+        throw e
+    end
+end
+
+Then(/^post ([a-f0-9-]+) is not found$/) do |uuid|
+    begin
+      response = RestClient.get "http://localhost:4567/posts/#{uuid}"      
+      expect(response.code).to eq(404)
+    rescue RestClient::ResourceNotFound => e
+        # good!
+    rescue RestClient::InternalServerError => e
+        STDERR.puts (e.methods)
+        throw e
+    end
+end
+</code></pre>
+
+Each step method defines a regular expressionm for example:
+
+<pre><code class="language-ruby">
+Given(/^that on the DB there is a post with UUID=([a-f0-9-]+) title="([^"]*)" content="([^"]*)"$/) do |uuid, title, content| 
+</code></pre>
+
+This is how we match the steps with the corresponding code. The code then is simply executed.
+
+Let's see what it does:
+
+* the only `given` step just insert a post in the DB
+* the `when` steps perform calls to our web service to create, modify or delete posts
+* the `then` steps perform calls to our web service to read posts and verify they meet our expectations
+
+Cool, now it is finally time to run our tests.
+
+##Run the tests
+
+Enter in the `functional_tests` directory and run `bundle exec cucumber`. You should see a lot of output (our tests are a bit verbose) and in the end something like:
+
+<img src="/img/posts/run_func_tests.png" alt="Run the functional tests">
+
+I really like the output produced by Cucumber. And all that green is quite relaxing (we definitely deserve some relax at this point!).
 
 ##Conclusions
 
 I think that functional tests are important because they provide us the guarantee that the application is doing what is supposed to do.
 
-There is a lot of space for improvements: it is very important to add proper logging functionalities so that when sometimes go wrong we know what's happened and we can fix it rapidly. If our tests fail we want to understand if it indicastes an issue with our application or our testing infrastructure: perhaps someone else is using a certain port or the database was not restarted properly. In such cases we want to find that out without having to tear apart every single piece of our testing infrastructure.
+There is a lot of space for improvements: it is very important to add proper logging functionalities so that when sometimes go wrong we know what's happened and we can fix it rapidly. If our tests fail we want to understand if it indicates an issue with our application or our testing infrastructure: perhaps someone else is using a certain port or the database was not restarted properly. In such cases we want to find that out without having to tear apart every single piece of our testing infrastructure.
 
 Writing the infrastructure of these tests could take some time (especially to get all the bits right) but the nice thing is that it can be reused across projects.
+
+So, let me just wish you happy testing!
 
 {% include authorTomassetti.html %}
