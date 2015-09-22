@@ -1,14 +1,14 @@
 ---
 layout: post
-title:  "Building a mini Twitter clone with Spark"
+title:  "Building a Mini Twitter Clone"
 author: <a href="http://eherrera.net" target="_blank">Esteban Herrera</a>
-date:   2015-08-19 10:34:52
+date:   2015-09-22 10:34:52
 comments: true
 summary: >
   This tutorial will walk you through the steps of creating a mini Twitter clone using Spark, Freemarker, Spring, and HSQLDB to show you how to build a simple but complete web application.
 ---
 
-<div class="notification"><em>The complete code of this application is available on <a href="https://github.com/eh3rrera/minitwit" target="_blank">GitHub</a>. </em></div>
+<div class="notification"><em>The complete code for this application is available on <a href="https://github.com/eh3rrera/minitwit" target="_blank">GitHub</a>.</em></div>
 
 ##What you will learn
 In this tutorial, you will learn how to create a web application using <a href="http://sparkjava.com" target="_blank">Spark</a> and <a href="http://freemarker.org/" target="_blank">Freemarker</a> on the view layer, <a href="http://projects.spring.io/spring-framework/" target="_blank">Spring</a> for dependency injection and data access, and <a href="http://hsqldb.org/" target="_blank">HSQLDB</a> as the database.
@@ -17,11 +17,11 @@ Particularly, you'll learn:
 
 * How to structure a Web application with Spark
 * How to handle post requests with Spark
-* How to create a master template in Freemarker
+* How to create a master template/layout template in Freemarker
 * How to integrate Spring with Spark
 * How to use HSQLBD as an in-memory database
 
-Among other things. So let's get started.
+And a lot more. So, let's get started!
 
 ##What's in a name?
 
@@ -46,37 +46,37 @@ There won't be any:
 
 And all the other things that are the reason we have come to love Twitter.
 
-All of this work (including the name) is based on the <a href="http://github.com/mitsuhiko/flask/tree/master/examples/minitwit/" target="_blank">minitwit</a> example for the <a href="http://flask.pocoo.org/" target="_blank">Flask</a> Python web microframework written by <a href="http://www.pocoo.org/team/#armin-ronacher" target="_blank">Armin Ronacher</a>.
+All of this work (including the name) is based on the <a href="http://github.com/mitsuhiko/flask/tree/master/examples/minitwit/" target="_blank">MiniTwit</a> example for the <a href="http://flask.pocoo.org/" target="_blank">Flask</a> Python web micro framework written by <a href="http://www.pocoo.org/team/#armin-ronacher" target="_blank">Armin Ronacher</a>.
 
-##minitwit
+##MiniTwit
 
-Here are some screenshots of the application:
+Here are some screenshots of the finished application:
 
 <p>
 	<img class="img-bordered" src="/img/posts/minitwit/sign_in.png" alt="Sign in" />
 	<div style="text-align:center"><em>Sign in</em></div>
-</p>
+</p><br>
 
 <p>
 	<img class="img-bordered" src="/img/posts/minitwit/sign_up.png" alt="Sign up" />
 	<div style="text-align:center"><em>Sign up</em></div>
-</p>
+</p><br>
 
 
 <p>
 	<img class="img-bordered" src="/img/posts/minitwit/my_timeline.png" alt="My Timeline" />
 	<div style="text-align:center"><em>My Timeline</em></div>
-</p>
+</p><br>
 
 <p>
 	<img class="img-bordered" src="/img/posts/minitwit/other_user_timeline.png" alt="Other User's Timeline" />
 	<div style="text-align:center"><em>Other User's Timeline</em></div>
-</p>
+</p><br>
 
 <p>
 	<img class="img-bordered" src="/img/posts/minitwit/public_timeline.png" alt="Public Timeline" />
 	<div style="text-align:center"><em>Public Timeline</em></div>
-</p>
+</p><br>
 
 As you can see, this is a very simple application.
 
@@ -97,9 +97,7 @@ The database has some dummy users and messages already inserted. You can use use
 
 You can go and try it now to learn more about how the application works.
 
-Ready?
-
-Now let's dive into the technical part.
+Ready? Let's dive into the technical part.
 
 
 ##Code Organization
@@ -455,5 +453,5 @@ I hope this overview had helped you to understand how to integrate frameworks li
 
 I tried to follow good development practices, but this application shows only one approach to develop a web application with Spark. It may not be the simplest one (after all, the original <a href="http://github.com/mitsuhiko/flask/tree/master/examples/minitwit/" target="_blank">minitwit</a> was made in just one file, which is also possible to do with the Spark framework) but it is flexible and can be tested easily.
 
-In the end, I hope this tutorial can serve as a starting point for your web development issues. Have fun!
+I hope this tutorial can serve as a starting point for your web development efforts. Have fun!
 
