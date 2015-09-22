@@ -1,0 +1,9 @@
+get("/", (req, res) -> {
+		User user = getAuthenticatedUser(req);
+		Map<String, Object> map = new HashMap<>();
+		map.put("pageTitle", "Timeline");
+		map.put("user", user);
+		List<Message> messages = service.getUserFullTimelineMessages(user);
+		map.put("messages", messages);
+		return new ModelAndView(map, "timeline.ftl");
+}, new FreeMarkerEngine());

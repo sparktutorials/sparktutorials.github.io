@@ -1,0 +1,9 @@
+@Configuration
+@ComponentScan({ "com.minitwit" })
+public class App {
+	public static void main(String[] args) {
+    	AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);
+    	new WebConfig(ctx.getBean(MiniTwitService.class));
+        ctx.registerShutdownHook();
+    }
+}
