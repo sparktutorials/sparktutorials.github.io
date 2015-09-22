@@ -1,0 +1,12 @@
+@Repository
+public class MessageDaoImpl implements MessageDao {
+	
+	// ...
+	private NamedParameterJdbcTemplate template;
+
+	@Autowired
+	public MessageDaoImpl(DataSource ds) {
+		template = new NamedParameterJdbcTemplate(ds);
+	}
+	// Methods
+}
