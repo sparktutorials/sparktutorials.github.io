@@ -198,11 +198,11 @@ You may want to use curl instead, if you prefer the command line. I like not hav
 
 Let's insert a post. We specify all the fields as part of a Json object inserted in the body of the request. We get back the ID of the post created.
 
-<img class="img-bordered" src="/img/posts/postman1.png" alt="Testing with Postman">
+<img class="img-bordered" src="/img/posts/sparkBoilerplate/postman1.png" alt="Testing with Postman">
 
 Then we can get the list of the posts. In this case we use a GET (no body in the request) and we get the data of all the posts (just the one we inserted above).
 
-<img class="img-bordered" src="/img/posts/postman2.png" alt="Testing with Postman">
+<img class="img-bordered" src="/img/posts/sparkBoilerplate/postman2.png" alt="Testing with Postman">
 
 ##Conclusion
 I have to say that I was positively surprised by this project. I was ready for the worse: this is the kind of application that requires a basic logic and a lot of plumbing. I found out that Python, Clojure and Ruby do all a great jobs for this kinds of problems, while the times I wrote simple web applications in Java the logic was drown in boilerplate code. Well, things can be different. The combination of Spark, Lombok, Jackson and Java 8 is really tempting. I am very grateful to the authors of these pieces of software, they are really improving the life of Java developers. I consider it also a lesson: great frameworks can frequently improves things much more than we think.

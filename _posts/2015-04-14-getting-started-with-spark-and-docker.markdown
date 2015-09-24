@@ -22,7 +22,7 @@ In our example we will leverage Maven and Docker’s layered file system to inst
 
 So the prerequisites you need: no Java, no Maven, just Docker. Crazy, eh? ;-)
 
-<img src="/img/posts/sparkdocker.png" alt="Docker, Maven and Spark">
+<img src="/img/posts/sparkDocker/sparkdocker.png" alt="Docker, Maven and Spark">
 
 ##The source and config Files
 

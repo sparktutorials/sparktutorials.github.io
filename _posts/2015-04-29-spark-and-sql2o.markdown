@@ -118,25 +118,25 @@ You will need to adapt the parameters to point to your database server. If every
 
 A first get to <em>localhost:4567/posts</em> should return an empty list of posts
 
-<img class="img-bordered" src="/img/posts/postman_2_1.png" alt="Testing with Postman">
+<img class="img-bordered" src="/img/posts/sparkSql2o/postman_2_1.png" alt="Testing with Postman">
 
 Now we insert a post with a post to localhost:4567/posts specifying the values of the post in the body of the request. We should get back the UUID of the post created.
 
-<img class="img-bordered" src="/img/posts/postman_2_2.png" alt="Testing with Postman">
+<img class="img-bordered" src="/img/posts/sparkSql2o/postman_2_2.png" alt="Testing with Postman">
 
 Now asking again for the list of posts we should be able to get a list of one element: the post we just inserted
 
-<img class="img-bordered" src="/img/posts/postman_2_3.png" alt="Testing with Postman">
+<img class="img-bordered" src="/img/posts/sparkSql2o/postman_2_3.png" alt="Testing with Postman">
 
 Let's add a comment by sending a post to <em>localhost:4567/posts/b3f202dd-1d44-4612-81da-4ea65b49952f/comments</em>. You should change to the UUID of the post that you want to comment. Note that if you use an UUID of a not existing post you should get a 404 code back (meaning "not found").
 
 In this case we get back the UUID of the comment created.
 
-<img class="img-bordered" src="/img/posts/postman_2_4.png" alt="Testing with Postman">
+<img class="img-bordered" src="/img/posts/sparkSql2o/postman_2_4.png" alt="Testing with Postman">
 
 Finally we should be able to get the list of comments for our post by using a get to <em>localhost:4567/posts//b3f202dd-1d44-4612-81da-4ea65b49952f/comments</em>
 
-<img class="img-bordered" src="/img/posts/postman_2_5.png" alt="Testing with Postman">
+<img class="img-bordered" src="/img/posts/sparkSql2o/postman_2_5.png" alt="Testing with Postman">
 
 ##Conclusion
 Our service is not complete: for example, we need endpoints to approve the comments (I am sure you can think of many other improvements). However, even if very limited, we have seen how it is possible to build a RESTful service, with persistent data in a few clear lines of Java. No long configuration files, no _auto-magic_ components that break all of a sudden (typically on a Friday evening). 
