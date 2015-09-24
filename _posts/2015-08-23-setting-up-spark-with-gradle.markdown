@@ -29,7 +29,7 @@ First we need install gradle IDE on Eclipse, so let's open our Eclipse IDE:
 <br>Look a familiar file struct, but instead of "pom.xml" now you have "build.gradle" let's open your "build.gradle"
 <img src="/img/posts/settingup-spark-gradle/5.png" alt="">
 
-<br>We have a "dependencies{}" object, we need to add spark-core dependencies on our project. We can leave testCompile and change **compile** to: **compile 'com.sparkjava:spark-core:2.2'** like image
+<br>We have a "dependencies{}" object, we need to add spark-core dependencies on our project. We can leave **testCompile** and change **compile** to: **compile 'com.sparkjava:spark-core:2.2'** like image
 <pre><code class="language-java">
 dependencies {
     compile 'com.sparkjava:spark-core:2.2'
