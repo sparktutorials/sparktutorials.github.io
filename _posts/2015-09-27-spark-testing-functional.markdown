@@ -2,10 +2,10 @@
 layout: post
 title:  "Spark and Testing - Part 2: Functional tests"
 author: <a href="http://tomassetti.me" target="_blank">Federico Tomassetti</a>
-date:   2015-10-01 10:34:52
+date:   2015-09-27 10:34:52
 comments: true
 summary: >
-  In this tutorial series you will learn an approach for writing functional tests for Spark applications from the ground up. In part one we discussed what and when to test, and wrote some unit tests. In this post we complete the discussion covering functional tests.
+  In this tutorial series you will learn an approach for writing testable Spark applications from the ground up. In part one we looked at what and when to test, and wrote unit tests. In this post we will have a look at functional tests.
 ---
 
 <div class="notification"><em>This is part two of a two-part tutorial series on testing in which we outline how to write a testable Spark application from the ground up.
@@ -17,10 +17,10 @@ This tutorial reuses an application we have built over the different tutorials p
 
 In this post we are going to see how to write very readable, high level tests. How readable? 
 <br/>
-Like this:
+This readable:
 
-<pre><code class="language-ruby">
-Feature: Post managament
+<pre><code class="language-txt">
+Feature: Post management
     I can create posts
     I can edit posts
     I can delete posts
@@ -51,17 +51,15 @@ Feature: Post managament
 
 This is the actual code of our functional tests for posts management: nice, clean and clear enough to support discussions with non-technical people. Now, how do we make this thing work?
 
-We have to take a step back, talk about the definition of functional tests, write some infrastructure code (boring, but we can reuse it across projects) and then see finally how we can define such readable tests.
+We have to take a step back, talk about the definition of functional tests, write some infrastructure code (boring, but we can reuse it across projects) and then finally see how we can define such readable tests.
 
 So, take a breath and let's get started.
 
 ## Goal of the functional tests
 
-The terminology for test types is rather confused: different people use the same term to indicate different things and the same kind of tests can be indicated by different names, depending on who you are talking to. In this post we call functional tests those tests which verify, at an high level, that functionalities needed by the user are implemented correctly.
+The terminology for test types is rather confused: different people use the same term to indicate different things and the same kind of tests can be indicated by different names, depending on who you are talking to. In this post we call functional tests those tests which verify, at a high level, that functionalities needed by the user are implemented correctly.
 
-These tests should not check technical implementation details but only the behavior of the application as perceived by the user.
-
-Functional tests obviously do not consider non-functional featurs like response times, or the load that the application can handle.
+These tests should not check technical implementation details but only the behavior of the application as perceived by the user. Further, they should not consider non-functional features like response time or the load that the application can handle.
 
 Our functional tests should be readable for Project Managers and other stakeholders. In some way they capture functional requirements and help us to verify that those requirements are met.
 
@@ -76,25 +74,25 @@ To write these tests we will use Cucumber.
 
 ##Cucumber
 
-Our functional tests should be declarative and easy to read. For this reason we are going to use [Cucumber](https://cucumber.io/). Cucumber is a well known and mature solution oriented to support Behaviour-Driven Development (BDD). It is available for several languages including Ruby and Java.
+Our functional tests should be declarative and easy to read. For this reason we are going to use <a href="https://cucumber.io/" target="_blank">Cucumber</a>. Cucumber is a well-known and mature solution oriented to support Behaviour-Driven Development (BDD). It is available for several languages including Ruby and Java. We will use Ruby.
 
-### Ruby? Why?
+## Ruby? Why?
 
-We are going to write are tests using Ruby for two reasons: on one hand Ruby is amazing for writing declarative and concise code and those are very good qualities for our tests. On the other hand this enforces very effectively a strong separation between our tests and our application: we are going to interface with the code under tests by running the whole application, not by accessing single classes or methods. Given we are using a different language for tests there is not temptation to sneak in a call to a Java method (no, you are not allowed to doing so by using JRuby!).
+We are going to write are tests using Ruby for two reasons: on one hand Ruby is amazing for writing declarative and concise code and those are very good qualities for our tests. This also effectively enforces a very strong separation between our tests and our application: we are going to interface with the code under tests by running the whole application, not by accessing single classes or methods. Given we are using a different language for tests there is no temptation to sneak in a call to a Java method (no, you are not allowed to do so by using JRuby!).
 
-Anyway do not worry I am going to hold your hand as we jump in the Ruby world. Who knows, in the end you could even like it.
+Anyway, don't worry, I'm going to hold your hand as we jump into the world of Ruby. Who knows, in the end you might even enjoy it.
 
-### Install it
+## Installing Ruby
 
-First of all you need to install Ruby. You are a grown-up, you can do that without direction.
+First of all you need to install Ruby. See <a href="https://www.ruby-lang.org/en/documentation/installation/" target="_blank">this page</a> for instructions.
 
-Once you have done that you could install Cucumber by using gem, the dependencies management tool which comes with Ruby. You can install Cucumber among your system libraries sinply by running:
+Once you have done that you can install Cucumber by using gem, the dependencies management tool which comes with Ruby. You can install Cucumber among your system libraries by running:
 
 <pre><code class="language-bash">
 gem install cucumber
 </code></pre>
 
-I suggest however to use [Bundler](http://bundler.io/), a tool which permit to install dependencies locally. Let's start by creating a directory named `functional_tests` under the root of the project and then create a file named `Gemfile` (no extension):
+I suggest, however, to use [Bundler](http://bundler.io/), a tool which permit to install dependencies locally. Let's start by creating a directory named `functional_tests` under the root of the project and then create a file named `Gemfile` (no extension):
 
 <pre><code class="language-ruby">
 source 'https://rubygems.org'
@@ -104,7 +102,7 @@ gem 'rspec'
 gem 'rspec-expectations'
 </code></pre>
 
-And let's make Bundler find the libraries and installing them for us:
+And let's make Bundler find the libraries and install them for us:
 
 <pre><code class="language-bash">
 # to install bundler itself
@@ -115,7 +113,7 @@ bundle install --path vendor/bundle
 
 ## Plan
 
-Now, writing the functional tests per se will be simple but first we have to create all the infrastructure. This is where normally I reach a fairly high level of desperation. What we need to do is theoretically very simple:
+Now, writing the functional tests will be fairly simple, but first we have to create some infrastructure. This is where I normally get pretty frustrated. What we need to do is theoretically very simple:
 
  * create a clean database
  * run the application with that database
@@ -127,25 +125,26 @@ In practice you need all sort of synchronization, because you do not want to sta
 
 I find that in general spawn and manage processes seem to be much simpler and nicer in Ruby, so I am sorry for the ones that did not listen and went on writing their functional tests in Java :)
 
-### Infrastructure needed
+## Infrastructure needed
 
-We are going to run the database in a Docker container because it is a nice way to create a reproducible environement. Ok, we are doing that also to show off a bit. Using a container to run our database we are always sure to start from a given state. We do not persist changes to our container so previous tests run will not pollute the DB. It means that we will always have a fresh copy at disposal for our tests.
+We are going to run the database in a Docker container because it is a nice way to create a reproducible environment. Ok, we are doing that also to show off a bit. Using a container to run our database we are always sure to start from a given state. We do not persist changes to our container so previous tests run will not pollute the DB. It means that we will always have a fresh copy at disposal for our tests.
 
-Of course if you are not using Linux it means that you have to install [Boot2docker](http://boot2docker.io/). That would mean having to run a comple of extra commands here and there to start Boot2docker.
+If you are not using Linux you have to install [Boot2docker](http://boot2docker.io/). That would mean having to run a couple of extra commands here and there to start Boot2docker.
 
-You should have all the code in the repository, you just need to run this to create the docker container (think about it as the image of an OS with just your DB installed:
+You should have all the code in the repository, you just need to run this to create the Docker container (think about it as the image of an OS with just your DB installed:
 
 <pre><code class="language-bash">
 build_docker_container_for_functests.sh
 </code></pre>
 
-This should create a docker image named `blog_functests_db_container`. Let's double check that by typing `docker images`:
+This should create a Docker image named `blog_functests_db_container`. Let's double-check that by typing `docker images`:
 
-<img src="/img/posts/docker_images.png" alt="List of docker images">
+<img src="/img/posts/sparkCucumber/docker_images.png" alt="List of Docker images">
 
-### What we need to do before and after each test
+## What we need to do before and after each test
 
-In our tests we will have to start and stop both the database and the application and we are going to do that for each single test. To do so we are going to write Cucumber hooks. We create `functional_tests/features/support/hooks.rb` and write this inside:
+In our tests we will have to start and stop both the database and the application and we are going to do that for each single test. To do so we are going to write Cucumber hooks. 
+<br>We create `functional_tests/features/support/hooks.rb` and write this inside:
 
 <pre><code class="language-ruby">
 #encoding: utf-8
@@ -214,13 +213,13 @@ After do |scenario|
 end    
 </code></pre>
 
-So before each test start we ensure that the application is killed, if it was still running (`stop_application`), and the database is shutdown (`stop_db`). Note that this should not be necessary but it is better to exceed on the safe side. Then we start the db (`create_clean_db`) and the application (`start_application`).
+So before each test start we ensure that the application is killed, if it was still running (`stop_application`), and the database is shutdown (`stop_db`). Note that this should not be necessary but it's better to be safe than sorry. Then we start the db (`create_clean_db`) and the application (`start_application`).
 
 At the end of each test we kill the application and shutdown the database. 
 
 Let's see in more details how we manage the db and the application.
 
-### Managing the database
+## Managing the database
 
 These are the functions we used to manage the DB:
 
@@ -245,7 +244,7 @@ def stop_db
 end
 </code></pre>
 
-We start the database using the `start_db.sh` script. It starts docker in daemon mode and return control to our Ruby function. At that point we have to wait until the database is up and running because otherwise our application would complain and fail.
+We start the database using the `start_db.sh` script. It starts Docker in daemon mode and return control to our Ruby function. At that point we have to wait until the database is up and running because otherwise our application would complain and fail.
 We do that by calling `db_is_up.sh` every second for up to 30 seconds, after which we give up.
 
 To check if the database is up we just try to connect to it. This is the content of `db_is_up.sh`:
@@ -254,7 +253,7 @@ To check if the database is up we just try to connect to it. This is the content
 psql -h 127.0.0.1 -p 7500 -U blog_owner -d blog -c "select 1;"
 </code></pre>
 
-### Managing the application
+## Managing the application
 
 This is the code we use to start and stop the application:
 
@@ -295,19 +294,19 @@ mvn -f ../pom.xml exec:java -Dexec.args="--db-port 7500" > log_app_out.txt 2> lo
 echo $! > .saved_pid
 </code></pre>
 
-We store the content of the output and error streams on file. However each run of the application override the same files so you may want to improve that. We start the application in background (so that the script can terminate) and save the PID identifying ther process. Later we use that PID to kill the application.
+We store the content of the output and error streams on file. However, each run of the application overrides the same files (you may want to improve that). We start the application in background (so that the script can terminate) and save the PID identifying their process. Later we use that PID to kill the application.
 
 To verify that the application is up and running we try to contact it on a specific route that we defined for this purpose. That route returns just "ok", but we use the fact we are getting an answer to recognize when the application is ready to be used (and tested).
 
 ## Describing the features
 
 After this long and tedious preparation we are ready to write our tests.
-Do you remember the nice tests we have seen at the beginning of the post? Cool, let's take a look again at this code (which you should save in `functional_tests/features/post_mngt.feature`):
+Do you remember the nice tests you saw at the beginning of the post? Cool, let's take a look again at this code (which you should save in `functional_tests/features/post_mngt.feature`):
 
-<pre><code class="language-ruby">
+<pre><code class="language-txt">
 #encoding: utf-8
 
-Feature: Post managament
+Feature: Post management
     I can create posts
     I can edit posts
     I can delete posts
@@ -336,7 +335,7 @@ Feature: Post managament
         Then post 91ff2946-187e-4114-a185-712600ef1622 is not found
 </code></pre>
 
-The points immediately under `Feature` are not executed: they are a simple description of what the feature should do. The varios elements composing a scenario are instead called `steps` and they are where the magic happen.
+The points immediately under `Feature` are not executed: they are a simple description of what the feature should do. The various elements composing a scenario are instead called `steps` and they are where the magic happen.
 
 There are three kind of steps:
 
@@ -492,13 +491,13 @@ Then(/^post ([a-f0-9-]+) is not found$/) do |uuid|
 end
 </code></pre>
 
-Each step method defines a regular expressionm for example:
+Each step method defines a regular expression, for example:
 
 <pre><code class="language-ruby">
 Given(/^that on the DB there is a post with UUID=([a-f0-9-]+) title="([^"]*)" content="([^"]*)"$/) do |uuid, title, content| 
 </code></pre>
 
-This is how we match the steps with the corresponding code. The code then is simply executed.
+This is how we match the steps with the corresponding code. The code is then simply executed.
 
 Let's see what it does:
 
@@ -510,17 +509,17 @@ Cool, now it is finally time to run our tests.
 
 ##Run the tests
 
-Enter in the `functional_tests` directory and run `bundle exec cucumber`. You should see a lot of output (our tests are a bit verbose) and in the end something like:
+Enter the `functional_tests` directory and run `bundle exec cucumber`. You should see a lot of output (our tests are a bit verbose) and in the end something like:
 
-<img src="/img/posts/run_func_tests.png" alt="Run the functional tests">
+<img src="/img/posts/sparkCucumber/run_func_tests.png" alt="Run the functional tests">
 
-I really like the output produced by Cucumber. And all that green is quite relaxing (we definitely deserve some relax at this point!).
+I really like the output produced by Cucumber. And all that green is quite relaxing (we definitely deserve some relaxation at this point!).
 
 ##Conclusions
 
-I think that functional tests are important because they provide us the guarantee that the application is doing what is supposed to do.
+I think that functional tests are important because they provide us a guarantee that the application is doing what it's supposed to do.
 
-There is a lot of space for improvements: it is very important to add proper logging functionalities so that when sometimes go wrong we know what's happened and we can fix it rapidly. If our tests fail we want to understand if it indicates an issue with our application or our testing infrastructure: perhaps someone else is using a certain port or the database was not restarted properly. In such cases we want to find that out without having to tear apart every single piece of our testing infrastructure.
+There is a lot of room for improvements: it is very important to add proper logging functionalities, so that when something goes wrong we know what's happened and how to fix it. If our tests fail, we want to understand if it indicates an issue with our application or our testing infrastructure: perhaps someone else is using a certain port or the database was not restarted properly. In such cases we want to find that out without having to tear apart every single piece of our testing infrastructure.
 
 Writing the infrastructure of these tests could take some time (especially to get all the bits right) but the nice thing is that it can be reused across projects.
 
