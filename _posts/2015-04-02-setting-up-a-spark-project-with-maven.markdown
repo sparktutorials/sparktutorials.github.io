@@ -54,6 +54,13 @@ Maven projects are configured using a
 <br>Now everything is ready for you to run your main Class. Enjoy!
 
 
+<em>
+    If IntelliJ says <samp>"Method references are not supported at this language level"</samp>,
+    <br> 
+    press <b>alt+enter</b> and choose <samp>"Set language level to 8 - Lambdas, type annotations, etc."</samp>.
+</em>
+
+
 
 <h2 id="eclipse">Instructions for Eclipse</h2>
 
