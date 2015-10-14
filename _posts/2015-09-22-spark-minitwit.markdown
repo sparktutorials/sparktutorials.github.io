@@ -326,6 +326,9 @@ Notice how the service is called to get the timeline messages. This service is j
 {% capture code %}{% include codeExamples/minitwit/13.getUserFullTimelineMessages_method.html %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
+<em>If you don't want to write embedded SQL Strings, you could try out <a href="http://www.jooq.org/" target="_blank">jOOQ</a>. <br>
+Check out <a href="https://github.com/lukaseder/minitwit/blob/master/src/main/java/com/minitwit/dao/MessageDao.java" target="_blank">this example</a> by Lucas Eder, which is a fork of this tutorial.</em>
+
 Using Spring's `NamedParameterJdbcTemplate` class, the query is executed with some parameters passed in a `Map`. A `RowMapper` instance creates `Message` objects from the returned `ResultSet`.
 
 The schema of the database is actually very simple (it's located in *src/main/resource/sql*):
