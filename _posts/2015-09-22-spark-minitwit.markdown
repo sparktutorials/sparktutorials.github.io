@@ -89,7 +89,7 @@ Just clone or download the repository on <a href="https://github.com/eh3rrera/mi
 
 <pre><code class="language-bash">mvn compile exec:java</code></pre>
 
-Then, open your browser at <em>http://localhost:4557</em>.
+Then, open your browser at <em>http://localhost:4567</em>.
 
 The application uses an embedded in-memory database, meaning that everything you do is not persisted after the application is terminated. The advantage is that you don't need a database installed to run the application, and in the way the code is structured, it can be changed to use any other relational database easily (more on this later).
 
