@@ -8,7 +8,7 @@ summary: >
  In this tutorial you will learn to work with WebSockets to create a real-time chat app. <br> Some  (simple) JavaScript is required.
 ---
 
-<div class="notification"><em>The source code for this tutorial can be found on <a href="https://github.com/tipsy/spark-websocket" target="_blank">GitHub</a>.</em></div>
+<div class="notification"><em>The source code for this tutorial can be found on <a href="https://github.com/tipsy/spark-websocket" target="_blank">GitHub</a>, and a live demo can be found <a href="http://spark-heroku-example.herokuapp.com/" target="_blank">here</a>.</em></div>
 
 ##Create a Spark Maven Project
 First, we need to create a Spark Maven project <a href="/2015/04/02/setting-up-a-spark-project-with-maven.html" target="_blank">(→ Tutorial)</a>
