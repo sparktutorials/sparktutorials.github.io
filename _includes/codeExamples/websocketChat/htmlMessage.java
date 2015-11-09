@@ -1,7 +1,7 @@
-//Builds a HTML element with username, message and timestamp,
-private static String createHtmlMessageFromUser(Session user, String message) {
+//Builds a HTML element with a sender-name, a message, and a timestamp,
+private static String createHtmlMessageFromSender(String sender, String message) {
     return article().with(
-            b(usernameMap.get(user) + " says:"),
+            b(sender + " says:"),
             p(message),
             span().withClass("timestamp").withText(new SimpleDateFormat("HH:mm:ss").format(new Date()))
     ).render();
