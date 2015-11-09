@@ -23,7 +23,7 @@ Other than Spark, we are going to use a simple Java HTML Builder <a href="http:/
 {% capture code %}{% include codeExamples/websocketChat/pom.xml %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
-##Setting up Our Main.java class:
+##Creating the Java Application
 We need to keep track of all our users and assign them usernames. We create a map (userUsernameMap) that maps sessions to usernames, an int for the next username (nextUserNumber), and the Spark server code:
 
 <pre><code class="language-java">
@@ -51,7 +51,7 @@ The approach we will use is very straightforward: Add the user to our userUserna
 
 That's it for the Java part, the rest is HTML and JavaScript.
 
-##Building a Client
+##Building a JavaScript Client
 In order to use demonstrate that our application works, we can build a JavaScript client. First we create our index.html:
 
 <pre><code class="language-markup">
