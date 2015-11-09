@@ -42,7 +42,7 @@ To create the HTML, we will use <a href="http://j2html.com/" target="_blank">j2h
 {% capture code %}{% include codeExamples/websocketChat/htmlMessage.java %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
-##Setting up Our WebSocketHandlerr
+##Setting up Our WebSocketHandler
 The approach we will use is very straightforward: Add the user to our userUsernameMap when he connects, remove him when he disconnects, and send all his messages to all users. Since we want usernames, but don't want complexity, we will generate usernames based on when someone connects to the server:
 
 <pre><code class="language-java">
