@@ -72,8 +72,8 @@ Our friends over at <a href="https://www.learnhowtoprogram.com/courses" target="
     
     <p>
         To follow the full course, go to 
-        <a href="https://www.learnhowtoprogram.com/sections/object-oriented-java" target="_blank">
-            https://www.learnhowtoprogram.com/sections/object-oriented-java
+        <a href="https://www.learnhowtoprogram.com/object-oriented-java" target="_blank">
+            https://www.learnhowtoprogram.com/object-oriented-java
         </a>
     </p>
     
