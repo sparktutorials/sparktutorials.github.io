@@ -7,15 +7,15 @@ summary: >
  Our friends over at <a href="https://learnhowtoprogram.com" target="_blank">learnhowtoprogram.com</a> have been working on a series of Java courses for beginners, all of which feature Spark. This post contains an overview of these courses with direct links to their videos.
 ---
 
-Our friends over at <a href="https://learnhowtoprogram.com" target="_blank">learnhowtoprogram.com</a> have been working on a series of Java courses for beginners, all of which feature Spark. This post contains an overview of these courses with direct links to their videos.
+Our friends over at <a href="https://www.learnhowtoprogram.com/courses" target="_blank">learnhowtoprogram.com</a> have been working on a series of Java courses for beginners, all of which feature Spark. This post contains an overview of these courses with direct links to their videos.
  
 <section id="video-tuts">
   
     <h2>&#9899; Beginner videos</h2>
     <p>
         To follow the full course, go to 
-        <a href="https://www.learnhowtoprogram.com/sections/spark" target="_blank">
-            https://www.learnhowtoprogram.com/sections/spark
+        <a href="https://www.learnhowtoprogram.com/spark" target="_blank">
+            https://www.learnhowtoprogram.com/spark
         </a>
     </p>
 
@@ -48,8 +48,8 @@ Our friends over at <a href="https://learnhowtoprogram.com" target="_blank">lear
     <h2>&#9899; Behavior Driven Development</h2>
     <p>
         To follow the full course, go to 
-        <a href="https://www.learnhowtoprogram.com/sections/behavior-driven-development-with-java" target="_blank">
-            https://www.learnhowtoprogram.com/sections/bdd-with-java
+        <a href="https://www.learnhowtoprogram.com/behavior-driven-development-with-java" target="_blank">
+            https://www.learnhowtoprogram.com/bdd-with-java
         </a>
     </p>
     
@@ -100,8 +100,8 @@ Our friends over at <a href="https://learnhowtoprogram.com" target="_blank">lear
     
     <p>
         To follow the full course, go to 
-        <a href="https://www.learnhowtoprogram.com/sections/java-database-basics" target="_blank">
-            https://www.learnhowtoprogram.com/sections/java-database-basics
+        <a href="https://www.learnhowtoprogram.com/java-database-basics" target="_blank">
+            https://www.learnhowtoprogram.com/java-database-basics
         </a>
     </p>
     
