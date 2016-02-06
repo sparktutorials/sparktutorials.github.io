@@ -144,13 +144,13 @@ nav li:nth-child(2) {
 #some-buttons {
   position: fixed;
   left: 50%;
-  margin-left: 309px;
+  margin-left: 214px;
   top: 15px;
   z-index: 9999
 }
 #some-buttons img {
-  height: 22px;
-  width: 22px
+  height: 20px;
+  width: 20px
 }
 #some-buttons a {
   float: right;
@@ -159,6 +159,16 @@ nav li:nth-child(2) {
 }
 #some-buttons a:hover {
   opacity: 1;
+}
+#githubStar {
+  float: right;
+  width: 95px;
+  height: 20px;
+  margin-left: 8px;
+  position: relative;
+}
+#starBg, #starFrame {
+  position: absolute;
 }
 .posts .post p:first-of-type {
   margin-top: 0px;
