@@ -11,115 +11,63 @@ Our friends over at <a href="https://www.learnhowtoprogram.com/courses" target="
  
 <section id="video-tuts">
   
-    <h2>&#9899; Beginner videos</h2>
-    <p>
-        To follow the full course, go to 
-        <a href="https://www.learnhowtoprogram.com/spark" target="_blank">
-            https://www.learnhowtoprogram.com/spark
-        </a>
-    </p>
+    <h2>&#9899; Beginner videos 
+        <small><a href="https://www.learnhowtoprogram.com/java/spark" target="_blank">(full course)</a></small>
+    </h2>
+    <ul>
+        <li><a href="https://www.learnhowtoprogram.com/lessons/hello-world-with-spark" target="_blank">
+            Spark Hello World
+        </a></li>
+        <li><a href="https://www.learnhowtoprogram.com/lessons/creating-templates" target="_blank">
+            Creating Templates
+        </a></li>
+        <li><a href="https://www.learnhowtoprogram.com/lessons/using-a-layout" target="_blank">
+            Using layout templates
+        </a></li>
+        <li><a href="https://www.learnhowtoprogram.com/lessons/using-forms-with-spark" target="_blank">
+            Using forms
+        </a></li>
+    </ul>
 
-    <h3>Getting started:</h3>
+    <h2>&#9899; Behavior Driven Development 
+           <small><a href="https://www.learnhowtoprogram.com/java/behavior-driven-development-with-java" target="_blank">(full course)</a></small>
+    </h2>
+    <ul>
+        <li><a href="https://www.learnhowtoprogram.com/java/behavior-driven-development-with-java/behavior-driven-development-with-spark" target="_blank">
+            Behavior driven development
+        </a></li>
+        <li><a href="https://www.learnhowtoprogram.com/java/behavior-driven-development-with-java/integration-testing-with-fluentlenium" target="_blank">
+            Integration testing
+        </a></li>
+    </ul>
 
-    <a href="https://www.learnhowtoprogram.com/lessons/hello-world-with-spark" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/hello-world-with-spark
-    </a>
+    <h2>&#9899; Object Oriented Java 
+           <small><a href="https://www.learnhowtoprogram.com/java/object-oriented-java" target="_blank">(full course)</a></small>
+    </h2>
+    
+    <ul>
+        <li><a href="https://www.learnhowtoprogram.com/java/object-oriented-java/testing-with-objects" target="_blank">
+            Testing Objects
+        </a></li>
+        <li><a href="https://www.learnhowtoprogram.com/java/object-oriented-java/persisting-data-with-spark-session-storage" target="_blank">
+            Session storage
+        </a></li>
+        <li><a href="https://www.learnhowtoprogram.com/java/object-oriented-java/creating-a-todo-list" target="_blank">
+            Creating a todo-list
+        </a></li>
+    </ul>
 
-
-    <h3>Creating templates:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/creating-templates" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/creating-templates
-    </a>
-
-    <h3>Using a layout template:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/using-a-layout" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/using-a-layout
-    </a>
-
-    <h3>Working with forms:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/using-forms-with-spark" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/using-forms-with-spark
-    </a>
+    <h2>&#9899; Java Database Basics
+        <small><a href="https://www.learnhowtoprogram.com/java/java-database-basics" target="_blank">(full course)</a></small>
+    </h2>
     
-    <!-- 
-        Behavior Driven Development    
-    -->
+    <ul>
+         <li><a href="https://www.learnhowtoprogram.com/java/java-database-basics/one-to-many-with-spark" target="_blank">
+            One-to-many relations
+        </a></li>
+        <li><a href="https://www.learnhowtoprogram.com/java/java-database-basics/to-do-list-with-sql2o-and-postgres" target="_blank">
+            Todo-list with sql2o-and-postgres
+        </a></li>
+    </ul>
     
-    <h2>&#9899; Behavior Driven Development</h2>
-    <p>
-        To follow the full course, go to 
-        <a href="https://www.learnhowtoprogram.com/behavior-driven-development-with-java" target="_blank">
-            https://www.learnhowtoprogram.com/bdd-with-java
-        </a>
-    </p>
-    
-    <h3>Behavior Driven Development:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/behavior-driven-development-with-spark-monday-homework" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/behavior-driven-development-with-spark
-    </a>
-    
-
-    <h3>Integration testing with FluentLenium:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/integration-testing-with-fluentlenium-tuesday-homework" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/integration-testing-with-fluentlenium
-    </a>
-    
-    <!-- 
-        Object Oriented Java  
-    -->
-    
-    <h2>&#9899; Object Oriented Java</h2>
-    
-    <p>
-        To follow the full course, go to 
-        <a href="https://www.learnhowtoprogram.com/object-oriented-java" target="_blank">
-            https://www.learnhowtoprogram.com/object-oriented-java
-        </a>
-    </p>
-    
-    <h3>Testing Objects:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/integrating-objects-with-spark-weekend-homework" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/integrating-objects-with-spark
-    </a>
-
-    <h3>Session storage:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/persisting-data-with-spark-session-storage-weekend-homework" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/persisting-data-with-spark-session-storage
-    </a>
-    
-    <h3>Creating a TODO-list:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/creating-a-todo-list-monday-homework" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/creating-a-todo-list
-    </a>
-    
-    <!-- 
-        Java Database Basic
-    -->
-    
-    <h2>&#9899; Java Database Basics</h2>
-    
-    <p>
-        To follow the full course, go to 
-        <a href="https://www.learnhowtoprogram.com/java-database-basics" target="_blank">
-            https://www.learnhowtoprogram.com/java-database-basics
-        </a>
-    </p>
-    
-    
-    <h3>One-to-many relations:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/one-to-many-with-spark-weekend-homework" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/one-to-many-with-spark
-    </a>
-   
-    <h3>Many-to-many relations:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/many-to-many-with-spark-weekend-homework" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/many-to-many-with-spark
-    </a>
-   
-    <h3>CRUD operations over HTTP:</h3>
-    <a href="https://www.learnhowtoprogram.com/lessons/http-post-delete-and-crud-tuesday-homework" target="_blank">
-        https://www.learnhowtoprogram.com/lessons/http-post-delete-and-crud
-    </a>
-
 </section>
-
