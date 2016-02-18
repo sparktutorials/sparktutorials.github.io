@@ -7,7 +7,7 @@ comments: true
 summary: This tutorial will teach you how to create a minimal RESTful application for a blog, using JSON to transfer data. You will learn about setting up a complete Spark project, using Jackson and Lombok for awesome descriptive exchange objects.
 ---
 
-##Getting started with Spark:  Create a lightweight RESTful application in Java
+## Getting started with Spark:  Create a lightweight RESTful application in Java
 Recently I have been writing a RESTful service using <a href="http://sparkjava.com" target="_blank">Spark</a>, a web framework for Java (which is not related to Apache Spark). When we planned to write this I was ready to the unavoidable Javaesque avalanche of interfaces, boilerplate code and deep hierarchies. I was very surprised to find out that an alternative world exists also for the developers confined to Java.
 
 In this post we are going to see how to build a RESTful application for a blog, using JSON to transfer data. We will see:
@@ -19,7 +19,7 @@ In this post we are going to see how to build a RESTful application for a blog, 
 
 We are not going to see how to insert this data in a DB. We will just keep the list in memory (in my real service I have been using sql2o).
 
-##A few dependencies
+## A few dependencies
 First of all, we need to set up a few dependencies. Java:
 <pre><code class="language-java">
 {% capture code %}{% include codeExamples/sparkLombok/javaDeps.html %}{% endcapture %}{{ code | xml_escape }}
@@ -40,7 +40,7 @@ Let's take a lot at the POM:
 {% capture code %}{% include codeExamples/sparkLombok/mavenDep.html %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
-##Spark "Hello world!"
+## Spark "Hello world!"
 
 Now we can run it like this:
 
@@ -50,7 +50,7 @@ mvn compile && mvn exec:java
 
 Let's open a browser and visit <em>http://localhost:4567/posts.</em> Here we want to do a simple get. For performing posts you could want to use the Postman plugin for your browser or just run <a href="http://en.wikipedia.org/wiki/CURL" target="_blank">curl</a>. Whatever works for you.
 
-##Using Jackson and Lombok for awesome descriptive exchange objects
+## Using Jackson and Lombok for awesome descriptive exchange objects
 In a typical RESTful application we expect to receive POST requests with json objects as part of the payload. Our job will be to check the code is well-formed JSON, that it corresponds to the expected structure, that the values are in the valid ranges, etc. Kind of boring and repetitive. We could do that in different ways. The most basic one is to use <a href="https://code.google.com/p/google-gson/" target="_blank">gson</a>:
 
 <pre><code class="language-java">
@@ -143,7 +143,7 @@ class NewPostPayload {
 
 Much nicer, eh?
 
-##A complete example
+## A complete example
 
 We need to do two things:
 
@@ -192,7 +192,7 @@ And the final code is:
 {% capture code %}{% include codeExamples/sparkLombok/finalCode.html %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
-##Using PostMan to test the application
+## Using PostMan to test the application
 
 You may want to use curl instead, if you prefer the command line. I like not having to escape my JSON and having a basic editor so I use PostMan (a Chrome plugin).
 
@@ -204,7 +204,7 @@ Then we can get the list of the posts. In this case we use a GET (no body in the
 
 <img class="img-bordered" src="/img/posts/sparkBoilerplate/postman2.png" alt="Testing with Postman">
 
-##Conclusion
+## Conclusion
 I have to say that I was positively surprised by this project. I was ready for the worse: this is the kind of application that requires a basic logic and a lot of plumbing. I found out that Python, Clojure and Ruby do all a great jobs for this kinds of problems, while the times I wrote simple web applications in Java the logic was drown in boilerplate code. Well, things can be different. The combination of Spark, Lombok, Jackson and Java 8 is really tempting. I am very grateful to the authors of these pieces of software, they are really improving the life of Java developers. I consider it also a lesson: great frameworks can frequently improves things much more than we think.
 
 {% include authorTomassetti.html %}

@@ -25,7 +25,7 @@ summary: >
  
  If you have suggestions for tutorials, or if you want your tutorial posted on this site, please leave a comment or contact us on our facebook page.
 
-##Getting started with Spark
+## Getting started with Spark
 
 Add the maven dependency:
 

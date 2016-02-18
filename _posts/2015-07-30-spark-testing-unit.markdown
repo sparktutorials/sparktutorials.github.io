@@ -10,7 +10,7 @@ summary: >
 
 <div class="notification"><em>This is part one of a two-part tutorial series on testing in which we will outline how to write a testable Spark application from the ground up. If you already have a finished application that you want to start testing using the approach described here, some refactoring will be required. </em></div>
 
-##The plan
+## The plan
 There are many different forms of tests that can be used to assure that the different properties of your applications are maintained over time. In these tutorials we will focus exclusively on application logic (we verify that the application does what is supposed to do). We will not consider non-functional aspects (like response time, load handling, etc.).
 
 In the first tutorial we are going to focus on *unit tests*, while in the second tutorial we are going to focus on *functional tests*:
@@ -27,7 +27,7 @@ We will start by examining when to use each testing approach, then we will see h
 
 The examples are based on our Blog service application, and all the code is available on <a href="https://github.com/sparktutorials/BlogService_SparkExample" target="_blank">GitHub.</a>
 
-##Logic and plumbing code
+## Logic and plumbing code
 
 In my opinion, code can be divided roughly into two parts: the **logic** and the **plumbing**: 
 
@@ -44,7 +44,7 @@ Because of this, my test strategy can be divided in two steps:
 
 It's time to get started! As mentioned before, we will begin with unit tests. Functional tests (using Cucumber and Ruby) will have to wait for Part 2 of this tutorial series.
 
-##The RequestHandler interface
+## The RequestHandler interface
 
 To separate logic and plumbing code we want to insulate the logic from the *Spark specific* bits in our application. The logic should be as insulated as possible, so that we could one day replace Spark with something else and leave the logic untouched (of course, no one in their right mind would stop using Spark, it was a very hyphotetical example!).
 
@@ -139,7 +139,7 @@ We will create subclasses of _AbstractRequestHandler_, instantiate them and use 
 
 The rest of the _handle_ method get the result from _process_ and instruct Spark to send the response.
 
-##How to write and use RequestHandlers
+## How to write and use RequestHandlers
 
 Now, let's see how to use this class. Before we had our logic defined in anonymous classes implementing the _Route_ interface. For example:
 
@@ -186,7 +186,7 @@ And we will use this class as our _Route_ (remember that _AbstractRequestHandler
 post("/posts", new PostsCreateHandler(model));
 </code></pre>
 
-##Unit tests
+## Unit tests
 
 At this point we can simply test our logic by writing tests for our _RequestHandlers_. It's simple because we do not need to mock anything related to Spark. We just need to mock our _Model_, which represents the way we access the database. However it has a simple interface and mocking it is straightforward. Let's look at some examples.
 
@@ -242,7 +242,7 @@ We have other tests in <a href="https://github.com/sparktutorials/BlogService_Sp
 
 Here we just test that the JSON and HTML returned in the body of the Answer are the one expected. Pretty straightforward.
 
-##Conclusions
+## Conclusions
 
 I hope this post helped you by showing one possible way to approach testing Spark applications. This approach tries to be simple and effective, in the spirit of Spark. I can see two possible disadvantages with this approach:
 

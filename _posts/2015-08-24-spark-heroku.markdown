@@ -8,7 +8,7 @@ summary: >
  In this tutorial you will learn how to deploy a Hello World application on Heroku!
 ---
 
-##What is Heroku?
+## What is Heroku?
 <blockquote>
     <p>
         Heroku is a cloud application platform – a new way of building and deploying web apps.
@@ -18,7 +18,7 @@ summary: >
 </blockquote>
 Heroku takes care of everything related to deployment, and gives you easy access to key commands via their tool Heroku Toolbelt. It's very easy to get started with (as you'll soon learn), and it provides a nice free-tier that you can use to deploy your webapps.
 
-##Initial Setup
+## Initial Setup
 Before we get started, there are a few things we need to do:
 
 * Create a free Heroku account <a href="https://signup.heroku.com/dc" target="_blank">(sign up)</a>
@@ -26,14 +26,14 @@ Before we get started, there are a few things we need to do:
 * Install <a href="https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html" target="_blank">Maven</a> 
 * Set up the Spark Hello World example with Maven <a href="/2015/04/02/setting-up-a-spark-project-with-maven.html" target="_blank">(→ Tutorial)</a>
 
-##Configuring Maven
+## Configuring Maven
 This is actually where most of the work is done. In order to easily deploy a Java application anywhere, you have to create a jar file containing your application and all of its dependencies. Open the pom.xml of your Spark Maven project and add the following configuration (below your dependencies tag):
 
 <pre><code class="language-markup">
 {% capture code %}{% include codeExamples/herokuDeploy/maven.xml %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
-##Configuring Heroku
+## Configuring Heroku
 Before we can configure anything, we actually have to create a Heroku application. This can be done by using the <samp>heroku create</samp> command.<br>
 Open a terminal and navigate to your project root, then enter:
 
@@ -48,7 +48,7 @@ We specify the JDK version and the app-name, along with the launch config:
 </code></pre>
 When you've added the Heroku config to your pom, it should look like <a href="https://github.com/tipsy/spark-heroku-example/blob/master/pom.xml" target="_blank">this</a>.
 
-##Making Spark Listen on the Correct Port
+## Making Spark Listen on the Correct Port
 The only thing left is making sure Spark can handle your requests. Heroku assigns your application a new port every time you deploy it, so we have to get this port and tell Spark to use it:
 
 <pre><code class="language-java">

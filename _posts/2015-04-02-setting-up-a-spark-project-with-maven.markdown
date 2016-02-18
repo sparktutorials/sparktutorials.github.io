@@ -8,11 +8,11 @@ summary: >
  In this tutorial you will learn how to set up a Spark project using Maven. It's aimed at Java beginners, and will show you how to set up your project in IntelliJ IDEA and Eclipse.
 ---
 
-##IDE Guides
+## IDE Guides
 <a href="#intellij">- Instructions for IntelliJ IDEA</a><br>
 <a href="#eclipse">- Instructions for Eclipse</a><br>
  
-##About Maven
+## About Maven
 Maven is a build automation tool used primarily for Java projects. It addresses two aspects of building software: First, it describes how software is built, and second, it describes its dependencies.
 
 Maven projects are configured using a 

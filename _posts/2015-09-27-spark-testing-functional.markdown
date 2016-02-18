@@ -72,7 +72,7 @@ In this tutorial we will realize functional tests which:
 
 To write these tests we will use Cucumber.
 
-##Cucumber
+## Cucumber
 
 Our functional tests should be declarative and easy to read. For this reason we are going to use <a href="https://cucumber.io/" target="_blank">Cucumber</a>. Cucumber is a well-known and mature solution oriented to support Behaviour-Driven Development (BDD). It is available for several languages including Ruby and Java. We will use Ruby.
 
@@ -507,7 +507,7 @@ Let's see what it does:
 
 Cool, now it is finally time to run our tests.
 
-##Run the tests
+## Run the tests
 
 Enter the `functional_tests` directory and run `bundle exec cucumber`. You should see a lot of output (our tests are a bit verbose) and in the end something like:
 
@@ -515,7 +515,7 @@ Enter the `functional_tests` directory and run `bundle exec cucumber`. You shoul
 
 I really like the output produced by Cucumber. And all that green is quite relaxing (we definitely deserve some relaxation at this point!).
 
-##Conclusions
+## Conclusions
 
 I think that functional tests are important because they provide us a guarantee that the application is doing what it's supposed to do.
 

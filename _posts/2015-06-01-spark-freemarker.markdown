@@ -10,7 +10,7 @@ summary: >
 
 <em>The code discussed in this post is available on <a href="https://github.com/sparktutorials/BlogService_SparkExample" target="_blank">GitHub</a></em>
 
-##Offering the same data as both JSON and HTML
+## Offering the same data as both JSON and HTML
 To offer the same data as JSON or HTML we could use different strategies. The two simplest ones are:
 
 * using different endpoints for JSON and HTML
@@ -18,7 +18,7 @@ To offer the same data as JSON or HTML we could use different strategies. The tw
 
 The first strategy is very simple to implement: you just have to create different routes. For example, we could offer the JSON data in response to the endpoints <em>/service/posts</em> and <em>/service/posts/:id</em>, while offering HTML data in response to the endpoints <em>/posts</em> and <em>/posts/:id</em>. This is because we typically want shorter URLs for the content intended for human beings. In this post we will focus on the Accept-header strategy though, which requires a bit of work.
 
-##Using the Accept header to decide to return JSON or HTML
+## Using the Accept header to decide to return JSON or HTML
 An HTTP request reaching our service brings a lot of information, including the URL (of which we can parse specific parts to derive parameters), query parameters, a body and <a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields" target="_blank">headers</a>.<br>
 An interesting header is Accept. It can be used to specify the format that the caller is able to process or the formats it prefers. A web browser typically set this header to contains <em>text/html</em>. Other applications prefer to work with formats like JSON or XML (for the young kids out there: XML is a weird markup language we had to work with before we got JSON).
 
@@ -51,7 +51,7 @@ get("/posts", (request, response) -> {
 
 In this example we either get a request specifying <em>text/html</em> in the Accept header or we provide JSON in all other cases. It could make sense to return an error instead of always producing JSON: if someone is asking for XML they are not going to be able to process the JSON we are sending back to them.
 
-##Producing HTML programmatically
+## Producing HTML programmatically
 Let's see how we could generate HTML from pure Java. We are going to use <a href="http://j2html.com" target="_blank">j2html</a>. j2html is a simple Jave to HTML builder made by <a href="https://linkedin.com/in/davidaase" target="_blank">David Åse</a>, the person responsible for the Spark websites (if you are interested in joining the Spark project, you can read about how David got involved in this <a href="http://tomassetti.me/interview-with-david-ase-from-the-spark-web-framework-project/">interview</a>).
 
 Let's start by adding the dependency in our POM file:
@@ -89,7 +89,7 @@ I think j2html is great when prototyping HTML pages because you don't have to de
 
 The example using j2html can be found in the <a href="https://github.com/sparktutorials/BlogService_SparkExample" target="_blank">GitHub repository</a> under the tag j2html.
 
-##Producing HTML using the FreeMarker template engine
+## Producing HTML using the FreeMarker template engine
 For large HTML content you may want to use templates. The basic idea is the you can let a designer create a sample page and then replace the sample content with placeholders that are going to be dynamically replaced by the actual content at each request. 
 <br>Spark has native support for a lot of template engines (see <a href="https://github.com/perwendel/spark-template-engines" target="_blank">here</a> for the complete list).
 
@@ -140,7 +140,7 @@ And this should be the result:
 
 <img class="img-bordered" src="/img/posts/sparkFreemarker/marvellousBlog.png" alt="Screenshot of blog">
 
-##How to pass data to the template
+## How to pass data to the template
 
 Cool, we are able to load and display a template but so far the template does not contain any dynamic content: it is just producing the same page whatever content we have in our blog. Let's correct this.
 
@@ -171,7 +171,7 @@ And this should be the result, displaying a couple of posts:
 
 The example using FreeMarker is present in the <a href="https://github.com/sparktutorials/BlogService_SparkExample" target="_blank">GitHub repository</a> under the tag freemarker.
 
-##Conclusions
+## Conclusions
 As we have seen in this post Spark can be easily integrated with template engines and FreeMarker is a decent choice. I personally think that Spark is great for RESTful services but it does a pretty good job also for common user-facing web applications and it can be easily used for mixed applications (RESTful service + HTML interface, as we have seen in this post).
 
 There are improvements to be done to use templates in a large application. For example you may want to define a common structure (header, navigation column, footer) to be used in all the different templates, without having to maintain copies. To understand how to do this and more advanced topics I suggest to take a look at the FreeMarker documentation.

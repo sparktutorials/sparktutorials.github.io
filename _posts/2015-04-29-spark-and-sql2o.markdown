@@ -7,7 +7,7 @@ comments: true
 summary: This tutorial will teach you how to use a database with your Spark application. We will discuss when it is appropriate to use an ORM and describe how you can organize your code to make it easily testable.
 ---
 
-##What you will learn in this post
+## What you will learn in this post
 In my [last tutorial]({% post_url 2015-04-03-spark-lombok-jackson-reduce-boilerplate %}) we saw how to use Java 8 with Spark, Lombok and Jackson to create a lightweight REST service. One thing we did not examine was how to persist (store) data. 
 In this post I would like to describe a way to organize the integration of the database layer with the rest of your Spark application.
 
@@ -24,7 +24,7 @@ What we will not see in this post (but probably in a future one):
 
 Most of what we will learn could be adapted to other systems like myBatis or also ORMs like Hibernate. In my opinion the important thing is to come up with a design that is easily testable. Ideally you should write both unit tests and functional tests, and create a reliable REST service based on Spark.
 
-##To ORM or not to ORM?
+## To ORM or not to ORM?
 The first question is: "What kind of database library should we use?"
 There are different approaches out there, with their pros and cons. We basically can divide them in two families:
 
@@ -46,7 +46,7 @@ So which approach you should be using? I think it depends:
 
 In the end if I am sure that supporting one database (let's say <a href="http://www.postgresql.org/" target="_blank">PostgreSQL</a>) is enough my default choice is the lightweight approach. I have used myBatis years ago and I wanted to try Sql2o now.
 
-##Designing the Model
+## Designing the Model
 Let's assume you have access to a database. During development I would suggest to use a PostgreSQL server running in a Docker container:
 
 * if you are already using Docker do not miss the [tutorial on running Spark inside a Docker container]({% post_url 2015-04-14-getting-started-with-spark-and-docker %}) 
@@ -74,7 +74,7 @@ Now, let's start by defining a Model interface and one interface for each table 
 {% capture code %}{% include codeExamples/sql2o/javaModel.html %}{% endcapture %}{{ code | xml_escape }}
 </code></pre>
 
-##Implement the Model using Sql2o
+## Implement the Model using Sql2o
 Great! It is now time to write some code that could actually integrate with a real database. The code it is pretty straightforward, if you know your SQL:
 
 <pre><code class="language-java">
@@ -90,7 +90,7 @@ A few comments:
 
 This is probably all you need to know about Sql2o to write pretty complex services. Maybe you just need to refresh your SQL (do you remember how to a delete? Joins?)
 
-##Controllers
+## Controllers
 At this point we just need to use our model. Let's see how to write the main method of our application:
 
 <pre><code class="language-java">
@@ -105,7 +105,7 @@ A few comments:
 * Once we have an object representing the data associated to the request, we basically pass the content to some call of the model.
 * Possibly we return the result of some call to model. We convert the Java beans to JSONstrings using dataToJson (again, look it up on GitHub for the code).
 
-##A complete example
+## A complete example
 
 We start the application by running:
 
@@ -138,7 +138,7 @@ Finally we should be able to get the list of comments for our post by using a ge
 
 <img class="img-bordered" src="/img/posts/sparkSql2o/postman_2_5.png" alt="Testing with Postman">
 
-##Conclusion
+## Conclusion
 Our service is not complete: for example, we need endpoints to approve the comments (I am sure you can think of many other improvements). However, even if very limited, we have seen how it is possible to build a RESTful service, with persistent data in a few clear lines of Java. No long configuration files, no _auto-magic_ components that break all of a sudden (typically on a Friday evening). 
 
 <b>Just a few simple, reliable, understandable lines of code.</b>
