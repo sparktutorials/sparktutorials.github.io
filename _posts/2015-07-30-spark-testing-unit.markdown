@@ -252,3 +252,4 @@ I hope this post helped you by showing one possible way to approach testing Spar
 I have used this approach in practice, obtaining decent results, however, it's not always the best choice: sometimes you want to create very simple applications (just a few hundreds lines of code), and you do not want to go through the hassle of introducing separate handler classes. In other cases you want to have high unit tests coverage. Needs can be different, and testing approaches should be chosen accordingly. I hope this tutorial can serve as a starting point. Happy testing!
 
 {% include authorTomassetti.html %}
+
