@@ -150,7 +150,7 @@ Now that we know how the code is structured, let's see how the project is set up
 Let's start by listing the project's dependencies (the latest versions at the time of the project creation were used):
 
 * Java 8. The latest version of Spark runs on Java 8.
-* Spark 2.2. Web microframework.
+* Spark 2.3. Web microframework.
 * Spark Freemarker 2.3.23. Library that handles the integration between Spark and Freemarker.
 * Spring 4.2.0. Used for dependency injection and as a JDBC framework.
 * HSQLDB 2.3.3. Used as a database.

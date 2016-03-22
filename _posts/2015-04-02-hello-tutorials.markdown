@@ -33,7 +33,7 @@ Add the maven dependency:
 &lt;dependency&gt;
     &lt;groupId&gt;com.sparkjava&lt;/groupId&gt;
     &lt;artifactId&gt;spark-core&lt;/artifactId&gt;
-    &lt;version&gt;2.2&lt;/version&gt;
+    &lt;version&gt;2.3&lt;/version&gt;
 &lt;/dependency&gt;
 </code></pre>
 

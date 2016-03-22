@@ -51,7 +51,7 @@ Which should print something like:
 The environment is set up now, and all you have to do is write some code. And that's the fun part! The code required to get started with Spark is ridiculously simple:
 
 <pre><code class="language-java">
-@Grab(group = 'com.sparkjava', module = 'spark-core', version = '2.2')
+@Grab(group = 'com.sparkjava', module = 'spark-core', version = '2.3')
 import static spark.Spark.*
 
 get '/hello', { req, res -> 'Hello from your groovy Sparkberry Pi!' }
@@ -102,7 +102,7 @@ static String createPage(Map queryParams) {
 Now, your complete <samp>Server.groovy</samp> file should look like this:
 
 <pre><code class="language-java">
-@Grab(group = 'com.sparkjava', module = 'spark-core', version = '2.2')
+@Grab(group = 'com.sparkjava', module = 'spark-core', version = '2.3')
 import static spark.Spark.*
 
 println "Configuring server..."
