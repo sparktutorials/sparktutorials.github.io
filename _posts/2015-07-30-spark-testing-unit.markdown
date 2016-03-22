@@ -18,7 +18,7 @@ In the first tutorial we are going to focus on *unit tests*, while in the second
 * *unit tests*, to verify that classes or methods are logically correct
 * *functional tests*, to ensure that the whole application correctly implements our features
 
-We are going to use two different approaches for implementig these tests:
+We are going to use two different approaches for implementing these tests:
 
 * *unit tests* will be written in *Java using JUnit*. We will describe a pattern to make logic easy to test
 * *functional tests* are going to be written using *Cucumber and Ruby*
@@ -46,7 +46,7 @@ It's time to get started! As mentioned before, we will begin with unit tests. Fu
 
 ## The RequestHandler interface
 
-To separate logic and plumbing code we want to insulate the logic from the *Spark specific* bits in our application. The logic should be as insulated as possible, so that we could one day replace Spark with something else and leave the logic untouched (of course, no one in their right mind would stop using Spark, it was a very hyphotetical example!).
+To separate logic and plumbing code we want to insulate the logic from the *Spark specific* bits in our application. The logic should be as insulated as possible, so that we could one day replace Spark with something else and leave the logic untouched (of course, no one in their right mind would stop using Spark, it was a very hypothetical example!).
 
 Instead of just implementing *Routes*, we will create an interface which is project specific. We start by looking at what information we need to use to serve the different requests. If you look at the application we built in the previous tutorials, you will see that for each request we:
 
@@ -192,7 +192,7 @@ At this point we can simply test our logic by writing tests for our _RequestHand
 
 Class <a href="https://github.com/sparktutorials/BlogService_SparkExample/blob/unit_tests/src/test/java/me/tomassetti/handlers/PostsCreateHandlerTest.java" target="_blank">PostsCreateHandlerTest</a>:
 
-<pre><code class="language-java">ppublic class PostsCreateHandlerTest {
+<pre><code class="language-java">public class PostsCreateHandlerTest {
 
     @Test
     public void anInvalidNewPostReturnsBadRequest() {
@@ -230,7 +230,7 @@ Class <a href="https://github.com/sparktutorials/BlogService_SparkExample/blob/u
 
 }</code></pre>
 
-As you can see, in _anInvalidNewPostReturnsBadRequest_ we simply prepare an invalid _NewPostPayload_, and we pass it to an instance of _PostsCreateHandler_. We then pass an empty map (no url params needed here), and we invoke the method both with the parameter _shouldReturnHtml_ false and true, to verify that we get the same behavior in both cases. To test the answer is very easy: we just check that we get the expected _Answer_. In this case we expect the HTTP code 400 to be returned, because the request is not valid: this is beucuase the _newPost_ value was not valid.
+As you can see, in _anInvalidNewPostReturnsBadRequest_ we simply prepare an invalid _NewPostPayload_, and we pass it to an instance of _PostsCreateHandler_. We then pass an empty map (no url params needed here), and we invoke the method both with the parameter _shouldReturnHtml_ false and true, to verify that we get the same behavior in both cases. To test the answer is very easy: we just check that we get the expected _Answer_. In this case we expect the HTTP code 400 to be returned, because the request is not valid: this is because the _newPost_ value was not valid.
 
 In the second test (_aPostIsCorrectlyCreated_) we verify that _model.createPost_ is invoked passing the values we specified in our _NewPostPayload_ instance. Easy, eh?
 
@@ -252,3 +252,4 @@ I hope this post helped you by showing one possible way to approach testing Spar
 I have used this approach in practice, obtaining decent results, however, it's not always the best choice: sometimes you want to create very simple applications (just a few hundreds lines of code), and you do not want to go through the hassle of introducing separate handler classes. In other cases you want to have high unit tests coverage. Needs can be different, and testing approaches should be chosen accordingly. I hope this tutorial can serve as a starting point. Happy testing!
 
 {% include authorTomassetti.html %}
+
