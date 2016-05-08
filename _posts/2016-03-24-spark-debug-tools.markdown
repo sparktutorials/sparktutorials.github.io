@@ -2,7 +2,7 @@
 layout: post
 title: "Developing with the Spark Debug Tools (beta)"
 author: <a href="https://www.linkedin.com/in/davidaase" target="_blank">David Åse</a>
-date: 2016-05-01 11:11:11
+date: 2016-03-24 11:11:11
 comments: true
 summary: >
  In this tutorial you will learn how to use the Spark Debug Tools for easier development.
