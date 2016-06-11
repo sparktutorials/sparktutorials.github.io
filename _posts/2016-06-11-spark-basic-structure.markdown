@@ -118,7 +118,7 @@ public class ViewUtil {
     
 }
 </code></pre>
-The render method needs acceess to the request to check the locale and the current users. It puts this information in the template-model to ensure that the views are rendered correctly.
+The render method needs access to the request to check the locale and the current users. It puts this information in the template-model to ensure that the views are rendered correctly.
 
 The **ViewUtil** also has some Route fields, such as *notFound* and *notAcceptable*. It's a good place to put non-controller-specific error handling.
 
