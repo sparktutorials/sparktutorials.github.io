@@ -68,7 +68,7 @@ public class Application {
 </code></pre>
 
 ### Static dependencies?
-This is probably not what you learned in Java class, but I believe having static objects is superior to dependency injection when dealing with web applications. Injecting dependencies hides their initialization from controllers, and you have to trace the injected class back to the injection point to realize what's going on. It also makes getting stuff done a lot more ceremoniousm (it complicates things greatly for no real benefit). As can be seen in <a href="https://glot.io/snippets/efivlwbva5" target="_blank"
+This is probably not what you learned in Java class, but I believe having static objects is superior to dependency injection when dealing with web applications. Injecting dependencies hides their initialization from controllers, and you have to trace the injected class back to the injection point to realize what's going on. It also makes getting stuff done a lot more ceremonious (it complicates things greatly for no real benefit). As can be seen in <a href="https://glot.io/snippets/efivlwbva5" target="_blank"
 >this example</a>, you need about twice the amount of code for the same functionality.
 You're not launching this thing into space, so you don't need to test everything. If you do decide to test your controllers, then <a href="https://github.com/FluentLenium/FluentLenium" target="_blank">scenario-tests</a> are superior to mocking and unit-tests.
 
