@@ -68,9 +68,8 @@ public class Application {
 </code></pre>
 
 ### Static dependencies?
-This is probably not what you learned in Java class, but I believe having static objects is superior to dependency injection when dealing with web applications. Injecting dependencies hides their initialization from controllers, and you have to trace the injected class back to the injection point to realize what's going on. It also makes getting stuff done a lot more ceremonious (it complicates things greatly for no real benefit). As can be seen in <a href="https://glot.io/snippets/efivlwbva5" target="_blank"
->this example</a>, you need about twice the amount of code for the same functionality.
-You're not launching this thing into space, so you don't need to test everything. If you do decide to test your controllers, then <a href="https://github.com/FluentLenium/FluentLenium" target="_blank">scenario-tests</a> are superior to mocking and unit-tests.
+This is probably not what you learned in Java class, but I believe statics are better than dependency injection when dealing with web applications / controllers. Injecting dependencies makes everything a lot more ceremonious, and as can be seen in <a href="https://glot.io/snippets/efivlwbva5" target="_blank"
+>this example</a> you need about twice the amount of code for the same functionality. I think it complicates things wihtout providing any real benefit, and before you say **unit-testing**: you're not launching this thing into space, so you don't need to test everything. If you want to test your controllers, then <a href="https://github.com/FluentLenium/FluentLenium" target="_blank">acceptance-tests</a> are superior to mocking and unit-tests, as they test your application in the extact state it'll be in when it's deployed.
 
 ### Before, routes, after
 If your application is small, delcaring before-filters, routes, and after-filters all in the same location greatly improves the readability of your code. Just by looking at the class above, you can tell that there's a filter that adds trailing slashes to all endpoints (ex: /books -> /books/) and that any page can handle a locale change. You also get an overview of all the endpoints, and see that all routes are GZIPed after everything else.
@@ -121,6 +120,15 @@ public class ViewUtil {
 The render method needs access to the request to check the locale and the current users. It puts this information in the template-model to ensure that the views are rendered correctly.
 
 The **ViewUtil** also has some Route fields, such as *notFound* and *notAcceptable*. It's a good place to put non-controller-specific error handling.
+
+## Example view
+This code snippet shows the view for the *fetchOneBook* Route, which displays one book:
+
+<pre><code class="language-markup">
+{% capture code %}{% include codeExamples/sparkBasicStructure/oneBook.vm %}{% endcapture %}{{ code | xml_escape }}
+</code></pre>
+
+If the book is present, display it. Else, show a localized message saying the book was not found by using the **msg** object that was put into the viewmodel in the *render()* method above. The view also uses a layout template **@#mainLayout()** which is the page frame (styles, scripts, navigation, footer, etc.).
 
 ## Conlusion
 Hopefully you've learned a bit about Spark, and also Java and webapps in general. If you disagree with any choices made in the example-app, please create an issue on <a href="https://github.com/tipsy/spark-basic-structure" target="_blank">GitHub</a>. This example will hopefully continue to evolve based on feedback and new Spark features.
