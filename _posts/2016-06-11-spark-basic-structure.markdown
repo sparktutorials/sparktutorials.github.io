@@ -123,4 +123,4 @@ The render method needs access to the request to check the locale and the curren
 The **ViewUtil** also has some Route fields, such as *notFound* and *notAcceptable*. It's a good place to put non-controller-specific error handling.
 
 ## Conlusion
-Hopefully you've learned a bit about Spark, but also Java and webapps in general. If you disagree with any choices made in the example-app, please create an issue on <a href="https://github.com/tipsy/spark-basic-structure" target="_blank">GitHub</a>. This example will hopefully continue to evolve based on feedback and new Spark features.
+Hopefully you've learned a bit about Spark, and also Java and webapps in general. If you disagree with any choices made in the example-app, please create an issue on <a href="https://github.com/tipsy/spark-basic-structure" target="_blank">GitHub</a>. This example will hopefully continue to evolve based on feedback and new Spark features.
