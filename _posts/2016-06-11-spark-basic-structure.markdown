@@ -2,7 +2,7 @@
 layout: post
 title: "Creating a library website with login and multiple languages"
 author: <a href="https://www.linkedin.com/in/davidaase" target="_blank">David Åse</a>
-date: 2016-06-11 11:11:11
+date: 2016-06-10 11:11:11
 comments: true
 summary: >
  In this tutorial you will learn how to create a basic Spark application with filters, controllers, views, authentication, localization, error handling, and more.
