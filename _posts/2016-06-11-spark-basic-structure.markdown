@@ -73,7 +73,7 @@ This is probably not what you learned in Java class, but I believe having static
 You're not launching this thing into space, so you don't need to test everything. If you do decide to test your controllers, then <a href="https://github.com/FluentLenium/FluentLenium" target="_blank">scenario-tests</a> are superior to mocking and unit-tests.
 
 ### Before, routes, after
-If your application is small, delcaring before-filters, routes, and after-filters all in the same location greatly improves the readability of your code. Just by looking at the class above you can tell that there's a filter that adds trailing slashes to all endpoints (ex: /books -> /books/) and that any page can handle a locale change. You also get an overview of all the endpoints, and see that all routes are GZIPed after everything else.
+If your application is small, delcaring before-filters, routes, and after-filters all in the same location greatly improves the readability of your code. Just by looking at the class above, you can tell that there's a filter that adds trailing slashes to all endpoints (ex: /books -> /books/) and that any page can handle a locale change. You also get an overview of all the endpoints, and see that all routes are GZIPed after everything else.
 
 ### Path.Web and Controller.field
 It's usually a good idea to keep your paths in some sort of constant. In the above class I have a **Path** class with a subclass **Web** (it also has a subclass **Template**), which holds public final static Strings. That's just my preference, it's up to you how you want to do this. All my handlers are declared as static Route fields, grouping together functionality in the same classes (based on feature). Let's have a look at the LoginController:
@@ -93,7 +93,7 @@ The method intercepts the current Route *fetchOneBook* and redirects the user to
 
 ## Response types
 
-The *fetchOneBook* above controller gives three different answers based on the HTTP accepts header: Try first to return HTML, then try to return JSON, finally return not-acceptable (this Route only produces HTML and JSON).
+The *fetchOneBook* above controller gives three different answers based on the <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html" target="_blank">HTTP accept header</a>: Try first to return HTML, then try to return JSON, finally return not-acceptable (this Route only produces HTML and JSON).
 
 ## Localization
 Localization in Java is pretty straightforward. You create two properties files with different suffixes, for example *messages_en.properties* (english) and *messages_de.properties* (german), then you create a ResourceBundle:
