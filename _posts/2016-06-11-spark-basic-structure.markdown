@@ -83,7 +83,7 @@ It's usually a good idea to keep your paths in some sort of constant. In the abo
 </code></pre>
 
 It has four Routes/methods, *serveLoginPage*, *handleLoginPost*, *handleLogoutPost*, and *ensureUserIsLoggedIn*. This is all the functionality that is related to login/logout.
-The serveLoginPage Route inspects the request session and puts necessary variables in the Velocity model (did the user just log out? is there a uri to redirect the user to after login?), then renders the page. The *ensureUserIsLoggedIn* Route is used in other controllers, for example in BookController:
+The serveLoginPage Route inspects the request session and puts necessary variables in the view model (did the user just log out? is there a uri to redirect the user to after login?), then renders the page. The *ensureUserIsLoggedIn* Route is used in other controllers, for example in BookController:
 
 <pre><code class="language-java">
 {% capture code %}{% include codeExamples/sparkBasicStructure/BookController.java %}{% endcapture %}{{ code | xml_escape }}
