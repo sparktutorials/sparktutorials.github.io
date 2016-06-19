@@ -6,11 +6,16 @@ layout: default
         <h1 itemprop="name headline">{{ page.title }}</h1>
         <p class="post-meta">
             <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>
-            {% if page.author %} • Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %} • Spark Framework Tutorials
+            {% if page.author %} 
+                • Written by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
+            {% endif %} 
+            • Spark Framework Tutorials
+            <span id="timeToRead"></span>
         </p>
     </header>
     <div class="post-content" itemprop="articleBody">
         {{ content }}
+        {% include calculateTimeToRead.html %}
     </div>
 </article>
 {% include socialButtons.html %}

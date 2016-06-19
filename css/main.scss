@@ -213,6 +213,13 @@ article.post h2, article.post h3 {
   font-size: 13px;
   color: #888;
 }
+article .post-meta {
+    width: 100%;
+}
+.post-meta #timeToRead {
+    float: right;
+    font-size: 21px;
+}
 .notification {
     margin-top: 30px;
 }
