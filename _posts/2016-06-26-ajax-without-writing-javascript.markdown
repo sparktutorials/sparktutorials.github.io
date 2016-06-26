@@ -2,7 +2,7 @@
 layout: post
 title: "Creating an AJAX todo-list without writing JavaScript"
 author: <a href="https://www.linkedin.com/in/davidaase" target="_blank">David Åse</a>
-date: 2016-06-28 11:11:11
+date: 2016-06-26 11:11:11
 comments: true
 summary: >
  Learn how to create a modern single page application in Spark and intercooler.js without writing JavaScript.
