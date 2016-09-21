@@ -52,7 +52,7 @@ get("/posts", (request, response) -> {
 In this example we either get a request specifying <em>text/html</em> in the Accept header or we provide JSON in all other cases. It could make sense to return an error instead of always producing JSON: if someone is asking for XML they are not going to be able to process the JSON we are sending back to them.
 
 ## Producing HTML programmatically
-Let's see how we could generate HTML from pure Java. We are going to use <a href="http://j2html.com" target="_blank">j2html</a>. j2html is a simple Jave to HTML builder made by <a href="https://linkedin.com/in/davidaase" target="_blank">David Åse</a>, the person responsible for the Spark websites (if you are interested in joining the Spark project, you can read about how David got involved in this <a href="http://tomassetti.me/interview-with-david-ase-from-the-spark-web-framework-project/">interview</a>).
+Let's see how we could generate HTML from pure Java. We are going to use <a href="http://j2html.com" target="_blank">j2html</a>. j2html is a simple Java to HTML builder made by <a href="https://linkedin.com/in/davidaase" target="_blank">David Åse</a>, the person responsible for the Spark websites (if you are interested in joining the Spark project, you can read about how David got involved in this <a href="http://tomassetti.me/interview-with-david-ase-from-the-spark-web-framework-project/">interview</a>).
 
 Let's start by adding the dependency in our POM file:
 
