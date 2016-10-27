@@ -1,0 +1,19 @@
+
+setup dependencies
+
+setup the App.java
+
+we will have a separate util class that will contain all the utility classes
+
+we will have a class that will represent our contact - a java bean
+
+we will have a class that will control our contacts - performs crud operations
+
+
+
+rawData = {
+    "1": {"name":Seun, "mobile":"0909111"},
+    "2": {"name":Seun, "mobile":"0909111"},
+    "3": {"name":Seun, "mobile":"0909111"}
+    . . .
+}

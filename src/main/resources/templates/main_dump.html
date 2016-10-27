@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Cloud Contacts</title>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="css/main.css">
+ 	
+ 	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+ 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+ 	<script type="text/javascript" src="js/datatables.min.js"></script>
+ 	<script type="text/javascript" src="js/split.min.js"></script>
+ 	<script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+ 	
+ <style>
+
+ </style>
+
+</head>
+
+<body>
+ 
+    <div class="row" id="maintop">
+   		<img src="./images/cloud contacts logo.png" alt="logo" id="logoMain">
+ 		<a href="#" id="homeLnk">CLOUD CONTACTS</a>
+ 		<div class="dropdown">
+ 			<img src="./images/user_ic.png" class="dropbt" alt="user icon" id="useric">
+ 			<div class="dropdown-content">
+ 			 	<p><a href="#">Log Out</a></p>
+ 			 	<p><a href="#">Profile</a></p>		
+ 			</div>
+ 		</div>	
+ 		<h4 id="greeting">Hello, {{username}}</h4>
+ 	</div>
+
+ 
+ 	
+<div class="row" style="height:100%;">
+	
+	<div id="first" class="split split-horizontal">
+ 	 
+ 	 	<div class="split content">
+			
+			
+			<table id="maintable">
+					<thead>
+				  		<tr>	
+						<td>Names</td>
+						<td>Mobile No</td>
+						<td>Email</td>
+						<td>View</td>
+						<td>Delete</td>
+						</tr>
+					</thead>
+					<tbody>
+					{{#with tableData}}
+					 	{{{tableData}}}
+					 {{/with}}
+					<tr>
+						<td>Oyeleye Oluwasegun</td>
+						<td>+2348113760927</td>
+						<td>smatt382@gmail.com</td>
+						<td><span class="glyphicon glyphicon-search"></span></td>
+						<td><span class="glyphicon glyphicon-trash"></span>
+					</tr>
+					<tr>
+						<td>John James Doe</td>
+						<td>+2348113760927</td>
+						<td>smatt382@gmail.com</td>
+						<td><span class="glyphicon glyphicon-search"></span></td>
+						<td><span class="glyphicon glyphicon-trash"></span>
+					</tr>
+					<tr>
+						<td>Spark Apache Java</td>
+						<td>+2348113760927</td>
+						<td>smatt382@gmail.com</td>
+						<td><span class="glyphicon glyphicon-search"></span></td>
+						<td><span class="glyphicon glyphicon-trash"></span>
+					</tr>
+					<tr>
+						<td>Sorjourner Truth</td>
+						<td>+2348113760927</td>
+						<td>smatt382@gmail.com</td>
+						<td><span class="glyphicon glyphicon-search"></span></td>
+						<td><span class="glyphicon glyphicon-trash"></span>
+					</tr>
+					<tr>
+						<td>Queen May</td>
+						<td>+2348113760927</td>
+						<td>smatt382@gmail.com</td>
+						<td><span class="glyphicon glyphicon-search"></span></td>
+						<td><span class="glyphicon glyphicon-trash"></span>
+					</tr>
+					<tr>
+						<td>Juliana Matt</td>
+						<td>+2348113760927</td>
+						<td>smatt382@gmail.com</td>
+						<td><span class="glyphicon glyphicon-search"></span></td>
+						<td><span class="glyphicon glyphicon-trash"></span>
+					</tr>
+					<tr>
+						<td>American Explorer</td>
+						<td>+2348113760927</td>
+						<td>smatt382@gmail.com</td>
+						<td><span class="glyphicon glyphicon-search"></span></td>
+						<td><span class="glyphicon glyphicon-trash"></span>
+					</tr>
+					<tr>
+						<td>Satya Nadella</td>
+						<td>+2348113760927</td>
+						<td>smatt382@gmail.com</td>
+						<td><span class="glyphicon glyphicon-search"></span></td>
+						<td><span class="glyphicon glyphicon-trash"></span>
+					</tr>
+					<tr>
+						<td>James Gosling</td>
+						<td>+2348113760927</td>
+						<td>smatt382@gmail.com</td>
+						<td><span class="glyphicon glyphicon-search"></span></td>
+						<td><span class="glyphicon glyphicon-trash"></span>
+					</tr>
+					<tr>
+						<td>Sorjourner Truth</td>
+						<td>+2348113760927</td>
+						<td>smatt382@gmail.com</td>
+						<td><span class="glyphicon glyphicon-search"></span></td>
+						<td><span class="glyphicon glyphicon-trash"></span>
+					</tr>
+				 </tbody>
+			</table>
+
+		</div>	
+	</div>
+
+ <div id="second" class="split split-horizontal" style="padding-right:10px;">
+	<div class="split content">
+				
+
+			<div class="row text-center" id="btrow">
+				<input type="button" name="newBt" id="newBt" value="NEW" />
+<!-- 				<input type="button" name="deleteBt" id="deleteBt" value="DELETE" /> -->
+				<input type="button" id="editBt" name="editBt" value="EDIT" />
+<!-- 				<input type="button" id="saveBt" name="saveBt" value="SAVE" /> -->
+			</div>
+
+
+			<div class="row" id="detailsRow">
+				
+				<!-- details header -->
+				<div class="row" id="detailsHeader">
+					<span id="detailsText">CONTACT DETAILS</span>
+				</div>
+
+				<!-- details body -->
+				<div class="row" id="detailsBody">
+
+						<!-- details icon row-->
+						<div class="row" id="detailsIconRow">
+							<img src="./images/ic_male_user.png">
+						</div>
+
+						<div class="row" id="detailsDataRow">
+							<ul id="details">
+								<li>
+									<label for="viewFirstName">First Name: </label>
+									<input class="dataView" type="text" name="viewFirstName" id="viewFirstName" value="Seun" disabled />
+								</li>
+								<li>
+									<label for="viewLastName">Last Name: </label>
+									<input class="dataView" type="text" name="viewLastName" id="viewLastName" value="Matt" disabled/>
+								</li>
+								<li>
+									<label for="viewMiddleName">Middle Name: </label>
+									<input class="dataView" type="text" name="viewMiddleName" id="viewMiddleName" value="M." disabled />
+								</li>
+								<li>
+									<label for="viewMobile">Mobile: </label>
+									<input class="dataView" type="phone" name="viewMobile" id="viewMobile" value="+2348113760927" disabled/>
+								</li>
+								<li>
+									<label for="viewWork">Work: </label>
+									<input class="dataView" type="phone" name="viewWork" id="viewWork" value="+2348113760927" disabled />
+								</li>
+								<li>
+									<label for="viewFax">Fax: </label>
+									<input class="dataView" type="text" id="viewFax" name="viewFax" value="3760927" disabled />
+								</li>
+								<li>
+									<label for="viewHome">Home: </label>
+									<input class="dataView" type="phone" name="viewHome" id="viewHome" value="+2348113760927" disabled/>
+								</li>
+								<li>
+									<label for="viewEmail">Email: </label>
+									<input class="dataView" type="Email" id="viewEmail" name="viewEmail" value="smatt382@gmail.com" disabled />
+								</li>
+								<li>
+									<label for="viewAddress">Address: </label>
+									<input class="dataView" type="text" id="viewAddress" name="viewAddress" value="Lagos, Nigeria" disabled />
+								</li>
+								<li>
+									<label for="viewNote">Notes: </label> 
+									<div  contenteditable="false" name="viewNote" id="viewNote">
+										Facebook id: facebook.com/seun.matt | @SeunMatt2
+									</div>
+								</li>		
+							</ul>
+						</div>
+					</div>
+				<!-- </div> -->	
+			<!-- </div> -->
+		</div>
+
+
+
+			</div>
+	</div>
+</div>	
+
+
+
+
+<!-- footer -->
+	<div class="row text-center footer" id="footer">
+    <div class="col-sm-2">
+      <ul id="socialBt">
+        <li><a href="http://facebook.com/seun.matt" target="blank"><img id="fbic" src="./images/ic_facebook.png"/></a></li>
+        <li><a href="http://twitter.com/@SeunMatt2" target="blank"><img id="twitteric" src="./images/ic_twitter.png"/></a></li>
+      </ul> 
+    </div>
+    <div class="col-sm-8">
+      <p id="footertext">(c) 2016 Cloud Contacts | 
+      <span id="footertxt2">Designed by </span><span id="footertext3"><a href="http://facebook.com/seun.matt">Seun Matt</a></span></p>
+    </div>
+    <div class="col-sm-2">
+       <img id="chatic" src="./images/ic_headset.png"/> <span id="footertext4">Chat with us </span>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {	
+
+var rawData = {{{jsonData}}};
+
+	
+Split(['#first', '#second'], {
+	  sizes:[70,30],
+      gutterSize: 8,
+      cursor: 'col-resize'
+    });
+
+	var table = $("#maintable").DataTable({
+		"order":[[0, "asc"]]
+	});
+
+
+$("html").niceScroll({cursorwidth:"8", cursoropacitymax:"0.4"});
+$("#first").niceScroll({cursorwidth:"6", cursoropacitymax:"0.4"});
+
+
+$("#maintable").on("click", "tr", function() {
+	
+	var row = parseInt( $(this).index() );
+	var data = rawData.dataArray[row].first_name;
+	alert("You select row " + row + "\n" + data);
+
+});
+
+
+
+
+// console.log(rawData.dataArray[0]);
+
+});
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {{> head.hbs }}
+
+<style>
+    #footer {
+        position: fixed;
+        bottom:0px;
+    }
+    
+    
+ </style>   
+<body>
+	<div class="row" id="toprow">
+        	<img id="logoOthers" src="./images/cloud contacts logo.png" alt="logo">
+	        <a href="/" id="otherTitle">CLOUD CONTACTS</a>
+	</div>
+
+
+	<div class="row text-center" id="signupbox">
+            
+            
+	<div class="row" id="topTextRow">
+		<p id="topText">Sign in to your account or create one</p>
+                <p id="log" style="color:red;"></p>
+	</div>
+
+       <form role="form" id="loginForm">    
+	<div class="row">
+            <input type="email" name="email" id="email" placeholder="email" required/>
+	</div>
+
+	<div class="row">
+		<input type="password" name="password" id="password" placeholder="password" required/>
+	</div>
+	
+           <div class="row">
+                <div class="progress waitLogo" style="width:25%;height:20px;margin:auto; margin-top: 10px; margin-bottom: 10px;" hidden>
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuenow="100" aria-valuemin="100" 
+                                             aria-valuemax="100" style="width:100%; background-color:#104774;">
+                                            processing . . .
+                                        </div>
+                </div>    
+           </div>
+           
+	<div class="row">
+		<input type="submit" name="loginBt" id="loginBt" value="Sign In" />
+	</div>
+       </form>   
+
+	<div class="row" id="forgotLnkRow">
+		<a id="forgotLnk" href="#">Forgot Password?</a>
+	</div>
+
+	<div class="row" id="createLnkRow">
+		<a id="createLnk" href="/signup">Don't have an account? Create one now</a>
+	</div>
+
+	</div>
+		
+
+    {{> footer.hbs}}
+    
+    
+<script type="text/javascript">
+  
+$("document").ready(function() {
+    
+    $("#loginForm").on("submit", function(event) {
+      
+        event.preventDefault();
+        
+        $("#log").html("");
+        var email = $("#email").val();
+        var password = $("#password").val();
+        
+        
+        
+        $.ajax ({
+            type: "post",
+            url: "/login",
+            data: {"email":email},
+            success: function(response) {
+//                console.log("login success called");
+//                console.log("code = " + response.code + " status = " + response.status);
+//                console.log("resp = " + JSON.stringify(response));
+                    
+                var srpClient = new SRP6JavascriptClientSessionSHA256();
+		
+		srpClient.step1(email, password);
+		var credentials = srpClient.step2(response.salt, response.B);
+		password = credentials.M1 + ":" + credentials.A;   
+                    //second ajax request
+                   $.ajax({
+                       type: "POST",
+                       url: "/auth",
+                       data: {"email":email,"password":password},
+                       success: function(res2) {
+                           //redirect to location in response;
+//                           console.log("resp2 = " + res2.toString());
+//                           console.log("resp2 location = " + res2.target)
+                           if(res2.target)
+                             window.location.href = res2.target;
+                        },
+                        error: function(error2) {
+//                            console.log("error2 called");
+//                            console.log("error " + JSON.stringify(error2));
+                            $("#log").html("<strong>Oops! Invalid Login Credentials </strong>");
+                        }
+                    });
+                
+             },
+            error: function(error) {
+//                console.log("login error () called");
+//                console.log("error raw = " + error);
+//                console.log("error stringify = " + JSON.stringify(error));
+                $("#log").html("<strong>Oops! Invalid Login Credentials! </strong>");
+         }
+        });
+    
+    });
+      
+     
+
+   
+ $(document).ajaxStart( function() { 
+    $(".progress").show();
+ });
+
+$(document).ajaxComplete( function () {
+    $(".progress").hide();
+});
+
+     
+     
+ });    
+</script>
+
+</body>
+</html>

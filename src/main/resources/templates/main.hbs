@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> head.hbs}}
+
+<body>
+ 
+    <div class="row" id="maintop">
+   		<img src="/./images/cloud contacts logo.png" alt="logo" id="logoMain">
+ 		<a href="/" id="homeLnk">CLOUD CONTACTS</a>
+                 <div class="dropdown">
+                    <span class="fa fa-user fa-3x dropdown-toggle" id="useric" data-toggle="dropdown">
+                        <span class="caret"></span></span>
+                    <ul class="dropdown-menu">
+                         <li><a href="/logout">Log out</a></li>
+                        <li><a data-toggle="modal" href="#profileModal">Profile</a></li>
+                     </ul>
+                </div>
+ 		<h4 id="greeting">Hello, {{username}}</h4>
+    </div>
+
+    <!--this is to be shown on width <= 400 px-->
+    <div class="row text-center" id="sm-btrow" hidden>
+	<input type="button" name="sm-newBt" id="sm-newBt" value="NEW CONTACT" />
+    </div>
+ 
+{{> progress_indicator.hbs}}
+    
+<div class="split-pane fixed-left">
+	
+	<div class="split-pane-component" id="left-component">
+ 	 
+                        
+			<table id="maintable">
+					<thead>
+    				  		<tr>	
+                                                <td>S/N</td>
+						<td>Names</td>
+						<td>Mobile No</td>
+						<td>Email</td>
+						<td>View</td>
+						<td>Delete</td>
+						</tr>
+					</thead>
+					<tbody>
+					{{{tableData}}}
+					</tbody>
+			</table>
+	</div>
+    
+        <div class="split-pane-divider" id="divider"></div>
+
+        <div class="split-pane-component" id="right-component">
+	
+            <!--<div class="split content">-->
+				
+
+			<div class="row text-center" id="btrow">
+				<input type="button" name="newBt" id="newBt" value="NEW" />
+ 				<input type="button" id="editBt" name="editBt" value="EDIT" />
+			</div>
+
+
+			<div class="row" id="detailsRow">
+				
+				<!-- details header -->
+				<div class="row" id="detailsHeader">
+					<span id="detailsText">CONTACT DETAILS</span>
+				</div>
+
+				<!-- details body -->
+				<div class="row" id="detailsBody">
+
+						<!-- details icon row-->
+						<div class="row" id="detailsIconRow">
+							<img src="/./images/ic_male_user.png">
+						</div>
+
+						<div class="row" id="detailsDataRow">
+                                                    <input type="hidden" id="viewIndex" name="viewIndex" value="" disabled/>
+							<ul id="details">
+                                                            <li> 
+                                                                <p>
+                                                                    <span>First Name: </span>
+                                                                    <span class="dataView" type="text" name="viewFirstName" id="viewFirstName"></span>
+                                                                </p>   
+								</li>
+								<li>
+                                                                    <p>
+                                                                        <span>Last Name: </span>
+                                                                        <span class="dataView" type="text" name="viewLastName" id="viewLastName"></span>
+                                                                    </p>	
+								</li>
+								<li>
+                                                                    <p>
+                                                                        <span>Middle Name: </span>
+                                                                        <span class="dataView" type="text" name="viewMiddleName" id="viewMiddleName"></span>
+                                                                    </p>    
+								</li>
+								<li>
+                                                                    <p>
+									<span>Mobile: </span>
+                                                                        <span class="dataView" type="phone" name="viewMobile" id="viewMobile"></span>
+                                                                    </p>
+                                                                </li>
+								<li>
+                                                                    <p>
+                                                                        <span>Work: </span>
+                                                                        <span class="dataView" type="phone" name="viewWork" id="viewWork"></span>
+                                                                    </p>   
+								</li>
+								<li>
+                                                                    <p>
+									<span for="viewFax">Fax: </span>
+                                                                        <span class="dataView" type="text" id="viewFax" name="viewFax"></span>
+                                                                    </p>    
+								</li>
+								<li>
+                                                                    <p>
+									<span>Home: </span>
+                                                                        <span class="dataView" type="phone" name="viewHome" id="viewHome"></span>
+                                                                    </p>    
+								</li>
+								<li>
+                                                                    <p>
+									<span>Email: </span>
+                                                                        <span class="dataView" id="viewEmail" name="viewEmail"></span>
+                                                                    </p>    
+								</li>
+								<li>
+                                                                    <p>
+                                                                        <span>Address: </span>
+                                                                        <span class="dataView" id="viewAddress" name="viewAddress"></span>
+                                                                    </p>    
+								</li>
+								<li>
+                                                                    <p>
+                                                                        <span>Notes: </span> 
+									<span  contenteditable="false" name="viewNote" id="viewNote">
+										Facebook id: facebook.com/seun.matt | @SeunMatt2
+									</span>
+                                                                    </p>    
+								</li>		
+							</ul>
+						</div>
+					</div>
+				<!-- </div> -->	
+			<!-- </div> -->
+		</div>
+
+
+
+			<!--</div>-->
+	</div>
+</div>	
+
+
+
+    {{> confirm_modal.hbs}}
+    
+    {{> new_edit_modal.hbs}}
+    
+    {{> profile_modal.hbs}}
+    
+
+    {{> footer.hbs}}
+
+</body>
+
+<script type="text/javascript">
+
+$(document).ready(function() {	
+
+
+  var rawData = {{{jsonData}}};
+
+var w = $(window).width();
+
+$('div.split-pane').splitPane();
+   
+
+    var table = $("#maintable").DataTable({"order":[[0, "asc"]]});
+    
+    $("html").niceScroll({cursorwidth:"8", cursoropacitymax:"0.4"});
+    
+    //show defaultDetails
+    showDetails(rawData["0"]);
+    //this is what points to the data that
+    //showDetails will show from d rawData
+    $("#viewIndex").val(0); 
+    
+    
+    
+    $("#maintable tbody").on("click", ".view", function() {	
+      
+        var index = table.row(this).data()[0];
+        //sets the viewIndex so when edit is clicked
+        //it will show data from the rawData[viewIndex]
+        $("#viewIndex").val(index);
+        if(w > 800) { //desktops
+            showDetails(rawData[index]);
+            $("#detailsRow").trigger("loadDetails");
+        } else {
+            $("#editBt").trigger("click");
+        }
+    });
+    
+    $("#maintable tbody").on("click", ".del", function() {
+            var name = table.row(this).data()[1];
+            var index = table.row(this).data()[0];
+            deleteConfirm("Are you sure you want to delete " + name + " from your contacts?", function() {
+                 deleteData(rawData[index].id)
+            });
+    });
+
+
+
+$("#editBt").on("click", function() {
+    var data = rawData[$("#viewIndex").val()]; 
+    loadEditDetails(data);
+    $("#mode").val("EDIT");
+    $("#inputModal").modal({backdrop:"static"});
+});
+
+//trigger new on <= 400px
+$("#sm-newBt").on("click", function() {
+    $("#newBt").trigger("click");
+});
+
+//start the new
+$("#newBt").on("click", function() {
+    $("#mode").val("NEW");
+    clearEditDetails();
+    $("#inputModal").modal({backdrop:"static"});
+});
+
+
+
+
+$("#saveBt").on("click", function() {
+    
+    console.log("save Bt Clicked");
+    
+    var data = {};
+    
+    data.firstName = $("#newFirstName").val();
+    data.middleName = $("#newMiddleName").val();
+    data.lastName = $("#newLastName").val();
+    data.mobile = $("#newMobile").val();
+    data.home = $("#newHome").val();
+    data.work = $("#newWork").val();
+    data.fax = $("#newFax").val();
+    data.email = $("#newEmail").val();
+    data.note = $("#inputNote").val();
+    
+    
+   if( $("#mode").val() === "EDIT" ) {
+       data.id = $("#newId").val(); //only needed here
+       saveEdit(data);
+   } else {
+       console.log("New Bt clicked");
+       saveNew(data);       
+   } 
+   
+});
+
+
+//attach event for load details
+$("#detailsRow").on("loadDetails", function() {
+   $("#detailsRow").css("border-color", "red");
+   $("#detailsHeader").css({"background-color":"red", "border-color":"red"});  
+   setTimeout(
+           function(){ 
+               $("#detailsRow").css("border-color", "#104774");
+               $("#detailsHeader").css({"background-color":"#104774", "border-color":"#104774"});
+       }, 700);
+//   console.log("onLoadDetails Fired!");
+});
+
+
+
+//=========== SECTION FOR WAIT LOGO ==============//
+ 
+ $("#waitLogo, #alertBox").hide();
+   
+ $(document).ajaxStart( function() {
+    $("#waitLogo").show();
+ });
+
+$(document).ajaxComplete( function () {
+    setTimeout (
+      function() {
+        $("#waitLogo").hide();
+        $("#alertBox").show();
+
+     }, 10);
+});
+
+
+$("#alertCloseBt").click(function(event){
+    event.preventDefault();
+    $("#alertBox").hide();
+    window.location.reload();
+});  
+     
+ //=====================================================//
+
+
+
+
+});
+
+
+</script>
+
+</html>

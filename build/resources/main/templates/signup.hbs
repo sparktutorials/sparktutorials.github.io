@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> head.hbs}}
+
+<style>
+    #footer {
+        position: fixed;
+        bottom:0px;
+    }
+    
+ </style>   
+<body>
+
+	<div class="row text-center" id="toprow">
+        	<img id="logoOthers" src="./images/cloud contacts logo.png" alt="logo">
+	        <a href="/" id="otherTitle">CLOUD CONTACTS</a>
+	</div>
+
+
+	<div class="row text-center" id="signupbox">
+
+	<div class="row" id="topTextRow">
+		<p id="topText">Join other great people that use Cloud Contacts</p>
+                <p id="log" style="color:red;"></p>
+	</div>
+            
+            
+         <form role="form" id="signupForm">
+             
+	<div class="row">
+	<input type="text" name="username" id="username" placeholder="username" required/>
+	</div>
+
+	<div class="row">
+		<input type="email" name="email" id="email" placeholder="email" required/>
+	</div>
+	
+	<div class="row">
+		<input type="password" name="password1" id="password1" placeholder="new password" required>
+	</div>
+	
+	<div class="row">
+		<input type="password" name="password2" id="password2" placeholder="re-type password" required>		
+	</div>
+             
+        <div class="row">
+                <div class="progress waitLogo" style="width:25%;height:20px;margin:auto; margin-top: 10px; margin-bottom: 10px;" hidden>
+                                        <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuenow="100" aria-valuemin="100" 
+                                             aria-valuemax="100" style="width:100%; background-color:#104774;">
+                                            processing . . .
+                                        </div>
+                </div>    
+           </div>    
+	
+	<div class="row">
+		<input type="submit" name="signupBt" id="signupBt" value="Sign Up" />
+	</div>
+             
+         </form>     
+
+	<div class="row" id="loginLnkRow">
+		<a id="loginLnk" href="/login">Already have an account? Log in Here</a>
+	</div>
+
+
+	</div>
+		
+
+
+	{{> footer.hbs}}
+
+   <script type="text/javascript">
+            
+ $(document).ready(function() {
+              
+ $(document).ajaxStart( function() {
+    $(".progrress").show();
+ });
+
+$(document).ajaxComplete( function () {
+    $(".progress").hide();
+});
+
+          $("#log").html("");
+            
+            $("#signupForm").on('submit', function(event) {
+                  
+                  event.preventDefault();
+                  
+                 var username = $("#username").val();
+                 var email = $("#email").val();
+                 var p1 = $("#password1").val();
+                 var p2 = $("#password2").val();
+                 
+                 
+                if(p1 === p2) {
+ 	
+                    var srpClient = new SRP6JavascriptClientSessionSHA256();
+                    var salt = srpClient.generateRandomSalt();
+                    var verifier = srpClient.generateVerifier(salt, email, p1);
+                    $.ajax({
+                        type: "POST",
+                        url: "/signup",
+                        data: {"username": username, "salt":salt, "verifier":verifier, "email":email},
+                        success: function(response) { 
+//                            console.log("success called!");
+//                            console.log("raw resp = " + JSON.stringify(response));
+//                            console.log("resp code = " + response.code);
+                            $("#log").html("<strong>Registration Successful! <a href=\"/login\"> CLICK HERE TO LOG IN </a> </strong>");
+                            $("#username").val("");
+                            $("#email").val("");
+                            $("#password1, #password2").val("");
+                        },
+                        error: function(error) { 
+//                            console.log("error called! " + JSON.stringify(error));
+                            $("#log").html("<strong>Oops! That EMAIL exists ALREADY! Use another one</strong>\n\
+                            <br>"); 
+                        }
+                    });
+                    
+                } else {
+                    $("#log").html("<strong>Passwords Do not Match</strong> <br/> ");
+                }
+      });
+});              
+                  
+                  
+</script>   
+</body>
+</html>
