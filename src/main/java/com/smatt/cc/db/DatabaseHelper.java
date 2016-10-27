@@ -43,9 +43,19 @@ public class DatabaseHelper {
 
 	
 	void initDatastore() {
-		datastore = morphia.createDatastore(new MongoClient(Path.Database.HOST, Path.Database.PORT), Path.Database.DBNAME);
-		datastore.ensureIndexes();
-                logger.info("Datastore initiated");
+            
+              ProcessBuilder processBuilder = new ProcessBuilder();
+            if (processBuilder.environment().get("MONGODB_URI") != null) {
+             //heroku environ
+		datastore = morphia.createDatastore(new MongoClient(processBuilder.environment().get("MONGODB_URI")),
+                        Path.Database.HEROKU_DBNAME);
+            } else {
+                datastore = morphia.createDatastore(new MongoClient(Path.Database.HOST, Path.Database.PORT), 
+                        Path.Database.DBNAME);
+            }
+            
+            datastore.ensureIndexes();
+            logger.info("Datastore initiated");
 	}
 
 	
@@ -57,6 +67,6 @@ public class DatabaseHelper {
 		return datastore;
 	}
 	
-	//run test
-
+	
+        
 }
