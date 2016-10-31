@@ -39,7 +39,7 @@ public class App {
 		
 		//setup Sparkjava
                 //this tells sparkjava that our static files are in the public dir
-		staticFileLocation("/public/"); 
+		staticFileLocation("/public"); 
 		port(getHerokuAssignedPort());
 		
 		//initiate our DatabaseHelper that will map our Model Classes
