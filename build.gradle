@@ -58,3 +58,6 @@ dependencies {
     
     testCompile group: 'junit', name: 'junit', version: '4.10'
 }
+
+defaultTasks=['clean']
+task stage(dependsOn: ['clean', 'installApp'])
