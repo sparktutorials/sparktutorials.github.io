@@ -52,7 +52,6 @@ dependencies {
         compile 'com.fasterxml.jackson.core:jackson-databind:2.8.4'
         compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.4'
 	compile 'com.sparkjava:spark-template-handlebars:2.3'
-        compile 'commons-logging:commons-logging:1.1.1'
         compile 'com.nimbusds:srp6a:1.5.3'
     
     

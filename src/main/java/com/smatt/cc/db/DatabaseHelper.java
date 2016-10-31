@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.smatt.cc.auth.User;
 import com.smatt.cc.contact.Contact;
 import com.smatt.cc.util.Path;
@@ -45,17 +46,24 @@ public class DatabaseHelper {
 	void initDatastore() {
             
               ProcessBuilder processBuilder = new ProcessBuilder();
-            if (processBuilder.environment().get("MONGODB_URI") != null) {
+              MongoClient mongoClient;
+              
+              //this will fetch the MONGODB_URI environment variable on heroku
+              //that holds the connection string to our database created by the heroku mLab add on
+              String HEROKU_MLAB_URI = processBuilder.environment().get("MONGODB_URI");
+              
+            if (HEROKU_MLAB_URI != null && !HEROKU_MLAB_URI.isEmpty()) {
              //heroku environ
-		datastore = morphia.createDatastore(new MongoClient(processBuilder.environment().get("MONGODB_URI")),
-                        Path.Database.HEROKU_DBNAME);
+               mongoClient = new MongoClient(new MongoClientURI(HEROKU_MLAB_URI));
+               datastore = morphia.createDatastore(mongoClient, "");
             } else {
-                datastore = morphia.createDatastore(new MongoClient(Path.Database.HOST, Path.Database.PORT), 
-                        Path.Database.DBNAME);
+                //local environ 
+                mongoClient = new MongoClient(Path.Database.HOST, Path.Database.PORT);
+                datastore = morphia.createDatastore(mongoClient, Path.Database.HEROKU_DBNAME);
             }
-            
-            datastore.ensureIndexes();
-            logger.info("Datastore initiated");
+	       
+               datastore.ensureIndexes();
+               logger.info("Database connection successful and Datastore initiated");
 	}
 
 	
