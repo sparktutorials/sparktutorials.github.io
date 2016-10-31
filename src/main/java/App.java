@@ -31,26 +31,23 @@ public class App {
    private ChallengeGen gen;
    private SRP6JavascriptServerSessionSHA256 server; 
 
-	/**
-	 * Constructor 
-	 * cloud contacts
-	 */
     Logger logger = LoggerFactory.getLogger(App.class);
     
     
-	public App() {
+    public App() {
 		
 		
 		//setup Sparkjava
-		staticFileLocation("/public/");
+                //this tells sparkjava that our static files are in the public dir
+		staticFileLocation("/public/"); 
 		port(getHerokuAssignedPort());
 		
-		//Map our class
+		//initiate our DatabaseHelper that will map our Model Classes
 		new DatabaseHelper();
 		
            
                 
-                //store user attribute in session
+                //ensure user is logged in to have access to protected routes
                 before("/*/", (req, res) -> {
                     Session session = req.session(true);
                     boolean auth = session.attribute(Path.Web.AUTH_STATUS) != null  ? 
@@ -63,10 +60,10 @@ public class App {
                     }
                 });
                 
-//		Handle routes
+//		Handle homepage routes
 		get(Path.Web.HOME, (req, res) -> IndexController.serveHomePage(req, res), new HandlebarsTemplateEngine());
 
-//		handle auth routes
+//		handle authentication routes
 		get(Path.Web.GET_LOGIN_PAGE, (req, res) -> { return AuthController.serveLoginPage(req, res); }, new HandlebarsTemplateEngine());
 		post(Path.Web.DO_LOGIN, (req, res) -> { return AuthController.handleLogin(req, res);} );
                 post(Path.Web.DO_AUTH, (req, res) -> {return AuthController.handleAuth(req, res); } );
@@ -75,13 +72,13 @@ public class App {
                 get(Path.Web.LOGOUT, (req, res) -> { return AuthController.handleSignOut(req, res); });
 		
 		
-//		handle crud routes
+//		handle CRUD routes for contacts
 		get(Path.Web.DASHBOARD, (req, res) -> {return ContactController.serveDashboard(req, res);}, new HandlebarsTemplateEngine());
 		delete(Path.Web.DELETE, (req, res)-> {return ContactController.handleDeleteContact(req, res);}, new JsonTransformer());
                 put(Path.Web.UPDATE, "application/json", (req, res) -> {return ContactController.handleUpdateContact(req, res); });
                 post(Path.Web.NEW, "application/json", (req, res) -> { return ContactController.handleNewContact(req, res);} );
                 
-        }
+    }
 	
 
         

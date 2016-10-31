@@ -98,8 +98,7 @@ $("document").ready(function() {
                        data: {"email":email,"password":password},
                        success: function(res2) {
                            //redirect to location in response;
-//                           console.log("resp2 = " + res2.toString());
-//                           console.log("resp2 location = " + res2.target)
+//                           console.log("resp2 location = " + res2.target);
                            if(res2.target)
                              window.location.href = res2.target;
                         },

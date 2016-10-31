@@ -16,6 +16,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Session;
+import static spark.Spark.halt;
 
 /**
  * @author Seun Matt
@@ -113,7 +114,7 @@ public class AuthController {
 }
 	
 	
-        private static String doAuth(Request req, Response res) {
+        private static Object doAuth(Request req, Response res) {
 		//this place the client has receive the salt and server challenge B
                // now it will use those to calculate it's own client challenge A and M1 which is a special message
                //it will concatenate them in the format M1:A and send it as password along the username (email) to the server
@@ -153,11 +154,7 @@ public class AuthController {
                         String respjson = gson.toJson(response);
                         logger.info("Final response sent By doAuth to client = " + respjson);
                         res.status(200);
-//                        res.type(Path.Web.JSON_TYPE);
-                        
-			return respjson;
-//                        res.redirect(Path.Web.DASHBOARD);
-//                        halt();
+                        return respjson;
                     }
 				
 		} 

@@ -4,13 +4,13 @@ apply plugin: 'java'
 //you will have to declare mainClassName property below
 apply plugin: 'application'
 
-//setting needed for heroku deploy
+//root directory of the project 
 archivesBaseName='cloudcontact'
 version="1.0.0"
 applicationName="cloudcontact"
 
-//this is the entry point of the app
-//it is placed in the default package
+//this is the entry point of the app that contains our main method
+//this property is required is you apply the application plugin as we did above
 mainClassName="App"
 
 
@@ -28,6 +28,8 @@ if (!hasProperty('mainClass')) {
     ext.mainClass = 'App'
 }
 
+//this section tells Gradle where to look for and fetch the dependencies we declared below
+
 repositories {
     jcenter()
     mavenCentral()
@@ -39,7 +41,8 @@ repositories {
 dependencies {
    
       
-        compile fileTree(include: ['*.jar'], dir: 'libs')
+//        compile 'com.sparkjava:spark-core:2.5.1'
+        compile fileTree(include: ['*.jar'], dir: 'libs') //this will compile all jar files located in libs folder
   	compile 'org.slf4j:slf4j-api:1.7.21'
   	compile 'org.slf4j:slf4j-simple:1.7.21'
 	compile 'org.mongodb.morphia:morphia:1.2.1'
@@ -48,7 +51,6 @@ dependencies {
          compile 'com.fasterxml.jackson.core:jackson-core:2.8.4'
         compile 'com.fasterxml.jackson.core:jackson-databind:2.8.4'
         compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.4'
-//        compile 'com.sparkjava:spark-core:2.5.1'
 	compile 'com.sparkjava:spark-template-handlebars:2.3'
         compile 'commons-logging:commons-logging:1.1.1'
         compile 'com.nimbusds:srp6a:1.5.3'

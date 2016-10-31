@@ -28,6 +28,9 @@ public class Path {
 	
 	public static class Web {
                 
+//            this subclass holds the Web related static properties like routes
+//            and others.
+            
 		public static String HOME = "/";
 		
 //		log in routes

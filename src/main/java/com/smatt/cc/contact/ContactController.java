@@ -45,8 +45,8 @@ public class ContactController {
 	
 	public static ModelAndView serveDashboard(Request req, Response res) {
 		
-		//get userId from req must not be null
-                
+		//get user particulars from the req.session
+                //they must not be null, else the user wil be redirected to the login page
 		String userId = req.session(false).attribute(Path.Web.ATTR_USER_ID).toString();
                 String username = req.session(false).attribute(Path.Web.ATTR_USER_NAME).toString();
                 String email = req.session(false).attribute(Path.Web.ATTR_EMAIL).toString();
@@ -70,6 +70,7 @@ public class ContactController {
                 
               } else {
                     logger.warn("userID and username not found in Session"); //session expired
+                    res.header("Location", Path.Web.GET_LOGIN_PAGE);
                     res.redirect(Path.Web.GET_LOGIN_PAGE);
                     return null;
              }
@@ -164,7 +165,9 @@ public class ContactController {
 	
 	public static Object handleDeleteContact(Request req, Response res) {
                 
-                String id = req.params("id"); //id of contact to be deleted
+                String id = Jsoup.parse(req.params("id")).text()
+                        .replace(Path.Web.OK_PATTERN, ""); //id of contact to be deleted
+                
                 String userId = req.session(false).attribute(Path.Web.ATTR_USER_ID); 
                 
             if(id != null && !id.isEmpty() && userId != null && !userId.isEmpty()) { 
