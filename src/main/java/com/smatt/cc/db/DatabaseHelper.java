@@ -54,14 +54,14 @@ public class DatabaseHelper {
               
             if (HEROKU_MLAB_URI != null && !HEROKU_MLAB_URI.isEmpty()) {
              //heroku environ
-                logger.info("Remote MLAB Database Detected");
+                logger.error("Remote MLAB Database Detected");
                mongoClient = new MongoClient(new MongoClientURI(HEROKU_MLAB_URI));
-               datastore = morphia.createDatastore(mongoClient, "");
+               datastore = morphia.createDatastore(mongoClient, Path.Database.HEROKU_DB_NAME);
             } else {
                 //local environ 
                 logger.info("Local Database Detected");
                 mongoClient = new MongoClient(Path.Database.HOST, Path.Database.PORT);
-                datastore = morphia.createDatastore(mongoClient, Path.Database.DBNAME);
+                datastore = morphia.createDatastore(mongoClient, Path.Database.LOCAL_DBNAME);
             }
 	       
                datastore.ensureIndexes();

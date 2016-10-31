@@ -74,10 +74,11 @@ public class Path {
 	
 	public static class Database {
 		
-		public static String DBNAME = "contacts_db";
+		public static String LOCAL_DBNAME = "contacts_db";
                 public static String HOST = "127.0.0.1";
 		public static int PORT = 27017;
                 public static String HEROKU_DB_URI = "mongodb://smatt:smatt@ds135577.mlab.com:35577/heroku_zr7n290b";
+                public static String HEROKU_DB_NAME = "heroku_zr7n290b";
 	
 	}
         
