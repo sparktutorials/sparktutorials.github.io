@@ -7,12 +7,8 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
  	<link rel="stylesheet" type="text/css" href="css/main.css">
- 	
-
  	<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
  	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-
-
 </head>
 
 <body>
@@ -38,19 +34,19 @@
 	<div class="row text-center" id="midrow">
 
 		<div class="col-sm-4" id="netgrp">
-			<img src="./images/net group.png" alt="icon">
+			<img src="./images/net group.png" alt="icon" id="netIcon">
 			<br>
 			<p id="nettxt">Access your contacts from <br> any internet enabled device <br> from anywhere!</p>
 		</div>
 
 		<div class="col-sm-4" id="phonegrp">
-			<img src="./images/phone group.png" alt="icon">
+			<img src="./images/phone group.png" alt="icon" id="phoneIcon">
 			<br>
 			<p id="phonetxt">Making a phone switch? <br> No worries at all</p>
 		</div>
 
 		<div class="col-sm-4" id="cloudgrp">
-			<img src="./images/cloud group.png" alt="icon">
+			<img src="./images/cloud group.png" alt="icon" id="cloudIcon">
 			<br>
 			<p id="cloudtxt">Wants a place to backup your contacts? <br> And be able to access them? <br> Well here you are</p>
 		</div>	
@@ -63,13 +59,6 @@
 
 
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-  				
-  				<!-- Indicators -->
-  			<!-- <ol class="carousel-indicators">
-  			  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    		  <li data-target="#myCarousel" data-slide-to="1"></li>
-   			 <li data-target="#myCarousel" data-slide-to="2"></li>
-  		    </ol> -->
 
  		 <!-- Wrapper for slides -->
  			 <div class="carousel-inner text-center" role="listbox">
@@ -114,12 +103,5 @@
 
 	{{> footer.hbs}}
 
-        
-        <script>
-            
-            $("#footer").css("position", "inherit");
-            
-            
-         </script>   
 </body>
 </html>

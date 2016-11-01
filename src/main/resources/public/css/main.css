@@ -155,7 +155,7 @@ body {
 	font-family: "roboto italic";
 	font-size: 12pt;
 	color: #000000 !important;
-	letter-spacing: 80;
+	letter-spacing: 1px;
 	padding-top: 20px;
 	padding-bottom: 30px;
 }
@@ -732,6 +732,17 @@ THIS IS FOR THE MAIN CONTENT PAGE AFTER LOG IN
 
 @media screen and (max-width: 800px) {
     
+    #nettxt, #phonetxt, #cloudtxt {
+	font-size: 8pt;
+	padding-top: 20px;
+	padding-bottom: 30px;
+    }
+    
+    #netIcon, #phoneIcon, #cloudIcon {
+        height: 50px;
+        width: auto;
+    }
+
     #sm-btrow {
         background-color: inherit;
         display: block;
@@ -773,7 +784,7 @@ THIS IS FOR THE MAIN CONTENT PAGE AFTER LOG IN
     
     
     #footer {
-        position: inherit;
+      position: inherit;
     }
         #footertext4 {
 		font-size: 12pt;
