@@ -209,7 +209,7 @@ body {
 	background-color: #104774 !important;
 	padding-top: 1%;
 	padding-bottom: 1%;
-	bottom: 0px !important;
+	bottom: 0px;
 }
 
 #footertext {
@@ -784,7 +784,9 @@ THIS IS FOR THE MAIN CONTENT PAGE AFTER LOG IN
     
     
     #footer {
-      position: inherit;
+      position: fixed;
+      bottom: 0px;
+      margin-top: 1%;
     }
         #footertext4 {
 		font-size: 12pt;
