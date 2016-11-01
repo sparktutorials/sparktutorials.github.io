@@ -52,17 +52,17 @@ public class DatabaseHelper {
               //that holds the connection string to our database created by the heroku mLab add on
               String HEROKU_MLAB_URI = processBuilder.environment().get("MONGODB_URI");
               
-//            if (HEROKU_MLAB_URI != null && !HEROKU_MLAB_URI.isEmpty()) {
+            if (HEROKU_MLAB_URI != null && !HEROKU_MLAB_URI.isEmpty()) {
              //heroku environ
                 logger.error("Remote MLAB Database Detected");
                mongoClient = new MongoClient(new MongoClientURI(HEROKU_MLAB_URI));
                datastore = morphia.createDatastore(mongoClient, Path.Database.HEROKU_DB_NAME);
-//            } else {
+            } else {
 //                //local environ 
-//                logger.info("Local Database Detected");
-//                mongoClient = new MongoClient(Path.Database.HOST, Path.Database.PORT);
-//                datastore = morphia.createDatastore(mongoClient, Path.Database.LOCAL_DBNAME);
-//            }
+                logger.info("Local Database Detected");
+                mongoClient = new MongoClient(Path.Database.HOST, Path.Database.PORT);
+                datastore = morphia.createDatastore(mongoClient, Path.Database.LOCAL_DBNAME);
+            }
 	       
                datastore.ensureIndexes();
                logger.info("Database connection successful and Datastore initiated");

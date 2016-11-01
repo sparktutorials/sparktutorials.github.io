@@ -36,8 +36,8 @@ REQUIREMENTS
 3. basic knowledge of [Mongodb for java]( https://www.tutorialspoint.com/mongodb/mongodb_java.htm ) 
     and it's java ORM - [Morphia] ( http://mongodb.github.io/morphia/1.2/getting-started/ )
 
-4. Kindly read also about [thinbus SRP Protocol] ( http://connect2id.com/products/nimbus-srp/usage )
-    [also here] ( https://bitbucket.org/simon_massey/thinbus-srp-js )
+4. Kindly read also about thinbus SRP Protocol [here] ( http://connect2id.com/products/nimbus-srp/usage )
+    and [here as well] ( https://bitbucket.org/simon_massey/thinbus-srp-js )
 
     Then What on earth is this? Is n't this suppose to teach that?
 
@@ -101,7 +101,7 @@ EXPLANATION
 ===========
 
 Creating a web app with sparkjava is very similar to creating apps for desktops with the exception that this one
-runs on the web. SparkJava provides static methods that corresponds to HTTP verbs (GET, POST, PUT, DELETE . . .).
+runs on the web. SparkJava provide methods that correspond to HTTP verbs (GET, POST, PUT, DELETE . . .).
 When you call this methods with the appropriate parameters they will respond to HTTP requests from the client's browser.
 
 Dependencies
@@ -140,10 +140,12 @@ like jsoup and gson
 
 
 Another important statement in our build.gradle file is the 
+
 mainClassName="App" declaration. This tells Gradle where our main method is and where to start our application from
 
 N|B: "App" is the name of our main class with no .java extension. 
-If your main class is in a package, then you will supply the full package name and not just the class name
+
+If your main class is in a package, then you should supply the full package name and not just the class name
 
 
 Other sections of the build.gradle file are well commented so you can just go through them
@@ -155,8 +157,9 @@ Cloud Contact will allow a user to register, then sign in and then can add, edit
 
 From NetBeans Project view, expand the Source Pakages[Java] node and you will see all the packages for this project.
 
-The packages are organized based on function. All classes that are related to Contact handling - the Controller and the Model
-are all placed in the same package. Same goes for other packages as well.
+The packages are organized based on function. All classes that are related to Contact handling - 
+
+the Controller and the Model are all placed in the same package. Same goes for other packages as well.
 
 1. The default package contains the App.java which is the entry point of the app.
 2. com.bitbucket.thinbus.srp6.js contains the Classes required for authentication using thinbus implementation of SRP6 Protocol
@@ -166,11 +169,14 @@ are all placed in the same package. Same goes for other packages as well.
 6. com.smatt.cc.index contains the IndexController which deals with request for the HomePage
 7. com.smatt.cc.util contains utility classes like Path.java which contains all our constants used throughout the program
 
-Now, let's examined the work flow of the Application based on the features of Cloud Contacts. 
+Now, let's examine the work flow of the Application based on the features of Cloud Contacts. 
+
 Starting with the Entry point and how it relates to other parts. 
 
 The entry point of the app is App.java located in the default package. It contains our routes handlers that
+
 handle each request from the user via web browser.
+
 If you open the App.java it will contain this section of code. The routes have also been grouped according to functions
 
 ~~~java
@@ -224,37 +230,37 @@ LOGIN
 
 The authentication protocol used in this project is the SRP Protocol. The SRP Protocol does not send the 
 
-actual password rather it uses it to generate a salt and verifier. It is the salt and verifier that is send to the 
+actual password; rather it uses it to generate a salt and verifier. It is the salt and verifier that is then
 
-server and is stored alongside the username and other user details. 
+sent to the server and is stored alongside the username and other user details. 
 
-This permits the use of username/password authentication over unencrypted
+This permits the use of username/password authentication over un-encrypted
 
 channels like http (NOTE: The security of this protocol can be boosted by using it over https too).
 
-There are several implementations of the SRP Protocol. But I found thinbus java implementation suitable for my use.
+There are several implementations of the SRP Protocol. But I found thinbus' java implementation suitable for my use.
 
-Goto this links provided in the requirements section to know more in detail about
+Goto the links provided in the requirements section to know more in detail about
 
-the operation flow of thinbus SRP implementation. 
+the operation-flow of thinbus SRP implementation. 
 
 If you have any questions along the line, feel free to ask or create issues.
 
-When the user supplies his/her login credentials, the following sequence of events takes place
+When the user supplies his/her login credentials, the following sequence of events take place:
 
 1. The email will be sent over to the server
 2. The server will use the email to fetch the saved salt and verifier of the user
 3. The server will use the salt and verifier to generate a server challenge 
 4. The salt and the server challenge is sent back to the client
-5. The client will use the salt and server challenge to generate credentials, which is sent over to the server
+5. The client will use the salt and server challenge to generate credentials, which is sent back to the server
 6. The server will then use the received credentials to generate server evidence message, if this is successful
  without errors and exceptions thrown, then the user is authenticated.
 
-this route deals with step 1 - 4
+the route below, in App.java, deals with step 1 - 4
     
     post(Path.Web.DO_LOGIN, (req, res) -> { return AuthController.handleLogin(req, res);} );
     
-this route handles step 5 - 6
+while, this one deals with step 5 - 6
 
     post(Path.Web.DO_AUTH, (req, res) -> {return AuthController.handleAuth(req, res); } );
                 
@@ -263,11 +269,13 @@ After a successful login, the username, email and userId is stored in the sessio
 SIGN UP
 -------
 
-The signup process involves the user supplying username, email and password.
+The signup process involves the user supplying username, email and password 
+
+(and any other user details you wish to have).
 
 1. The Javascript library of thinbus SRP is used to generate a salt
 2. The salt, email and password is then used to generate a verifier.
-3. The verifier, salt, username and email are then sent to the server. NOTE: It is a crime to send the password!
+3. The verifier, salt, username and email are then sent to the server. NOTE: It is a crime to send the password! SO DON'T
 4. The server receives the data in json format and use them to create a new user object that is stored in the database.
 5. If the operation is successful or not, the client will display appropriate message as designed.
 
@@ -298,40 +306,51 @@ This portion of the App.java class
                 });
 ~~~
 
-ensures that a user is logged in before accessing every paths that match the pattern "/*/". Else, the user will be 
-redirected to the login page
+ensures that a user is logged in before accessing every paths that match the pattern "/*/". 
+
+This patterns denotes our protected, logged-in-users only area of the site.
+
+Attempting to access the urls will lead to redirection to the login page.
 
   
 DASHBOARD
 ---------
 
-When the user has logged in from the home page, the next page that will be served is the dashboard. The route that
+When the user has logged in from the login page, 
 
-handles that is the 
+the next page that will be served is the dashboard. 
 
-get(Path.Web.DASHBOARD, (req, res) -> {return ContactController.serveDashboard(req, res);}, new HandlebarsTemplateEngine());
+The route that handles that is the 
 
-remember it is in the App.java class. 
+    get(Path.Web.DASHBOARD, (req, res) -> {return ContactController.serveDashboard(req, res);}, new HandlebarsTemplateEngine());
+
+(remember it is in the App.java class.) 
 
 Now the serveDashboard method will be invoked from the ContactController class. The method will essentially fetch the 
 
-userId, username and email from the current user's session. Remember, they have been placed there when the user logged in.
+userId, username and email from the current user's session. 
+
+Remember, they have been placed there when the user logged in.
 
 The serveDashboard method will add the username and email to the Model for use by the HandlebarsTemplateEngine.
 
-The userId is passed to the prepareData method that will fetch all contacts saved in the database where userId equals the one supplied as param 
+The userId is passed to the prepareData method that will fetch all contacts saved in the database 
 
-After that, the data will be used to construct part of html table body and then added to the Model too.
+where userId equals the one supplied as parameter. 
 
-Finally, the model is used to construct a ModelAndView object that is then returned. It is this ModelAndView object that the 
+The data returned from the query will be used to construct part of html table body and then added to the Model too.
 
-Template Engine will use to render our final DASHBOARD Page.
+Finally, the model is used to construct a ModelAndView object that is then returned. 
 
-When it is rendered, you can see the username is used as part of greeting and alongside with the email is availble when you 
+It is this ModelAndView object that the Template Engine will use to render our final DASHBOARD Page.
 
-check your profile.
+When it is rendered, you can see the username is used as part in the greeting and 
 
-Now, from the dashboard, the user can Add, Edit, View and Delete Contacts.
+alongside with the email, is available when you profile is clicked.
+
+Now, from the dashboard, the user can Add, Edit, View and Delete Contacts. 
+
+Let's see how those operations are being handled by the app.
 
 
 VIEW CONTACT
@@ -353,12 +372,15 @@ The viewing ability is handled entirely by javascript so no call is being made t
 
 Note that the table can also be sort and filtered
 
+
 ADD NEW CONTACT
 ---------------
 
-When the user click on NEW button, a dialog will show up with the fields available for filling. The user must at least fill the
+When the user click on NEW button, a dialog will show up with the fields to be filled by the user. 
 
-First Name and Mobile number before a contact can be saved. When the user click on SAVE button, using jQuery, an ajax 
+The user must at least fill the First Name and Mobile number before a contact can be saved.
+
+When the user click on SAVE button, using jQuery, an ajax 
 
 request is sent to the url "/contact/" using http POST method with the new contact data organized in json format.
 
@@ -374,10 +396,10 @@ When the route is called, it will invoke the ContactController.handleNewContact 
 
 perform the following operations
 
-* It will first parsed the raw data using Jsoup to remove any malicious html/script codes injected, it will then
-    also parsed the data to remove every character not defined in Path.Web.OK_PATTERN.
+* It will first parse the raw data using Jsoup to remove any malicious html/script codes injected, it will then
+    escape the resulting data to remove every character not defined in Path.Web.OK_PATTERN.
 
-* It will use Jackson to map the data to a Contact object.
+* It will use Jackson to map the data to a new Contact object.
 
 * It will then get the userId from the session and then set it to the Contact object derived from mapping above
 
@@ -387,7 +409,7 @@ perform the following operations
 
 * From the client's browser, we have implemented the success and error callback to handle each results accordingly
 
-* Feel free to check out the javascript codes in the template files. Some methods are placed in utility.js file
+* Feel free to check out the javascript codes in the template files. Some methods are placed in js/utility.js file
 
 
 UPDATE CONTACT
@@ -444,8 +466,63 @@ When the request hits the route, the ContactController.handleDeleteContact metho
 
 * If everything goes well then a http status code of 200 is returned else 500 is returned.
 
-* The front end that initiates the ajax request also implements success and error callbacks that is invoked accordingly.
- 
+* The front end that initiates the ajax request also implements success and error callbacks that is invoked accordingly
+
+
+DEPLOYING TO HEROKU PLATFORM
+============================
+
+1. [Create a free heroku account]( https://signup.heroku.com/ )
+
+2. We need to place a Procfile file at the root dir of the project. Note that the name of 
+
+    the file has no extension. It's just Procfile
+
+3. The Procfile contains a single line of instruction telling Heroku it's a web app we are launching.
+        
+        web: ./build/install/cloudcontact/bin/cloudcontact
+
+4. After this, you will need to [download heroku cli toolbelt] ( https://devcenter.heroku.com/articles/heroku-command-line ) which will be used to 
+   communicate with heroku via cmd.
+
+5. Goto your dashboard on heroku and create a new project.
+
+6. Add the mLab add on. This will create a free sandbox instance of mongodb that our app can use
+
+7. The mLab add on will add a MONGODB_URI to the env variable that our app can use to connect to the mongodb 
+    instance running on mLab
+
+8. The initDatastore method in DatabaseHelper class first tries to use that env variable to connect to the mongodb
+    when it has been deployed to heroku. But if the env variable is null, it will fall back to localhost and port.
+
+9. You might want to add add ons like Papertrail for logging
+
+10. Then after you created your account on heroku, downloaded the heroku toolbelt cli,
+    created the project on heroku, and added the required mLab add on. 
+
+11. Open your cmd and now cd into this project's root dir on your local system
+
+12. run the following commands to deploy the app to heroku
+    
+        heroku git:remote -a your-heroku-project-name
+
+        git push heroku master
+
+13. You will log outputs in your cmd. When the process is complete successfully, you will see a BUILD SUCCESSFUL 
+    message on the screen. Now you can goto http://your-heroku-project-name.herokuapp.com and your site will be live there
+
+14. If you encounter error, you can simply run the command
+        
+        heroku logs
+   
+    or login to your heroku account, goto your app's dashboard. By the top-right you will see a more button click on
+    it and you will see open logs option which you can use to view your logs.
+    
+    If you have added the Papertrail Add-on, you can just click on it from your app's overview and it will
+    load all the logs in another tab for you. it's quite easier than the default log viewer
+    
+
+
 
 CONCLUSION
 ==========
@@ -456,11 +533,15 @@ functional real world web app. And at its core is the lightweight sparkjava web 
 
 mongodb and thinbus SRP authentication protocol.
 
-I hope I have been able to explain it to your understanding; if you are seemingly not getting it the
+This is a long tutorial, longer and complex than what I have in mind
 
-first time, try reading it again and checking the source code as you do so.
+when I started out. I hope I have been able to explain it to your understanding a bit. 
 
-Fork and clone the repo. Feel free to contribute and ask questions.
+if you are seemingly not getting it the first time, try reading it again 
+
+and checking the source code as you do so.
+
+Fork and [clone the repo]( https://github.com/SeunMatt/cloudcontact.git ). Feel free to contribute and ask questions.
 
 #TODO
 
