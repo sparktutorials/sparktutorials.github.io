@@ -5,6 +5,12 @@
 
 Check it out! It's hosted on heroku [here]( https://cloud-contact.herokuapp.com/ ) 
 
+
+#Author
+Seun Matt (smatt382@gmail.com)
+
+Published on Nov. 1st, 2016
+
 Background
 ==========
 
@@ -554,11 +560,4 @@ Some aspects of the app are not implemented yet.
 
 These are left as features to be implemented in the future. You can start from there you know #contribution
 
-
-
-
-
-With Love from
-
-#Seun Matt - smatt382@gmail.com
 
