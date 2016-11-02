@@ -561,3 +561,13 @@ Some aspects of the app are not implemented yet.
 These are left as features to be implemented in the future. You can start from there you know #contribution
 
 
+=======
+# sparktutorials.github.io
+This repo contains the source code for the Spark Tutorial webpage, located at [https://sparktutorials.github.io](https://sparktutorials.github.io)
+
+##Anyone is free to submit a tutorial!
+If you have something to share, small or big, please creat a pull request.
+
+###Setup
+https://help.github.com/articles/using-jekyll-with-pages/
+>>>>>>> 7f7008b472a03ad4b0ef3482aa8aec88a6d5aca3
