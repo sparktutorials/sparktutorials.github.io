@@ -1,9 +1,12 @@
 
-#Cloud Contact
+Cloud Contact
+=============
+
+
 
 #A Complete Web App developed with SparkJava, Mongodb and Thinbus SRP Authentication Protocol
 
-Check it out! It's hosted on heroku [here]( https://cloud-contact.herokuapp.com/ ) 
+Check out the hosted app on heroku [here]( https://cloud-contact.herokuapp.com/ ) 
 
 
 #Author
