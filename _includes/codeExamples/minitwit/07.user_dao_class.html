@@ -1,0 +1,12 @@
+@Repository
+public class UserDaoImpl implements UserDao {
+	
+	private NamedParameterJdbcTemplate template;
+
+	@Autowired
+	public UserDaoImpl(DataSource ds) {
+		template = new NamedParameterJdbcTemplate(ds);
+	}
+
+	// Methods
+}

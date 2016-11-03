@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 Cloud Contact
 =============
 
@@ -565,6 +566,8 @@ These are left as features to be implemented in the future. You can start from t
 
 
 =======
+=======
+>>>>>>> 450a1b5c2f9b22dbc1fb8e8c62182a1126861583
 # sparktutorials.github.io
 This repo contains the source code for the Spark Tutorial webpage, located at [https://sparktutorials.github.io](https://sparktutorials.github.io)
 
@@ -573,4 +576,7 @@ If you have something to share, small or big, please creat a pull request.
 
 ###Setup
 https://help.github.com/articles/using-jekyll-with-pages/
+<<<<<<< HEAD
 >>>>>>> 7f7008b472a03ad4b0ef3482aa8aec88a6d5aca3
+=======
+>>>>>>> 450a1b5c2f9b22dbc1fb8e8c62182a1126861583

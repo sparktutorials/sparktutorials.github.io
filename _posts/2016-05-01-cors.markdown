@@ -1,0 +1,48 @@
+---
+layout: post
+title: "Implement CORS in Spark"
+author: <a href="https://www.linkedin.com/in/franklin-gauer-iii-4271666" target="_blank">Franklin M. Gauer III</a>
+date: 2016-05-01 22:22:22
+comments: true
+summary: >
+ Some boilerplate code to enable CORS on your Spark server.
+---
+
+## CORS (Cross-Origin Resource Sharing)
+[CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) covers the web application architecture where a given web application calls api resources located in a different domain other than the domain of the web application. 
+
+For example if you have a site located at domain: www.mysite.com, and you wish to host your api at domain: www.myapi.com, requests that originate from www.mysite.com accessing www.myapi.com will be considered CORS requests. These requests have been traditionally called AJAX requests and refer to requests that the browser client makes, via javascript, from one originating domain to another.
+
+Modern browsers successfully complete these requests only if the server allows it via the setting of specific headers in the request and response of each cross domain call.  
+
+## Enable CORS
+A little boilerplate code to enable CORS on your Spark server. This code opens CORS wide open on your server so please be cautious and modify the header values to suit your specific needs.
+
+<pre><code class="language-java">
+// Enables CORS on requests. This method is an initialization method and should be called once.
+private static void enableCORS(final String origin, final String methods, final String headers) {
+
+    options("/*", (request, response) -> {
+
+        String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+        if (accessControlRequestHeaders != null) {
+            response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+        }
+
+        String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+        if (accessControlRequestMethod != null) {
+            response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+        }
+
+        return "OK";
+    });
+
+    before((request, response) -> {
+        response.header("Access-Control-Allow-Origin", origin);
+        response.header("Access-Control-Request-Method", methods);
+        response.header("Access-Control-Allow-Headers", headers);
+        // Note: this may or may not be necessary in your particular application
+        response.type("application/json");
+    });
+}
+</code></pre>

@@ -1,0 +1,11 @@
+before("/t/:username/follow", (req, res) -> {
+	String username = req.params(":username");
+	User authUser = getAuthenticatedUser(req);
+	User profileUser = service.getUserbyUsername(username);
+	if(authUser == null) {
+		res.redirect("/login");
+		halt();
+	} else if(profileUser == null) {
+		halt(404, "User not Found");
+	}
+});
