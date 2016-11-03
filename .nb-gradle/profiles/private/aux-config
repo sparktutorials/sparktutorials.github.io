@@ -5,10 +5,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
       <group>
-        <file>file:/C:/NetBeansProject/cloudcontact/README.md</file>
-        <file>file:/C:/NetBeansProject/cloudcontact/src/main/java/com/smatt/cc/util/Path.java</file>
-        <file>file:/C:/NetBeansProject/cloudcontact/src/main/java/App.java</file>
-        <file>file:/C:/NetBeansProject/cloudcontact/src/main/java/com/smatt/cc/index/IndexController.java</file>
+        <file>file:/C:/NetBeansProject/cloudcontact/src/main/resources/templates/index.hbs</file>
+        <file>file:/C:/NetBeansProject/cloudcontact/src/main/resources/public/css/main.css</file>
+        <file>file:/C:/NetBeansProject/cloudcontact/src/main/resources/templates/head.hbs</file>
       </group>
     </open-files>
     <editor-bookmarks lastBookmarkId="0" xmlns="http://www.netbeans.org/ns/editor-bookmarks/2"/>
@@ -16,6 +15,7 @@
       <group>
         <file>file:/C:/NetBeansProject/cloudcontact/src/main/resources/templates/index.hbs</file>
         <file>file:/C:/NetBeansProject/cloudcontact/src/main/resources/public/css/main.css</file>
+        <file>file:/C:/NetBeansProject/cloudcontact/README.md</file>
         <file>file:/C:/NetBeansProject/cloudcontact/src/main/resources/templates/head.hbs</file>
       </group>
     </open-files>
