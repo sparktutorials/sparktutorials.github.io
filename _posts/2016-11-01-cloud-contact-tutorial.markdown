@@ -1,20 +1,16 @@
+---
+layout: post
+title: "Complete webapp with Spark, MongoDB and Thinbus SRP Authentication"
+author: <a href="https://twitter.com/@SeunMatt2" target="_blank">Seun Matt</a>
+date: 2016-11-01 11:11:11
+comments: true
+summary: >
+ Learn how to create a modern single page application in Spark and intercooler.js without writing JavaScript.
+---
 
-Cloud Contact
-=============
+Check out the hosted app on heroku [here]( https://cloud-contact.herokuapp.com/ ). 
 
-
-
-#A Complete Web App developed with SparkJava, Mongodb and Thinbus SRP Authentication Protocol
-
-Check out the hosted app on heroku [here]( https://cloud-contact.herokuapp.com/ ) 
-
-The complete source code for the tutorial is available on https://github.com/SeunMatt/cloudcontact.git 
-
-
-#Author
-Seun Matt (smatt382@gmail.com)
-
-Published on Nov. 1st, 2016
+The complete source code for the tutorial is available on <a href="https://github.com/SeunMatt/cloudcontact.git" target="_blank">GitHub</a>.
 
 Background
 ==========
@@ -51,9 +47,9 @@ REQUIREMENTS
 4. Kindly read also about thinbus SRP Protocol [here]( http://connect2id.com/products/nimbus-srp/usage )
     and [here as well]( https://bitbucket.org/simon_massey/thinbus-srp-js )
 
-    Then What on earth is this? Is n't this suppose to teach that?
+    Then What on earth is this? Isn't this suppose to teach that?
 
-Well, am sorry. This is not a basic tutorial. It is more of a holistic tutorial that 
+Well, I'm sorry. This is not a basic tutorial. It is more of a holistic tutorial that 
 articulates major aspects of Web App development in java using sparkjava framework        
 
 
@@ -141,10 +137,8 @@ Now the version of the sparkjava core we will be using is in a jar file in our l
 That's why there's this statement in the dependencies section to compile all the jar files in the libs 
 folder.
 
-~~~ Java
-
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-
+~~~java
+compile fileTree(include: ['*.jar'], dir: 'libs')
 ~~~
 
 The libs folder is in the root dir of the project and contains other jar files as well
@@ -195,36 +189,34 @@ If you open the App.java it will contain this section of code. The routes have a
 
 //		Handle homepage routes
 
-		get(Path.Web.HOME, (req, res) -> IndexController.serveHomePage(req, res), new HandlebarsTemplateEngine());
+get(Path.Web.HOME, (req, res) -> IndexController.serveHomePage(req, res), new HandlebarsTemplateEngine());
 
 //		handle auth routes
 
-		get(Path.Web.GET_LOGIN_PAGE, (req, res) -> { return AuthController.serveLoginPage(req, res); }, new HandlebarsTemplateEngine());
+get(Path.Web.GET_LOGIN_PAGE, (req, res) -> { return AuthController.serveLoginPage(req, res); }, new HandlebarsTemplateEngine());
 
-		post(Path.Web.DO_LOGIN, (req, res) -> { return AuthController.handleLogin(req, res);} );
+post(Path.Web.DO_LOGIN, (req, res) -> { return AuthController.handleLogin(req, res);});
 
-                post(Path.Web.DO_AUTH, (req, res) -> {return AuthController.handleAuth(req, res); } );
+post(Path.Web.DO_AUTH, (req, res) -> { return AuthController.handleAuth(req, res); });
 
-                get(Path.Web.GET_SIGN_UP, (req, res) -> { return AuthController.serveSignUpPage(req, res); }, new HandlebarsTemplateEngine());
+get(Path.Web.GET_SIGN_UP, (req, res) -> { return AuthController.serveSignUpPage(req, res); }, new HandlebarsTemplateEngine());
 
-		post(Path.Web.DO_SIGN_UP, (req, res) -> {return AuthController.handleSignUp(req, res);});
+post(Path.Web.DO_SIGN_UP, (req, res) -> { return AuthController.handleSignUp(req, res);});
 
-                get(Path.Web.LOGOUT, (req, res) -> { return AuthController.handleSignOut(req, res); });
-		
-		
+get(Path.Web.LOGOUT, (req, res) -> { return AuthController.handleSignOut(req, res); });
+
+
 //		handle CRUD routes
 
-		get(Path.Web.DASHBOARD, (req, res) -> {return ContactController.serveDashboard(req, res);}, new HandlebarsTemplateEngine());
+get(Path.Web.DASHBOARD, (req, res) -> { return ContactController.serveDashboard(req, res);}, new HandlebarsTemplateEngine());
 
-		delete(Path.Web.DELETE, (req, res)-> {return ContactController.handleDeleteContact(req, res);}, new JsonTransformer());
+delete(Path.Web.DELETE, (req, res)-> { return ContactController.handleDeleteContact(req, res);}, new JsonTransformer());
 
-                put(Path.Web.UPDATE, "application/json", (req, res) -> {return ContactController.handleUpdateContact(req, res); });
+put(Path.Web.UPDATE, "application/json", (req, res) -> { return ContactController.handleUpdateContact(req, res); });
 
-                post(Path.Web.NEW, "application/json", (req, res) -> { return ContactController.handleNewContact(req, res);} );
+post(Path.Web.NEW, "application/json", (req, res) -> { return ContactController.handleNewContact(req, res);});
 
 ~~~
-
-
 
 HOMEPAGE
 --------
@@ -269,12 +261,16 @@ When the user supplies his/her login credentials, the following sequence of even
  without errors and exceptions thrown, then the user is authenticated.
 
 the route below, in App.java, deals with step 1 - 4
-    
-    post(Path.Web.DO_LOGIN, (req, res) -> { return AuthController.handleLogin(req, res);} );
+
+~~~java
+post(Path.Web.DO_LOGIN, (req, res) -> { return AuthController.handleLogin(req, res);});
+~~~
     
 while, this one deals with step 5 - 6
 
-    post(Path.Web.DO_AUTH, (req, res) -> {return AuthController.handleAuth(req, res); } );
+~~~java
+post(Path.Web.DO_AUTH, (req, res) -> { return AuthController.handleAuth(req, res); });
+~~~
                 
 After a successful login, the username, email and userId is stored in the session for use later 
 
@@ -293,7 +289,7 @@ The signup process involves the user supplying username, email and password
 
 The path that handles the signup process is 
 
-    post(Path.Web.DO_SIGN_UP, (req, res) -> {return AuthController.handleSignUp(req, res);});
+    post(Path.Web.DO_SIGN_UP, (req, res) -> { return AuthController.handleSignUp(req, res);});
 
 
 
@@ -302,20 +298,20 @@ FILTERS
 
 This portion of the App.java class
 
-~~~Java
+~~~java
 
-     //ensure user is logged in to have access to protected routes
-                before("/*/", (req, res) -> {
-                    Session session = req.session(true);
-                    boolean auth = session.attribute(Path.Web.AUTH_STATUS) != null  ? 
-                                    session.attribute(Path.Web.AUTH_STATUS) : false;
-                    logger.info("auth status = " + auth);
-                    if(!auth) {
-                        logger.warn("Secured Area! Login is REQUIRED");
-                        res.redirect(Path.Web.GET_LOGIN_PAGE);
-                       halt(401);
-                    }
-                });
+//ensure user is logged in to have access to protected routes
+before("/*/", (req, res) -> { 
+    Session session = req.session(true);
+    boolean auth = session.attribute(Path.Web.AUTH_STATUS) != null ? 
+                   session.attribute(Path.Web.AUTH_STATUS) : false;
+    logger.info("auth status = " + auth);
+    if(!auth) { 
+        logger.warn("Secured Area! Login is REQUIRED");
+        res.redirect(Path.Web.GET_LOGIN_PAGE);
+       halt(401);
+    }
+});
 ~~~
 
 ensures that a user is logged in before accessing every paths that match the pattern "/*/". 
@@ -334,7 +330,7 @@ the next page that will be served is the dashboard.
 
 The route that handles that is the 
 
-    get(Path.Web.DASHBOARD, (req, res) -> {return ContactController.serveDashboard(req, res);}, new HandlebarsTemplateEngine());
+    get(Path.Web.DASHBOARD, (req, res) -> { return ContactController.serveDashboard(req, res);}, new HandlebarsTemplateEngine());
 
 (remember it is in the App.java class.) 
 
@@ -400,7 +396,7 @@ If the operation is successful the user will be alerted and if not, the user is 
 
 The route that handles that request is 
 
-    post(Path.Web.NEW, "application/json", (req, res) -> { return ContactController.handleNewContact(req, res);} );
+    post(Path.Web.NEW, "application/json", (req, res) -> { return ContactController.handleNewContact(req, res);});
 
 the route is expecting a json formatted data.
 
@@ -436,7 +432,7 @@ The data to be sent are also formatted in json  and sent to this url "/contact/i
 
 The route that handles that is the 
 
-      put(Path.Web.UPDATE, "application/json", (req, res) -> {return ContactController.handleUpdateContact(req, res); });
+      put(Path.Web.UPDATE, "application/json", (req, res) -> { return ContactController.handleUpdateContact(req, res); });
 
 This route will call ContactController.handleUpdateContact to process the request.
 
@@ -466,7 +462,7 @@ confirms the action then an ajax request will be sent to the server using via ht
 
 The route that handles the request in the App.java class is
 
-    delete(Path.Web.DELETE, (req, res)-> {return ContactController.handleDeleteContact(req, res);}, new JsonTransformer());
+    delete(Path.Web.DELETE, (req, res)-> { return ContactController.handleDeleteContact(req, res);}, new JsonTransformer());
 
 When the request hits the route, the ContactController.handleDeleteContact method is called. The method does the following:
 
