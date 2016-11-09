@@ -5,7 +5,7 @@ author: <a href="https://twitter.com/@SeunMatt2" target="_blank">Seun Matt</a>
 date: 2016-11-01 11:11:11
 comments: true
 summary: >
- Learn how to create a modern single page application in Spark and intercooler.js without writing JavaScript.
+ Learn how to create a full webapp for syncing your contact list, using Heroku, MongoDB and SRP authentication. 
 ---
 
 Check out the hosted app on heroku [here]( https://cloud-contact.herokuapp.com/ ). 
