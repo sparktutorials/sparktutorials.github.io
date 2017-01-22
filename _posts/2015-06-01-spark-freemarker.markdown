@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Spark and Freemarker: Exposing HTML and JSON from the same service"
+title:  "Exposing HTML and JSON from the same service"
 author: <a href="http://tomassetti.me" target="_blank">Federico Tomassetti</a>
 date:   2015-06-01 10:34:52
 comments: true

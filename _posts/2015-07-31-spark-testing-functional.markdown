@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Spark and Testing - Part 2: Functional tests"
+title:  "Functional tests in Spark"
 author: <a href="http://tomassetti.me" target="_blank">Federico Tomassetti</a>
-date:   2015-09-27 10:34:52
+date:   2015-07-31 10:34:52
 comments: true
 summary: >
   In this tutorial series you will learn an approach for writing testable Spark applications from the ground up. In part one we looked at what and when to test, and wrote unit tests. In this post we will have a look at functional tests.

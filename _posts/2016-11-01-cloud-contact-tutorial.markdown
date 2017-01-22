@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Complete webapp with Spark, MongoDB and Thinbus SRP Authentication"
+title: "Spark with MongoDB and Thinbus SRP Auth"
 author: <a href="https://twitter.com/@SeunMatt2" target="_blank">Seun Matt</a>
 date: 2016-11-01 11:11:11
 comments: true

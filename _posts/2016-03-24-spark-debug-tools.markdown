@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Developing with the Spark Debug Tools (beta)"
+title: "Spark Debug Tools"
 author: <a href="https://www.linkedin.com/in/davidaase" target="_blank">David Åse</a>
 date: 2016-03-24 11:11:11
 comments: true
