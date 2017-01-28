@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Using Spark and Kotlin to create a simple CRUD microservice"
+title: "Using Spark with Kotlin to create a simple CRUD REST API"
 author: <a href="https://www.linkedin.com/in/davidaase" target="_blank">David Åse</a>
 date: 2017-01-28 11:11:11
 comments: true
