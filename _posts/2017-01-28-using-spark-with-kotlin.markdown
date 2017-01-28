@@ -78,7 +78,7 @@ Kotlin has a really neat feature called <a href="https://kotlinlang.org/docs/ref
 data class User(val name: String, val email: String, val id: Int);
 ~~~
 
-... and you're done! This is similar to the <a href="https://projectlombok.org/features/Value.html" target="_blank">Lombok @Value</a> annotation, only better. It gives you an immutable class with toString, hashCode/equals, copying and destructuring:
+... and you're done! If you declare all parameters as `val` you get an immutable class similar to the <a href="https://projectlombok.org/features/Value.html" target="_blank">Lombok @Value</a> annotation, only better.  Regardless of if you use `var` or `val` (or a mix) for your data class, you get toString, hashCode/equals, copying and destructuring included:
 
 ~~~kotlin
 val alice = User(name = "Alice", email = "alice@alice.kt", id = 0)
@@ -100,7 +100,7 @@ val users = hashMapOf(
 )
 ~~~
 
-Kotlin has type inference and named paramters (we could have written our arguments in any order). It also has a nice standard library providing map-literal-like functions, so you won't have to include guava in every project.
+Kotlin has type inference and named paramters (we could have written our arguments in any order). It also has a nice standard library providing map-literal-like functions (so you won't have to include guava in every project).
 
 ### Creating a data access object
 We need to be able to read out data somehow, so let's set up some basic CRUD functionality, with one added function for finding user by email:

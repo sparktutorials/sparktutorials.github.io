@@ -40,9 +40,9 @@ h1, h2, h3 {
 h1 + pre, h2 + pre, h3 + pre {
     margin-top: 25px !important;
 }
-h1 { font-size: 23px }
-h2 { font-size: 20px }
-h3 { font-size: 17px }
+h1 { font-size: 26px }
+h2 { font-size: 22px }
+h3 { font-size: 20px }
 footer {
   background: #333;
   color: #fff;
@@ -189,7 +189,7 @@ nav li:nth-child(2) {
     margin-top: 30px;
 }
 article.post h2, article.post h3 {
-  margin-top: 30px;
+  margin-top: 40px;
   margin-bottom: -15px;
 }
 .post ul li, .post ol li {
