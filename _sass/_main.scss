@@ -37,6 +37,9 @@ h1, h2, h3 {
   color: #333;
   margin: 10px 0 5px 0
 }
+h1 + pre, h2 + pre, h3 + pre {
+    margin-top: 25px !important;
+}
 h1 { font-size: 23px }
 h2 { font-size: 20px }
 h3 { font-size: 17px }
