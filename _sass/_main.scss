@@ -37,9 +37,6 @@ h1, h2, h3 {
   color: #333;
   margin: 10px 0 5px 0
 }
-h1 + pre, h2 + pre, h3 + pre {
-    margin-top: 25px !important;
-}
 h1 { font-size: 26px }
 h2 { font-size: 22px }
 h3 { font-size: 20px }
@@ -190,7 +187,9 @@ nav li:nth-child(2) {
 }
 article.post h2, article.post h3 {
   margin-top: 40px;
-  margin-bottom: -15px;
+}
+article.post h2 + p, article.post h3 + p {
+  margin-top: 5px;
 }
 .post ul li, .post ol li {
   margin: 10px;

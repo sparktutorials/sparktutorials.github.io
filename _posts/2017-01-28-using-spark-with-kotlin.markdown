@@ -238,7 +238,7 @@ get("/multiline-interpolation-example") { req, res ->
     val email = "alice@alice.kt"
     """
         <h1>Hello $name</h1>
-        <p>Your email is $email<p>
+        <p>Your email is $email</p>
     """
 }
 ~~~
