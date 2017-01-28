@@ -8,7 +8,7 @@ summary: >
  Learn how to use Kotlin with Spark by creating a simple CRUD REST API.
 ---
 
-<div class="notification"><em>The source code for this tutorial can be found on <a href="#" target="_blank">GitHub</a>.</em></div>
+<div class="notification"><em>The source code for this tutorial can be found on <a href="https://github.com/tipsy/spark-kotlin" target="_blank">GitHub</a>.</em></div>
 
 ## What You Will Learn
 
@@ -220,7 +220,7 @@ Our app references `req.qp()` a number of times, which is a method that doesn't 
 I have only worked with Kotlin for a few hours while writing this tutorial, but I'm already a very big fan of the language. Everything just seems to make sense, and the interoperability with Java is great. IntelliJ will also automaticall convert Java code into Kotlin if you paste it into your project. Please clone the repo and give it a try!
 
 
-<div class="notification"><em>The source code for this tutorial can be found on <a href="#" target="_blank">GitHub</a>.</em></div>
+<div class="notification"><em>The source code for this tutorial can be found on <a href="https://github.com/tipsy/spark-kotlin" target="_blank">GitHub</a>.</em></div>
 
 [//]: # 
 [//]: # Tutorial is offically over, but there are some neat code examples below
