@@ -7,6 +7,6 @@
     <dependency>
         <groupId>com.j2html</groupId>
         <artifactId>j2html</artifactId>
-        <version>0.7</version>
+        <version>0.88</version>
     </dependency>
 </dependencies>
