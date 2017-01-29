@@ -9,4 +9,9 @@
         <artifactId>j2html</artifactId>
         <version>0.88</version>
     </dependency>
+     <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20160810</version>
+    </dependency>
 </dependencies>
