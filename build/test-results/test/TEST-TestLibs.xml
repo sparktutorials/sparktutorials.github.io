@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestLibs" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-10-31T23:30:14" hostname="SMATT-PC" time="6.839">
+  <properties/>
+  <testcase name="testDB" classname="TestLibs" time="6.839"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 01, 2016 12:30:14 AM org.mongodb.morphia.logging.MorphiaLoggerFactory chooseLoggerFactory
+INFO: LoggerImplFactory set to org.mongodb.morphia.logging.jdk.JDKLoggerFactory
+[Test worker] ERROR com.smatt.cc.db.DatabaseHelper - Remote MLAB Database Detected
+[Test worker] INFO org.mongodb.driver.cluster - Cluster created with settings {hosts=[ds011725.mlab.com:11725], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+[Test worker] INFO org.mongodb.driver.cluster - No server chosen by WritableServerSelector from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=ds011725.mlab.com:11725, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+[cluster-ClusterId{value='5817d408149a9c14043e0a19', description='null'}-ds011725.mlab.com:11725] INFO org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:154004}] to ds011725.mlab.com:11725
+[cluster-ClusterId{value='5817d408149a9c14043e0a19', description='null'}-ds011725.mlab.com:11725] INFO org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=ds011725.mlab.com:11725, type=REPLICA_SET_PRIMARY, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 2, 9]}, minWireVersion=0, maxWireVersion=4, maxDocumentSize=16777216, roundTripTimeNanos=271201324, setName='rs-ds011725', canonicalAddress=ds011725-a.mlab.com:11725, hosts=[ds011725-a.mlab.com:11725], passives=[], arbiters=[], primary='ds011725-a.mlab.com:11725', tagSet=TagSet{[]}, electionId=7fffffff0000000000000000, setVersion=2}
+[Test worker] INFO org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:154005}] to ds011725.mlab.com:11725
+[Test worker] INFO com.smatt.cc.db.DatabaseHelper - Database connection successful and Datastore initiated
+]]></system-err>
+</testsuite>

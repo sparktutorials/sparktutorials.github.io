@@ -1,0 +1,65 @@
+
+
+apply plugin: 'java'
+
+//note here, if you apply this plugin which is needed for deploy to heroku
+//you will have to declare mainClassName property below
+apply plugin: 'application'
+
+//root directory of the project 
+archivesBaseName='cloudcontact'
+version="1.0.0"
+applicationName="cloudcontact"
+
+//this is the entry point of the app that contains our main method
+//this property is required is you apply the application plugin as we did above
+mainClassName="App"
+
+
+sourceCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+// NetBeans will automatically add "run" and "debug" tasks relying on the
+// "mainClass" property. You may however define the property prior executing
+// tasks by passing a "-PmainClass=<QUALIFIED_CLASS_NAME>" argument.
+//
+// Note however, that you may define your own "run" and "debug" task if you
+// prefer. In this case NetBeans will not add these tasks but you may rely on
+// your own implementation.
+if (!hasProperty('mainClass')) {
+    ext.mainClass = 'App'
+}
+
+//this section tells Gradle where to look for and fetch the dependencies we declared below
+
+repositories {
+    jcenter()
+    mavenCentral()
+    // You may define additional repositories, or even remove "mavenCentral()".
+    // Read more about repositories here:
+    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
+}
+
+dependencies {
+   
+      
+//        compile 'com.sparkjava:spark-core:2.5.1'
+        compile fileTree(include: ['*.jar'], dir: 'libs') //this will compile all jar files located in libs folder
+  	compile 'org.slf4j:slf4j-api:1.7.21'
+  	compile 'org.slf4j:slf4j-simple:1.7.21'
+	compile 'org.mongodb.morphia:morphia:1.2.1'
+        compile 'com.github.jknack:handlebars-guava-cache:4.0.1'
+        compile 'com.github.jknack:handlebars:4.0.1'
+         compile 'com.fasterxml.jackson.core:jackson-core:2.8.4'
+        compile 'com.fasterxml.jackson.core:jackson-databind:2.8.4'
+        compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.4'
+	compile 'com.sparkjava:spark-template-handlebars:2.3'
+        compile 'com.nimbusds:srp6a:1.5.3'
+    
+    
+    testCompile group: 'junit', name: 'junit', version: '4.10'
+}
+
+//this is required for hosting/deploying to heroku
+defaultTasks=['clean']
+task stage(dependsOn: ['clean', 'installApp'])

@@ -1,0 +1,52 @@
+<!-- Modal -->
+<div id="profileModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+		<span id="detailsText">USER PROFILE</span>
+	 </div>
+      <div class="modal-body">
+
+			<div class="row" id="detailsRow">
+
+				<!-- details body -->
+				<div class="row" id="detailsBody">
+
+						<!-- details icon row-->
+						<div class="row" id="detailsIconRow">
+
+								<div class="col-sm-3" id="iconCol">
+									<img src="/./images/ic_male_user.png">
+									 <span id="editPix" class="glyphicon glyphicon-camera"></span>
+								</div>
+
+								<div class="col-sm-3 text-center" id="profileTxtCol">
+									
+								</div>
+						</div>
+						<div class="row" id="detailsDataRow">
+							<ul id="profileDetails">
+								<li>
+									<label for="profileUsername">Your username is </label>
+									<input class="dataInput" type="text" name="profileUsername" id="profileUsername" value="{{username}}" disabled  />
+								</li>	
+                                                                <li>
+									<label for="profileEmail">Your email is </label>
+									<input class="dataInput" type="text" name="profileEmail" id="profileEmail" value="{{email}}" disabled  />
+								</li>	
+							</ul>
+						</div>
+					</div>
+			</div>	
+      </div>
+      <div class="modal-footer">
+        	<!-- button row -->
+			<div class="row text-center" id="newBtrow">
+				<input type="button" id="closeBt" data-dismiss="modal" name="closeBt" value="CLOSE" />
+			</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,921 @@
+
+@font-face {
+	src: url("../fonts/audimat-italic.otf");
+	font-family: "audimat italic";
+}
+
+@font-face {
+	src: url("../fonts/audimat-regular.otf");
+	font-family: "audimat regular";
+}
+
+@font-face {
+	src: url("../fonts/furore.otf");
+	font-family: furore;
+}
+
+@font-face {
+	src: url("../fonts/Roboto-Bold.ttf");
+	font-family: "roboto bold";
+}
+
+@font-face {
+	src: url("../fonts/Roboto-Italic.ttf");
+	font-family: "roboto italic";
+}
+
+@font-face {
+	src: url("../fonts/Roboto-Regular.ttf");
+	font-family: "roboto regular";
+}
+
+@font-face {
+	src: url("../fonts/Roboto-Light.ttf");
+	font-family: "roboto light";
+}
+
+@font-face {
+	src: url("../fonts/junction-regular.otf");
+	font-family: "junction";
+}
+
+@font-face {
+	src: url("../fonts/Junction-light.otf");
+	font-family: "junction light";
+}
+
+
+
+html, body {
+    height: 100%;
+  }
+
+body {
+	padding: 0px;
+	margin: 0px;
+	background-color: #fafafa !important;
+}
+
+.row {
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#toprow {
+	margin: auto;
+	margin-top: 50px;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+#logoCol {
+	padding-left: 120px;
+}
+
+#logoOthers {
+    float: left;
+    opacity: 0.2;
+    height: 150px;
+    width: auto;
+}
+
+
+#title {
+	font-family: furore;
+	color: #104773 !important;
+	font-size: 30pt;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+#otherTitle {
+	font-family: furore;
+	color: #104773 !important;
+	font-size: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+	float: left;
+	margin-top: 50px;
+	margin-left: 20px;
+}
+
+
+
+#motto {
+	font-family: "audimat italic";
+	font-size: 20.83pt;
+	color: rgba(0,0,0,.4) !important;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+#signUpBt, #loginBt {
+
+	font-family: furore;
+	font-size: 15.78pt;
+	color: #104773 !important;
+	background-color: #ffffff !important;
+	border: 2px solid #1e86da;
+	border-radius: 0px !important;
+	text-align: center;
+	/*padding: 20px 24px;*/
+	/*padding-bottom: 20px;*/
+	position: relative;
+	margin: auto;
+	width: 180px;
+	height: 60px;
+
+	-webkit-transition: border-color 1s ease-in, width 1s ease-in, height 1s ease-in;
+	transition: border-color 1s ease-in, width 1s ease-in, height 1s ease-in;
+}
+
+#signUpBt:hover, #loginBt:hover {
+	/*width: 182px;
+	height: 61px;*/
+	border-color: rgba(16,71,115,.9);
+}
+
+#signUpBt {
+	margin-right: 70px;
+}
+
+
+#midrow {
+	margin-top: 80px;
+	background-color: #eceff1;
+	padding-top: 50px;
+	padding-left: 10%;
+	padding-right: 10%;
+	border-bottom: 1px solid #1E86DA;
+	border-top: 1px solid #1E86DA;
+}
+
+#nettxt, #phonetxt, #cloudtxt {
+	font-family: "roboto italic";
+	font-size: 12pt;
+	color: #000000 !important;
+	letter-spacing: 1px;
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+
+
+#myCarousel {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	background-color: #fafafa !important;
+}
+
+#myCarousel ol {
+	margin-top: 30px;
+}
+
+.carousel-inner {
+	background-color: #fafafa !important;
+}
+
+#crow1 {
+	background-color: #fafafa !important;
+}
+
+#carouselNext, #carouselPrev {
+	background-image: none;
+	background-repeat: no-repeat;
+	background-color: inherit;
+}
+
+
+
+.carousel-text {
+
+	padding-left: 20px;
+	font-family: "audimat italic";
+	font-size: 15.79pt;
+	margin-right: 20px;
+	text-align: center;
+	color: rgba(0,0,0,.4) !important;
+}
+
+.carousel-image {
+	padding-right: 0px;
+	padding-bottom: 20px;
+
+}
+
+
+#footer {
+	width: 100% !important;
+	background-color: #104774 !important;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	bottom: 0px;
+}
+
+#footertext {
+	font-family: "audimat regular";
+	font-size: 14px !important;
+	color: #ffffff !important;
+	text-align: center;
+}
+
+#footertxt2 {
+	display: inline;
+	font-size: 13px !important;
+}
+
+#footertext3 a {
+	text-decoration: underline;
+	color: #ffffff !important;
+	font-size: 13px !important;
+}
+
+
+#socialBt li {
+	text-decoration: none;
+	display: inline;
+	padding-left: 2px;
+	cursor: pointer;
+}
+
+#fbic, #twitteric, #chatic {
+	width: 15px; 
+	height: auto;
+}
+
+#footertext4 {
+	cursor: pointer;
+	padding-left: 10px;
+	font-family: "audimat regular";
+	font-size: 13px;
+	text-decoration: underline;
+	color: #ffffff !important;
+}
+
+
+#topText {
+
+	font-family: "audimat italic";
+	font-size: 12pt;
+	color: rgba(0,0,0,.4) !important;
+}
+
+#username, #email, #password1, #password2, #password {
+	border: 2px solid rgba(0,0,0,.4);
+	border-radius: 0;
+	text-align: center;
+	padding: 5px 10px;
+	font-family: "audimat regular";
+	font-size: 15pt;
+	margin-bottom: 20px;
+	box-shadow: none;
+	-webkit-transition: padding 1s linear;
+	transition: padding 1s linear;
+}
+
+#username:focus, #email:focus, #password1:focus, #password2:focus, #password:focus {
+	padding: 5px 5px; 
+	outline-color: transparent;
+	outline-style: none; 
+}
+
+#username:hover, #email:hover, #password1:hover, #password2:hover, #password:hover {
+	border-color: #104774;
+}
+
+
+#signupBt, #signinBt {
+	border: 2px solid rgba(0,0,0,.4);
+	border-radius: 0px;
+	text-align: center;
+	padding: 5px 110px;
+	font-family: "audimat regular";
+	font-size: 15pt;
+	margin-bottom: 20px;
+	background-color: #104774;
+	color: #ffffff !important;
+	-webkit-transition: background-color 1s ease-in-out;
+	transition: background-color 1s ease-in-out;
+}
+
+#signupBt:hover, #signinBt:hover {
+	background-color: rgba(16,71,116,.8);
+}
+
+#loginLnk, #createLnk, #forgotLnk {
+
+	font-family: "audimat regular";
+	font-size: 13pt;
+	color: #104774;
+	text-decoration: underline;
+	text-align: center;
+}
+
+#forgotLnkRow {
+	margin-top: 5%;
+}
+
+#loginLnkRow, #createLnkRow {
+	margin-bottom: 60px;
+}
+
+/*
+THIS IS FOR THE MAIN CONTENT PAGE AFTER LOG IN
+*/
+
+#maintop {
+	border-bottom: 4px solid #104774;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 50px;
+	padding-right: 90px;
+}
+
+
+
+#logoMain {
+	float: left;
+	width: 30px;
+	height: auto;
+}
+
+
+#homeLnk {
+	float: left;
+	font-family: "junction light";
+	font-size: 24px;
+	color: #104774 !important;
+	text-transform: capitalize;
+	padding-left: 10px;
+	padding-top: 22px;
+}
+
+
+#greeting {
+	float: right;
+	font-family: "junction light";
+	font-size: 12px;
+	color: #104774 !important;
+	padding-top: 30px;
+	padding-right: 15px;
+
+}
+
+
+#useric {
+	padding-top: 20px;
+	opacity: 0.5 !important;
+        font-size: 50px;
+}
+
+.dropdown {
+	float: right;
+	padding-right: 6%;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #fafafa;
+	font-family: "junction light";
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	color: rgba(0,0,0,.4) !important;
+	padding: 10%;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+
+.dataTables_wrapper {
+	margin-top: 5%;
+	margin-bottom: 5%;
+	padding-left: 2%;
+}
+
+#maintable.dataTable, .dataTable {
+	margin-bottom: 3%;
+	width: 90%;
+}
+
+
+#maintable thead {
+	border: 3px solid  #104774 !important;
+	background-color: #104774 !important;
+}
+
+#maintable thead tr td {
+	font-family: "roboto bold";
+	color: #fff !important;
+	font-size: 14px;
+	text-align: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+
+#maintable thead tr td:last-child {
+	padding-right: 10px;
+}
+
+
+#maintable tbody {
+	border: 3px solid rgba(0,0,0,.3) !important;
+}
+
+#maintable tbody tr td {
+	font-family: "junction";
+	font-size: 12px;
+	color: rgba(0,0,0, .66) !important;
+	padding-left: 10px;
+	padding-right: 25px;
+	padding-top: 10px;
+	padding-bottom: 18px;
+}
+
+#maintable tbody tr:nth-child(even) {
+	background-color: #f0f0f0;
+}
+
+
+#maintable tbody tr:hover {
+	background-color: rgba(24,11,179,.32);
+}
+
+
+.dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
+ 	display: inline;
+	margin-right: 15px;
+	color: rgba(0,0,0,.6) !important;
+	font-family: "junction light";
+}
+
+.dataTables_filter label input {
+	border-radius: 0px;
+	border: 2px solid rgba(0,0,0,.4);
+	text-align: center;
+	font-family: "roboto light";
+	background-color: transparent;
+	margin-left: 5px;
+}
+
+.dataTables_paginate .previous {
+	padding: 5px;
+	margin-right: 5px;
+}
+
+.dataTables_paginate .next {
+	padding: 5px;
+	margin-left: 5px;
+}
+
+.dataTables_paginate .current {
+	margin-left: 5px;
+	margin-right: 3px;
+	border: 2px solid rgba(0,0,0,.4);
+	padding: 2px 10px;
+	font-family: "roboto bold";
+}
+
+
+#btrow, #sm-btrow {
+	padding-top: 25px;
+	padding-bottom: 5px;
+}
+
+#newBt, #sm-newBt, #deleteBt, #editBt, #saveBt, #closeBt {
+	border-radius: 0px;
+	border: 2px solid rgba(0,0,0,.4);
+	text-align: center;
+	font-family: "roboto light";
+	font-size: 10.02pt;
+	color: #104773 !important;
+	background-color: transparent;
+	padding: 5px 15px;
+	margin-right: 20px;
+}
+
+
+#detailsRow {
+	border: 3px solid #104774;
+ }
+
+
+#detailsHeader {
+	border: 3px solid #104774;
+	background-color: #104774;
+	text-align: center;
+	padding-top: 0px;
+             
+}
+
+#detailsText {
+	font-family: "roboto bold";
+	font-size: 15.64px;
+	color: white;
+	letter-spacing: 2pt;
+}
+
+#detailsIconRow {
+	padding-left: 3px;
+	padding-top: 5px;
+	margin-bottom: 6px;
+}
+
+#details {
+	padding-left: 13px;
+}
+
+#details li{
+	font-family: "junction light";
+	font-size: 12.5px;
+	color: #104774 !important;
+	text-align: left;
+	text-decoration: none;
+	list-style-type: none; 
+        margin-bottom: 5px;
+}
+
+#details li label {
+    margin-bottom: 0px;
+}
+
+
+#details li input{
+	background-color: transparent;
+	border: 0px none transparent;
+        width: 100%;
+}
+
+.view:hover, .del:hover {
+    font-size: 20px !important;
+}
+
+.ncol:hover, .mcol:hover, .ecol:hover {
+    font-size: 15px !important;
+}
+
+
+
+
+#newDetails li, #confirmBody {
+	font-family: "junction light";
+	font-size: 12.5px;
+	color: #104774 !important;
+	text-align: left;
+	text-decoration: none;
+	list-style-type: none; 
+}
+
+
+
+.dataInput {
+	margin-left: 10px;
+	padding-left: 3px;
+	border: 0px none transparent;
+	border-bottom: 2px solid rgba(0,0,0,0.4) !important;
+	background-color: transparent;
+	-webkit-transition: padding-bottom 1s ease 0s;
+	transition: padding-bottom 1s ease 0s;
+        width: 60%;
+        float: right;
+        margin-right: 20%;
+}
+
+
+.dataInput:focus {
+	outline-style: none;
+	outline: 0;
+	padding-bottom: 2px;
+}
+
+.dataInput:hover {
+   border-bottom-color: #104774  !important;
+}
+
+
+#inputNote {
+	margin-right: 20%;
+	overflow: auto;
+	max-height: 250px;
+	width: 60%;
+	padding: 3px;
+	/* padding-right: 2px; */
+	min-height: 100px;
+	outline-style: none;
+	margin-top: 10px;
+	float: right;
+	margin-bottom: 10px;
+	text-align: justify;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 3px;
+	resize: vertical;
+}
+
+
+#viewNote {
+	margin-right: 3px;
+	overflow: auto;
+	max-height: 150px;
+	width: auto;
+	outline-style: none;
+}
+
+
+
+/*THIS IS FOR THE SPLIT-pane.JS*/
+   .split-pane-divider {
+	background: #fafafa;
+    }
+    #left-component {
+        margin-left: 20px;
+    	min-width: 950px;
+        overflow: auto !important;
+    }
+    #divider {
+	left: 950px; /* same as left component width */
+	width: 5px;
+    }
+    #right-component {
+	left: 955px; /*should be the same as left-component width plus small padding */
+	margin-left: 5px; /* same as divider width */
+        margin-right: 20px; 
+    }
+  
+  #alertBox, #alertBoxModal {
+      margin:auto;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-family: "junction light";
+      font-size: 10px;
+      padding-right:0px;
+      background-color: rgba(16,71,116,0.9);
+      color: #fff !important;
+     text-align: center;
+     width: 50%;     
+  }
+  
+#alertBox a, #alertBoxModal a {
+  margin-left: 5px;  
+  color: #e3e3e3 !important;
+  }
+  
+  
+  
+  
+  
+  /*This is the section for the new/edit modal*/
+  div#inputModal .modal-content, div#profileModal .modal-content {
+ 	/*border: 2px solid #104774 !important;*/
+        border-radius: 0px;
+    }
+
+ div#inputModal .modal-header, div#profileModal .modal-header {
+    padding-top: 3px;
+    background-color: #104774;
+    padding-bottom: 3px;
+    text-align: center;
+ }
+
+ div#inputModal .modal-body, div#profileModal .modal-body {
+    background-color: #fafafa !important;
+ }
+
+ div#inputModal .modal-footer, div#profileModal .modal-footer {
+    background-color: #fafafa;
+    border: none;
+    padding-top: 0px;
+ }
+
+ #newBtRow {
+    padding-top: 5px;
+    padding-bottom: 5px;
+ }
+
+ #editPix {
+    position: absolute;
+    left: 80px;
+    top: 50px;
+    font-size: 20px;
+    opacity: .7
+}		
+
+
+/*this is for profile_modal*/
+#profileDetails {
+    	margin-top: 20px;
+    	margin-bottom: 20px;
+    }		
+
+ 	#profileDetails li{	
+	font-family: "junction light";
+	font-size: 14.5px;
+	color: #104774 !important;
+	text-align: left;
+	text-decoration: none;
+	list-style-type: none; 
+        margin-bottom: 5px;
+   	}
+
+	#profileDetails li label {
+            margin-bottom: 0px;
+	}
+
+
+	#profileDetails li input{
+		background-color: transparent;
+		border: 0px none transparent;
+                width: auto;
+    	}
+
+@media screen and (max-width: 800px) {
+    
+    #nettxt, #phonetxt, #cloudtxt {
+	font-size: 8pt;
+	padding-top: 20px;
+	padding-bottom: 30px;
+    }
+    
+    #netIcon, #phoneIcon, #cloudIcon {
+        height: 50px;
+        width: auto;
+    }
+
+    #sm-btrow {
+        background-color: inherit;
+        display: block;
+    }
+    
+    #sm-newBt {
+        float:right;
+	font-size: 8.02pt;
+	padding: 3px 10px;
+	margin-right: 25px;
+    }
+    
+    #left-component {
+    	min-width: 700px;
+        overflow: auto !important;
+        left: 50px;
+        
+    }
+    #divider {
+        display: none;
+	left: 700px; /* same as left component width */
+	width: 5px;
+    }
+    #right-component {
+        display: none;
+	left: 355px; /*should be the same as left-component width plus small padding */
+	margin-left: 5px; /* same as divider width */
+        margin-right: 10px; 
+        
+    }
+    
+    #logoCol {
+        padding-left: 10px;
+    }
+    
+    .dropdown-content {
+        width: 80px;
+    }
+    
+    
+    #footer {
+      position: fixed;
+      bottom: 0px;
+      margin-top: 1%;
+    }
+        #footertext4 {
+		font-size: 12pt;
+	}
+
+	#footertext {
+		font-size: 15pt;
+	}
+
+	#footertext3, #footertxt2 {
+		font-size: 12pt;
+	}
+     #signUpBt{
+            display: block;
+            margin-bottom: 10px;
+            margin-right: auto;
+        }
+        
+        #loginBt{
+            display: block;
+            margin-bottom: 10px;
+        }    
+}
+
+
+@media screen and (max-width: 450px) {
+    
+    #greeting {
+	font-size: 10px;
+	padding-top: 20px;
+    }
+
+
+    #useric {
+        font-size: 25px;
+    }
+    
+    
+     #sm-newBt {
+        float:right;
+	font-size: 8.02pt;
+	padding: 3px 10px;
+	margin-right: 10px;
+    }
+    
+    #maintable thead tr td {
+	font-size: 10px;
+	padding-left: 5px;
+    }
+    
+    #maintable tbody tr td {
+    font-size: 8px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+   }
+    
+    
+    #left-component {
+    	min-width: 400px;
+        overflow: auto !important;
+        left: 5px;
+        
+    }
+    #divider {
+        display: none;
+	left: 300px; /* same as left component width */
+	width: 5px;
+    }
+    #right-component {
+        display: none;
+	left: 355px; /*should be the same as left-component width plus small padding */
+	margin-left: 5px; /* same as divider width */
+        margin-right: 10px; 
+        
+    }
+        #sm-btrow {
+            /*display: block;*/
+        }
+        
+        #logoOthers {
+            height: 100px;
+        }
+        
+        #logoFrontPage {
+            height: 100px;
+        }
+        
+        #logoMain {
+           display: none;
+        }
+        
+        #title {
+		font-size: 24pt;
+	}
+        
+        #footer {
+            position: inherit !important;
+        }
+        
+
+	#motto {
+		font-size: 15.83pt;
+	}
+        
+        #signUpBt{
+            display: block;
+            margin-bottom: 10px;
+            margin-right: auto;
+        }
+        
+        #loginBt{
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+	#logoCol {
+            display: none;
+		/*padding-bottom: 30px;*/
+	}
+        
+        #homeLnk {
+        font-family: "furore";
+        letter-spacing: 5px;
+        text-align: center;
+        margin: auto;
+        margin-top: 10px;
+        /*display: block;*/
+        }
+}	
+
