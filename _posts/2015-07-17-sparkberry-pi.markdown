@@ -4,13 +4,22 @@ title:  "Spark on Raspberry Pi"
 date:   2015-07-17 19:02:00
 author: <a href="https://sites.google.com/a/athaydes.com/renato-athaydes/" target="_blank">Renato Athaydes</a>
 comments: true
-summary: > 
+summary:  
   This tutorial will show you how to turn your Raspberry Pi into a webserver in a matter of minutes, 
   using Spark and Groovy. Spark was chosen for the tutorial because "Spark is as easy as it gets".
   <br>
   </em> The tutorial is written by Renato Athaydes and originally appeared on his 
-  <a href="https://sites.google.com/a/athaydes.com/renato-athaydes/posts/agroovywebserverrunningonraspberrypiinminutes" target="_blank">google site</a>.
+  <a href="https://sites.google.com/a/athaydes.com/renato-athaydes/posts/agroovywebserverrunningonraspberrypiinminutes" target="_blank">google site</a>. 
 ---
+## Changes April 2017
+  This tutorial was updated to 
+  1) resolved issues with classloader. 
+  2) documented new installation process for groovy.
+  3) updated Spark version.
+  4) added slf4j logging.
+  
+  -- <a href="https://kendrick-wilson.appspot.com" target="_blank">Kendrick Wilson</a>. 
+
 
 ## Background
 I just bought a Raspberry Pi to have some fun. First with code, and hopefully with hardware later.
@@ -28,14 +37,12 @@ Now, you may ask, just how easy is it to install Groovy in the Raspberry Pi?
 Well, here's what you need to type in the terminal to get the job done:
 
 <pre><code class="language-bash">
-curl -s get.gvmtool.net | bash
-source "$HOME/.gvm/bin/gvm-init.sh"
-gvm install groovy
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install groovy
 </code></pre>
 
-<em>Note: here, we use GVM to get Groovy. See <a href="http://gvmtool.net" target="_blank">http://gvmtool.net</a></em>
-
-This should take less than a minute (the download of version 2.3.9 is about 32MB).
+<em>Note: here, we use sdkman to get Groovy. See <a href="http://sdkman.io" target="_blank">http://sdkman.io</a></em>
 
 You can check that you have groovy installed by running:
 
@@ -45,22 +52,31 @@ groovy -version
 
 Which should print something like:
 
-<samp>Groovy Version: 2.3.9 JVM: 1.8.0 Vendor: Oracle Corporation OS: Linux</samp>
+<samp>Groovy Version: 2.4.10 JVM: 1.8.0 Vendor: Oracle Corporation OS: Linux</samp>
 
 ## Setting up Spark
 The environment is set up now, and all you have to do is write some code. And that's the fun part! The code required to get started with Spark is ridiculously simple:
 
 <pre><code class="language-java">
-@Grab(group = 'com.sparkjava', module = 'spark-core', version = '2.3')
+@Grab(group = 'com.sparkjava', module = 'spark-core', version = '2.5.5')
+@GrabExclude('javax.servlet:javax.servlet-api')
+@Grab(group = 'org.slf4j', module = 'slf4j-simple', version = '1.7.21')
+
 import static spark.Spark.*
 
 get '/hello', { req, res -> 'Hello from your groovy Sparkberry Pi!' }
 </code></pre>
 
-Save this code in a file called <samp>Server.groovy</samp>, then run it:
+Save this code in a file called <samp>Server.groovy</samp>.
+
+Download servlet api to avoid classloader issues.
+<pre><code class="language-bash">
+curl http://central.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar -o javax.servlet-api-3.1.0.jar
+</code>
+</pre>
 
 <pre><code class="language-bash">
-groovy Server.groovy
+groovy -cp javax.servlet-api-3.1.0.jar Server.groovy
 </code></pre>
 
 Once you see some output from the application (which does take a little while in the Pi, unfortunately), hit the following URL with your browser (replace the IP address with your Raspberry Pi's IP):
@@ -102,7 +118,10 @@ static String createPage(Map queryParams) {
 Now, your complete <samp>Server.groovy</samp> file should look like this:
 
 <pre><code class="language-java">
-@Grab(group = 'com.sparkjava', module = 'spark-core', version = '2.3')
+@Grab(group = 'com.sparkjava', module = 'spark-core', version = '2.5.5')
+@GrabExclude('javax.servlet:javax.servlet-api')
+@Grab(group = 'org.slf4j', module = 'slf4j-simple', version = '1.7.21')
+
 import static spark.Spark.*
 
 println "Configuring server..."
@@ -116,7 +135,7 @@ get '/page',  { req, res -> Page.createPage(req.queryMap().toMap()) }
 Now just run it! Let Groovy know there's more than one Groovy file in the current directory by adding the classpath option as follows:
 
 <pre><code class="language-bash">
-groovy -cp ./ Server.groovy
+groovy -cp javax.servlet-api-3.1.0.jar:. Server.groovy
 </code></pre>
 
 And that's it. You've got a hassle-free webserver running on your Raspberry Pi in just a few minutes!
