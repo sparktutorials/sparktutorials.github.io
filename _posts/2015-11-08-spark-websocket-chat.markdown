@@ -8,9 +8,12 @@ summary: >
  In this tutorial you will learn to work with WebSockets to create a real-time chat app. <br> Some  (simple) JavaScript is required.
 ---
 
-<div class="sister-project" markdown="1">
-This tutorial is also available for my new Java/Kotlin framework, [Javalin](https://javalin.io).<br>
-Check it out at [https://javalin.io/tutorials/websocket-example](https://javalin.io/tutorials/websocket-example)
+<div class="overlay">
+    <div class="dialog">
+        An improved version of this tutorial is available for my new framework, <a href="https://javalin.io">Javalin</a>.
+        <a class="show-tutorial" href="https://javalin.io/tutorials/websocket-example">Show me the improved tutorial</a>
+        <div class="close">✖</div>
+    </div>
 </div>
 
 <div class="notification"><em>The source code for this tutorial can be found on <a href="https://github.com/tipsy/spark-websocket" target="_blank">GitHub</a>, and a live demo can be found <a href="http://spark-heroku-example.herokuapp.com/" target="_blank">here</a>.</em></div>

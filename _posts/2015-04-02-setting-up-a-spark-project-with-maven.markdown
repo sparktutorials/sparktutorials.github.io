@@ -8,9 +8,12 @@ summary: >
  In this tutorial you will learn how to set up a Spark project using Maven. It's aimed at Java beginners, and will show you how to set up your project in IntelliJ IDEA and Eclipse.
 ---
 
-<div class="sister-project" markdown="1">
-This tutorial is also available for my new java/kotlin framework, [Javalin](https://javalin.io).<br>
-Check it out at [https://javalin.io/tutorials/maven-setup](https://javalin.io/tutorials/maven-setup)
+<div class="overlay">
+    <div class="dialog">
+        An improved version of this tutorial is available for my new framework, <a href="https://javalin.io">Javalin</a>.
+        <a class="show-tutorial" href="https://javalin.io/tutorials/maven-setup">Show me the improved tutorial</a>
+        <div class="close">✖</div>
+    </div>
 </div>
 
 ## IDE Guides

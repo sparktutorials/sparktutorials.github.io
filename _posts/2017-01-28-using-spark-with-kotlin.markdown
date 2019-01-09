@@ -8,9 +8,12 @@ summary: >
  Learn how to use Kotlin with Spark by creating a simple CRUD REST API.
 ---
 
-<div class="sister-project" markdown="1">
-This tutorial is also available for my new java/kotlin framework, [Javalin](https://javalin.io).<br>
-Check it out at [https://javalin.io/tutorials/simple-kotlin-example](https://javalin.io/tutorials/simple-kotlin-example)
+<div class="overlay">
+    <div class="dialog">
+        An improved version of this tutorial is available for my new framework, <a href="https://javalin.io">Javalin</a>.
+        <a class="show-tutorial" href="https://javalin.io/tutorials/simple-kotlin-example">Show me the improved tutorial</a>
+        <div class="close">✖</div>
+    </div>
 </div>
 
 <div class="notification"><em>The source code for this tutorial can be found on <a href="https://github.com/tipsy/spark-kotlin" target="_blank">GitHub</a>.</em></div>

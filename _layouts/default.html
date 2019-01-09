@@ -42,5 +42,13 @@
         Also visit our sister project, <a href="https://javalin.io">Javalin</a>.
     </footer>
     <script src="/js/prism.js"></script>
+    <script>
+        const overlay = document.querySelector(".overlay")
+        overlay.addEventListener("click", e => {
+            if (e.target.className === "close") {
+                overlay.parentNode.removeChild(overlay);
+            } 
+        });
+    </script>
 </body>
 </html>
